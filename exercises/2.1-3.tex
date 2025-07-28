@@ -1,0 +1,149 @@
+\section*{Exercises for 2.1--2.3}
+
+\begin{enumerate}
+
+ \item Which of the following are wff?
+
+  \begin{enumerate}
+
+\item \p{P}
+
+\item \p{W\lor S}
+
+\item \p{\{[Y\land (\land T)]\land L\}\land L}\cover{\dotfill malformed}
+
+\item \p{(P\land M)\lor \lnot [(W\land )\lor (R\lor Q)]}\cover{\dotfill malformed}
+
+\item \p{Z\lor Z}
+
+\item \p{Z\land [(S\lor R)\land P\lor L]}\cover{\dotfill malformed}
+
+\item \p{Z\land [(S\lor R)\land (P\lor L)]}
+
+\item \p{[(Z\lor L)\land \lnot Z]\lor (Q\land S)}
+
+\item \p{L\lor Q}
+
+\item \p{L\lor Q\lor R}\cover{\dotfill malformed}
+
+\item \p{WR}\cover{\dotfill malformed}
+
+\item \p{S\lor (S\land Y)}
+
+\item \p{(L\land T)\land \{[T\lor (\{\lor W)]\lor (Q\lor M)\}}\cover{\dotfill malformed}
+
+\item \p{[(L\land M)\lor P]\land (Y\lor P}\cover{\dotfill malformed}
+
+\item \p{[(L\land P)\lor T]\lor \lor (M\lor L)}\cover{\dotfill malformed}
+
+
+\item \p{L\land \{(W\land W)\land [(W\land Z)\lor (Z\lor P]\}}\cover{\dotfill malformed}
+
+\end{enumerate}
+
+
+\item Circle, highlight, or otherwise clearly mark the main connective of each 
+ of the following sentences.
+
+ \begin{enumerate}
+
+  \item \p{\{[(Z\land R)\land T]\land [(Y\land Y)\lor (S\land Z)]\}
+	\lor [S\lor (T\lor Y)]}
+\item \p{T\lor \lnot W}
+
+\item \p{\{[(W\land R)\land (L\land T)]\lor (P\land Z)\}\lor (Y\lor S)}
+
+\item \p{[(Q\land Q)\land (R\lor Q)]\land [(L\land W)\lor T]}
+
+\item \p{\lnot R\lor \{(T\lor S)\land [\lnot W\land (W\lor P)]\}}
+
+\item \p{\lnot M\land M}
+
+\item \p{\lnot (M\land M)}
+
+\item \p{(L\land M)\lor \{[(T\lor S)\lor (Z\land T)]\land (W\land Y)\}}
+
+\item \p{M\land (Q\land Z)}
+
+\item \p{Q\lor S}
+
+\item \p{\{[(Q\lor P)\land (Y\land Y)]\lor [(M\lor S)\land T]\}\lor Q}
+
+\item \p{\lnot Q}
+
+\item \p{\Big(\{[T\land (R\lor \lnot Z)]\land Y\}\land (Z\land \lnot T)\Big)
+ \land (S\lor L)}
+
+\item \p{\lnot P\land \{[(L\lor Y)\land (Z\land Q)]\lor [P\lor (M\land M)]\}}
+
+\item \p{(Q\land W)\lor (T\land P)}
+
+\item \p{(Q\land Q)\lor W}
+
+\item \p{[S\lor (W\land Y)]\land \{[Y\lor (Z\land Q)]\land Q\}}
+
+\item \p{\{(R\lor L)\land [(R\lor P)\land Y]\}\lor (Z\land Y)}
+
+\item \p{[(Z\lor M)\lor (S\land R)]\land \{[(S\land W)\land (L\lor Q)]\land Q\}}
+
+
+\end{enumerate}
+
+\item Which of the sentences (a) through (h) in the previous question are of the 
+ form
+
+ \begin{enumerate}
+
+  \item \p{s_1 \lor s_2}\cover{ : a, b, c, e, h} 
+
+  \item \p{s_2 \land s_2}\cover{ : none. Notice \p{s_2} on both sides of the 
+   \p{\land} which means the sides must be identical}
+
+  \item \p{\lnot s}\cover{ : g}
+
+ \end{enumerate}
+
+
+\item A well-formed formula (wff) is a string of symbols (logical connectives, 
+ opening and closing brackets, letters of the Roman alphabet possibly with some 
+ subscripts). Let's think a bit about how a wff must look like. For each of the 
+ following claim, state whether it's true or false of wffs:
+
+ \begin{enumerate}
+
+  \item A closing bracket cannot be the first symbol.\cover{\dotfill True}
+
+
+  \item A closing bracket cannot be the last symbol.\cover{\dotfill False}
+
+  \item A logical connective cannot be the first symbol.\cover{\dotfill False}
+
+
+  \item The negation can be the first symbol.\cover{\dotfill True}
+
+
+  \item \p{\lnot} cannot be followed immediately by \p{\land}. \cover{\dotfill 
+   True}
+
+
+  \item \p{\land} cannot be followed immediately by \p{\lnot}.\cover{\dotfill 
+   False}
+
+
+
+ \end{enumerate}
+
+\item Take the truth table for conjunction. Plug \p{(A \land B)} into \p{s_1} 
+ and \p{(A \lor B)} into \p{s_2} and produce the resulting truth conditions for 
+ \p{(A\land B)\land(A\lor B)}.
+\cover{
+ \begin{tabular}{cc||c}
+\p{A\land B} & \p{A\lor B} & \p{(A\land B)\land (A\lor B)}\\
+\hline
+\emph{T} & \emph{T} & \emph{T}\\
+\emph{F} & \emph{T} & \emph{F}\\
+\emph{T} & \emph{F} & \emph{F}\\
+\emph{F} & \emph{F} & \emph{F}\\
+\end{tabular}
+}
+\end{enumerate}

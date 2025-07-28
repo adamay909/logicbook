@@ -1,0 +1,50 @@
+
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+ 
+ \node(start) [terminal] {START};
+ 
+ \node(1) [decision, below=of start] {Is 0?};
+
+ \node(2) [process, right=of 1] {write 0};
+
+ \node(3) [process, below=of 2] {move left};
+
+ \node (4) [decision, below=of 3] {Is 0?};
+
+ \node(5) [process, below=of 4] {write 0};
+
+ \node(6) [process, below=of 5] {move right};
+
+ \node(7) [process, right=of 4] {write 0};
+
+ \node(8) [process, below=of 7] {move right};
+
+ \node(100) [process, left=of 1] {write 0};
+
+ \node(101) [process, below=of 100] {move left};
+
+ \node (102) [decision, below=of 101] {Is 0?};
+
+ \node(103) [process, below=of 102] {write 0};
+
+ \node(106) [process, below=of 103] {move right};
+
+ \node(107) [process, right=of 102] {write 0};
+
+ \node(108) [process, below=of 107] {move right};
+
+ \node(110) [terminal, below=of 108] {STOP};
+\end{tikzpicture}
+
+\end{document}
+
+
+

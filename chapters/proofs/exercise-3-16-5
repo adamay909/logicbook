@@ -1,0 +1,7 @@
+\Gamma;CXY;;premise
+NY;NY;;a
+X;X;;a
+\Gamma,X;Y;1,3;ce
+NY,X;NY;2
+\Gamma,NY;NX;4,5;ni
+\Gamma;CNYNX;6;ci

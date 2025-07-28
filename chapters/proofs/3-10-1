@@ -1,0 +1,8 @@
+\Gamma;ASM;;premise
+\Delta;CSG;;premise
+\Theta;CMG;;premise
+S;S;;a
+\Delta,S;G;2,4;ce
+M;M;;a
+\Theta,M;G;3,6;ce
+\Gamma,\Delta,\Theta;G;1,5,7;de

@@ -1,0 +1,13 @@
+\Gamma;AAPQR;;premise
+APQ;APQ;;a
+P;P;;a
+P;APAQR;3;di
+Q;Q;;a
+Q;AQR;5;di
+Q;APAQR;6;di
+APQ;APAQR;2,4,7;de
+R;R;;a
+R;AQR;9;di
+R;APAQR;10;di
+\Gamma;APAQR;1,8,11;de
+

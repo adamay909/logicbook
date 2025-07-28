@@ -1,0 +1,61 @@
+\begin{enumerate}
+
+ \item Show that Disjunction Elimination is a valid rule of inference.
+
+\answer{
+
+Here is one way.
+
+We are trying to show if \p{\Lambda_1\lentails s_1 \lor s_2}, \p{\Lambda_2, 
+s_1\lentails s_3}, and \p{\Lambda_3,s_2\lentails s_3}, then \p{\Lambda_1, 
+\Lambda_2, \Lambda_3 \lentails s_3}.
+
+Given \p{\Lambda_2, s_1\lentails s_3}, we get \p{\Lambda_2 \lentails 
+s_1\limplies s_3}. And given \p{\Lambda_3, s_2\lentails s_3}, we get 
+\p{\Lambda_3 \lentails s_2 \limplies s_3}. But this means that the truth of all 
+of \p{\Lambda_1}, \p{\Lambda_2}, \p{\Lambda_3}  guarantees the truth of \p{s_3}. 
+
+So \p{\Lambda_1, \Lambda_2, \Lambda_3 \lentails s_3}.
+
+}
+
+ \item Show that Negation Introduction is a valid rule of inference.
+
+  \answer{ 
+
+   We are trying to show that if \p{\seq{\Lambda_1,s_1}{s_2}} and 
+   \p{\seq{\Lambda_2,s_1}{\lnot s_2}} are both correct, then so is 
+   \p{\seq{\Lambda_1,\Lambda_2}{\lnot s_1}}.
+
+   Consider the following derivation:
+
+   \begin{argument*}
+
+	\ai{\Lambda_1,s_1}{s_2}{}
+   \ai{\Lambda_2,s_1}{\lnot s_2}{}
+   \ai{\Lambda_1}{s_1\limplies s_2}{1,\condI}
+   \ai{\Lambda_2}{s_1\limplies s_2}{2,\condI}
+   \ai{\Lambda_1,\Lambda_2}{(s_1\limplies s_2)\land(s_1\limplies \lnot s_2)}{3,4,
+   \conjI}
+  \end{argument*}
+
+  Since \condI{} and \conjI{} are both valid rules of inference, given the first 
+  two sequents are correct, we know that so is the last:
+
+  \p{\Lambda_1,\Lambda_2\lentails (s_1\limplies s_2)\land(s_1\limplies\lnot s_2)}
+
+  We can use truth tables to show:
+  \p{\lentails [(s_1\limplies s_2)\land(s_1\limplies\lnot s_2)]\limplies \lnot 
+  s_1}
+  
+  Therefore,
+
+  \p{\Lambda_1,\Lambda_2\lentails \lnot s_1}
+
+   So \negI{} is valid.
+ }
+
+
+
+
+\end{enumerate}

@@ -1,0 +1,23 @@
+\begin{verbatim}
+
+State S0:
+    If on 0, then: write 0, move right, go to state S0
+             else: write 1, move left, go to state S1
+
+State S1:
+    If on 0, then: write 0, move left, go to state S1
+             else: write 1, move left, go to state S2
+
+State S2:
+    If on 0, then: write 0, move right, go to state S2
+             else: write 1, move right, go to state S3
+
+State S3:
+    If on 0, then: write 1, move right, go to state S4
+             else: write 1, move right, go to state S3
+State S4:
+    If on 0, then: do nothing
+             else: do nothing
+    
+\end{verbatim}
+

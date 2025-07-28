@@ -1,0 +1,742 @@
+\section*{Practicing Inference Rules}
+
+\begin{enumerate}
+
+ \item Each of the following little derivation has a mistake. What is it?
+
+  \begin{enumerate}
+
+   \item    
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{p}{q}{A}
+
+\end{argumentN}
+
+\opts{
+\dotline
+\dotline
+}{The datum and succedent cannot differ when using \p{A}}
+
+\item 
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{p\mc{\lor  }q}{premise}
+
+\ai{\Gamma }{q}{1,\disjE}
+
+\end{argumentN}
+
+\opts{
+\dotline
+\dotline
+}{\disjE{} cannot be used in that way.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{p}{p}{A}
+
+\ai{q}{q}{A}
+
+\ai{p\mc{\land  }q}{p\mc{\land  }q}{1,2,\conjI}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{\conjI{} does not result in that datum.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma ,  s}{r}{premise}
+
+\ai{\Gamma ,  q}{p}{premise}
+
+\ai{\Gamma ,  s,  q}{r\mc{\limplies  }p}{1,2,\conjI}
+
+\end{argumentN}
+
+\opts{
+ \dotline
+ \dotline
+}
+{\conjI{} results in a succedent with \p{\land} as main connective.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{s}{s}{A}
+
+\ai{s\mc{\lor  }w}{s}{1,\disjI}
+
+\end{argumentN}
+
+\opts{
+ \dotline
+ \dotline
+}
+{\disjI{} does not change datum.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{p\mc{\land  }q}{p\mc{\land  }q}{A}
+
+\ai{p}{p\mc{\land  }q}{1,\conjE}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{
+Cannot eliminate a conjunct from a conjunction in datum using \conjE{}.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{r}{s\mc{\lor  }w}{premise}
+
+\ai{r}{s\mc{\lor  }(w\lor  q)}{1,\disjI}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{Cannot introduce a disjunct in that way using \disjI.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma ,  q}{p}{premise}
+
+\ai{\Delta }{\mc{\lnot  }p}{premise}
+
+\ai{\Gamma ,  \Delta }{\mc{\lnot  }q}{1,2,\negI}
+
+\end{argumentN}
+
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{\p{q} is not in the datum of line 2.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{w}{premise}
+
+\ai{\Gamma }{\mc{\lnot  }\lnot  w}{1,\negI}
+
+\end{argumentN}
+
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{Cannot introduce double negation using \negI.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Delta }{\lnot  \lnot  p\mc{\lor  }r}{premise}
+
+\ai{\Delta }{p\mc{\lor  }r}{1,\negE}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{Can't eliminate the double negation in this way.}
+
+\item
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{p\mc{\limplies  }q}{p\mc{\limplies  }q}{A}
+
+\ai{q}{q}{A}
+
+\ai{p\mc{\limplies  }q,  q}{p}{1,2,\condE}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{Not how \condE{} works.}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{p\mc{\limplies  }q}{p\mc{\limplies  }q}{A}
+
+\ai{p\mc{\limplies  }q}{p}{1,\condE}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{Not how \condE{} works}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{a}{premise}
+
+\ai{\Delta }{b}{premise}
+
+\ai{\Gamma ,  \Delta }{a\mc{\limplies  }b}{1,2,\condI}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+}
+{Not how \condI{} works.}
+
+\end{enumerate}
+\newpage
+
+\item Fill in missing items.
+
+ \begin{enumerate}
+  \renewcommand{\labelenumii}{(\roman{enumii})}
+
+ \setlength{\itemsep}{2em}
+ \item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\mask{p\mc{\limplies  }q}}{\mask{p\mc{\limplies  }q}}{A}
+
+\ai{p\mc{\limplies  }q,  r}{p\mc{\limplies  }q}{1}
+
+\end{argumentN}
+
+
+\item
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\mask{r\mc{\land  }s}}{\mask{r\mc{\land  }s}}{A}
+
+\ai{\Gamma ,  r\mc{\land  }s}{r\mc{\land  }s}{1}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\mask{\lnot  q\mc{\lor  }r}}{\mask{\lnot  q\mc{\lor  }r}}{A}
+
+\ai{\lnot  q\mc{\lor  }r,  \mc{\lnot  }\lnot  p}{\lnot  q\mc{\lor  }r}{1}
+
+\end{argumentN}
+
+
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{s\mc{\lor  }w}{premise}
+
+\ai{\mask{\Delta }}{\mask{p\mc{\limplies  }q}}{premise}
+
+\ai{\Gamma ,  \Delta }{(s\lor  w)\mc{\land  }(p\limplies  q)}{1,2,\conjI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{p}{premise}
+
+\ai{\mask{\Gamma }}{\mask{p\mc{\lor  }q}}{1,\disjI}
+
+\ai{\mask{\Delta} }{\mask{\mc{\lnot  }s}}{premise}
+
+\ai{\Gamma ,  \Delta }{(p\lor  q)\mc{\land  }\lnot  s}{2,3,\conjI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{q\mc{\land  }r}{premise}
+
+\ai{\mask{\Gamma }}{\mask{q}}{1,\conjE}
+
+\ai{\Gamma }{s\mc{\lor  }q}{2,\disjI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{s}{premise}
+
+\ai{\Delta }{r}{premise}
+
+\ai{\Gamma }{\mask{s\mc{\lor  }w}}{1,\disjI}
+
+\ai{\Gamma ,  \Delta }{(s\lor  w)\mc{\land  }r}{2,3,\conjI}
+
+\end{argumentN}
+
+\newpage
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{s}{premise}
+
+\ai{\Delta }{r}{premise}
+
+\ai{\mask{\Gamma }}{\mask{s\mc{\lor  }w}}{1,\disjI}
+
+\ai{\mask{\Delta }}{\mask{\lnot  p\mc{\lor  }r}}{2,\disjI}
+
+\ai{\Gamma ,  \Delta }{(s\lor  w)\mc{\land  }(\lnot  p\lor  r)}{3,4,\conjI}
+
+\end{argumentN}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\mc{\lnot  }p}{premise}
+
+\ai{\Gamma ,  s}{\mc{\lnot  }p}{1}
+
+\ai{\mask{\Gamma }}{\mask{s\mc{\limplies  }\lnot  p}}{2,\condI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{u\mc{\land  }w}{premise}
+
+\ai{\mask{\Gamma} }{\mask{u}}{1,\conjE}
+
+\ai{\mask{\Gamma ,  s}}{\mask{u}}{2}
+
+\ai{\Gamma }{s\mc{\limplies  }u}{3,\condI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{a\mc{\limplies  }b}{premise}
+
+\ai{\Delta }{a}{premise}
+
+\ai{\mask{\Gamma ,  \Delta} }{\mask{b}}{1,2,\condE}
+
+\end{argumentN}
+
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\Gamma }{\mask{x\mc{\limplies  }y}}{premise}
+
+ \ai{\mask{\Delta }}{x}{premise}
+
+\ai{\Gamma ,  \Delta }{y}{1,2,\condE}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\mc{\lnot  }\lnot  p}{premise}
+
+\ai{\mask{\Gamma }}{\mask{p}}{1,\negE}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\Delta }{\mask{\mc{\lnot  }\lnot  s}}{premise}
+
+ \ai{\mask{\Delta} }{s}{1,\negE}
+
+\end{argumentN}
+\newpage
+
+\item 
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma ,  q}{\mc{\lnot  }(p\lor  s)}{premise}
+
+\ai{\Delta ,  q}{p\mc{\lor  }s}{premise}
+
+\ai{\mask{\Gamma ,  \Delta} }{\mask{\mc{\lnot  }q}}{1,2,\negI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma ,  p}{q\mc{\limplies  }r}{premise}
+
+\ai{\Delta ,  p}{\mask{\mc{\lnot  }(q\limplies  r)}}{premise}
+
+\ai{\Gamma ,  \Delta }{\mc{\lnot  }p}{1,2,\negI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\Gamma ,  \mask{s\mc{\land  }w}}{q\mc{\lor  }\lnot  r}{premise}
+
+ \ai{\Delta ,  \mask{s\mc{\land  }w}}{\mask{\mc{\lnot  }(q\lor  \lnot  r)}}
+ {premise}
+
+\ai{\Gamma ,  \Delta }{\mc{\lnot  }(s\land  w)}{1,2,\negI}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{q\mc{\lor  }r}{premise}
+
+\ai{\Delta ,  q}{p\mc{\limplies  }s}{premise}
+
+\ai{\Theta ,  r}{p\mc{\limplies  }s}{premise}
+
+\ai{\mask{\Gamma ,  \Delta ,  \Theta} }{\mask{p\mc{\limplies  }s}}{1,2,3,\disjE}
+
+\end{argumentN}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma ,  p}{w\mc{\land  }(p\limplies  q)}{premise}
+
+\ai{\Delta }{p\mc{\lor  }q}{premise}
+
+\ai{\Theta ,  q}{w\mc{\land  }(p\limplies  q)}{premise}
+
+\ai{\mask{\Gamma ,  \Delta ,  \Theta }}{\mask{w\mc{\land  }(p\limplies  q)}}{1,2,
+3,\disjE}
+
+\end{argumentN}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\Gamma }{\mask{x\mc{\lor  }y}}{premise}
+
+\ai{\Delta ,  x}{w}{premise}
+
+\ai{\Theta ,  y}{w}{premise}
+
+\ai{\Gamma ,  \Delta ,  \Theta }{w}{1,2,3,\disjE}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{r\mc{\lor  }s}{premise}
+
+\ai{\Delta ,  \mask{r}}{\mask{\mc{\lnot  }(p\land  q)}}{premise}
+
+\ai{\Theta ,  s}{\mask{\mc{\lnot  }(p\land  q)}}{premise}
+
+\ai{\Gamma ,  \Delta ,  \Theta }{\mc{\lnot  }(p\land  q)}{1,2,3,\disjE}
+
+\end{argumentN}
+
+\end{enumerate}
+
+\newpage
+
+\item The following have blanks that are impossible to fill in in accordance 
+ with our inference rules if we stick to the annotations.  Explain why.
+
+ \newcommand{\blanksp}{\_\_}
+
+ \begin{enumerate}
+	\setlength{\itemsep}{2em}
+
+  \item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\blanksp}{r}{A}
+
+\ai{p,  q}{p}{1}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+
+}{
+ The blank would have to be an \p{r} given the annotation of line 1, but you 
+can't get line 2 from that in the way indicated.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{r}{r}{A}
+
+\ai{\blanksp}{\blanksp}{1}
+
+\ai{r}{p\mc{\limplies  }q}{2,\condI}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+
+}
+{
+ Given the annotation of line 3, line 2 must have a \p{q} in succedent, but you 
+can't get that given line 2 is said to be a rewrite of line 1.}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{r}{premise}
+
+\ai{s}{s}{A}
+
+\ai{s}{\blanksp}{2,\disjI}
+
+\ai{\Gamma ,  s}{r\mc{\land  }(s\land  q)}{1,3,\conjI}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+
+}
+{
+ Given the annotation of line 4, the succedent of line 3 must be \p{s\land q}, 
+ but you can't get that since the annotation of line 3 requires that the 
+ succedent be a disjunction.
+}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\mc{\lnot  }\lnot  p}{premise}
+
+\ai{\blanksp}{\blanksp}{1,\negE}
+
+\ai{\Delta }{p\mc{\limplies  }q}{premise}
+
+\ai{\Delta }{q}{2,3,\condE}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+
+}
+{Given the annotation of line 4, the datum of line 2 must either be empty or 
+\p{\Delta}. But the annotation of 2 requires that the datum be \p{\Gamma}.}
+
+\newpage
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\Theta }{\blanksp}{premise}
+
+\ai{\Gamma ,  p}{r}{premise}
+
+\ai{\Delta ,  q}{r}{premise}
+
+\ai{\Gamma ,  \Delta ,  \Theta }{r}{1,2,3,\disjE}
+
+\ai{\Theta }{\blanksp}{1,\conjE}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+
+}
+{According to the annoation of line 5, line 1's succedent must be a conjunction, 
+but the annotation of line 4 requires it to be a conjunction.}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+ \ai{\Gamma}{\blanksp}{premise}
+
+  \ai{\Delta }{\blanksp}{premise}
+
+\ai{\Theta ,  p}{q}{premise}
+
+\ai{\Gamma,\Delta,\Theta}{\blanksp}{1,2,\conjI}
+
+\ai{\Gamma,\Delta,\Theta,p}{\blanksp}{4}
+
+
+\ai{\Gamma,\Delta ,  \Theta }{\mc{\lnot  }p}{3,5,\negI}
+
+\end{argumentN}
+
+\opts{
+
+ \dotline
+ \dotline
+
+}
+{Given the annotation of line 6, the succedents of lines 4 and 5 must be 
+ \p{\lnot q}. But given the annotation of line 4, the succedent must be a 
+ conjunction.
+}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\mc{\lnot  }\lnot  p}{premise}
+
+\ai{\Gamma }{\blanksp}{1,\disjI}
+
+\ai{\Gamma }{p\mc{\lor  }q}{2,\negE}
+
+\end{argumentN}
+
+\opts{
+  
+ \dotline
+ \dotline
+
+}
+{
+ Given the annotation of line 2, the main connective of its succedent must be 
+ \p{\lor}, but then you cannot use \negE{} to infer line 3 from line 2.
+}
+
+\end{enumerate}
+
+\end{enumerate}

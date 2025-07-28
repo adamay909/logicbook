@@ -1,0 +1,44 @@
+
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+ 
+ \node(start) [terminal] {START};
+ 
+ \node(S1) [decision, below=of start] {On 0?};
+
+ \node(S2) [process, right=of S1] {write 0};
+
+ \node(S3) [process, below=of S2] {move right};
+
+ \node(S4) [process, left=of S1] {write 0};
+
+ \node(S5) [process, below=of S4] {move right};
+
+
+
+ \draw[arrow] (start)--(S1);
+
+ \draw[arrow] (S1)--node[anchor=south]{Yes}(S2);
+
+ \draw[arrow] (S2)--(S3);
+
+ \draw[arrow] (S3) --++(0,-1.5)-|(S1);
+
+ \draw[arrow] (S1)--node[anchor=south]{No}(S4);
+
+ \draw[arrow] (S4)--(S5);
+
+ \draw[arrow] (S5) --++(0,-1.5)-|(S1);
+\end{tikzpicture}
+
+\end{document}
+
+
+

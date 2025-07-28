@@ -1,0 +1,69 @@
+\section*{Exercises for 4.5}
+
+\begin{enumerate}
+ \setlength{\itemsep}{2em}
+ \cover{\setlength{\itemsep}{1em}
+ }
+ \item Suppose there is a derivation from \p{\seq{\Gamma}{s}} to \p{\seq{\Gamma}
+  {t}}.  Explain why it follows that \p{\seq{}{s\limplies t}}. (Hint: you can 
+  plug anything you want into \p{\Gamma}.)
+
+ \answer{
+
+  We can plug \p{s} into \p{\Gamma}. The supposition gives us that we can prove 
+  \p{\seq{s}{t}}. We can then use \condI{} to get \p{\seq{}{s\limplies t}}.
+
+ }
+
+
+ \item Suppose \plsh{Cst} is a tautology. Explain why in that case the truth of 
+  \p{s} guarantees the truth of \p{t}.
+
+  \answer{ 
+
+   If the truth of \p{s} did not guarantee the truth of \p{t}, \p{s\limplies t} 
+   could be false and therefore would not be a tautology which contradicts the 
+   supposition.
+
+  }
+
+
+  \item Suppose we can show that if \p{\seq{}{s\limplies t}}, then \plsh{Cst} is 
+   a tautology. Explain why this would show that if there is a derivation from 
+   \p{\seq{\Gamma}{s}} to \p{\seq{\Gamma}{t}}, then the truth of \p{s} 
+   guarantees the truth of \p{t}.
+
+\answer{
+
+ From Q1 we know that if there is a derivation from \p{\seq{\Gamma}{s}} to 
+ \p{\seq{\Gamma}{t}}, then \p{\seq{}{s\limplies t}}. Given our supposition for 
+ this question, this means that \p{s\limplies t} is a tautology. But then by Q2, 
+ it follows that the truth of \p{s} guarantees the truth of \p{t}.
+
+}
+
+  \item Suppose we can show that if \plsh{Cst} is a tautology, then \p{\seq{}
+   {s\limplies t}}. Explain why this would show that if \plsh{Cst} is a 
+   tautology, then there is a derivation from \p{\seq{\Gamma}{s}} to 
+   \p{\seq{\Gamma}{t}}.
+
+   \answer{
+
+	We can construct the following derivation:
+
+	\begin{argument*}
+
+	 \ai{\Gamma}{s}{premise}
+	 \ai{}{s\limplies t}{theorem}
+	 \ai{\Gamma}{t}{1,2,\condE}
+
+	\end{argument*}
+
+	By the supposition, if \p{s\limplies t} is a tautology, line 2 in the above 
+	derivation is correct.
+   }
+
+
+\end{enumerate}
+
+

@@ -1,0 +1,6 @@
+\Gamma;APQ;;premise
+P;P;;a
+P;AQP;2;di
+Q;Q;;a
+Q;AQP;4;di
+\Gamma;AQP;1,3,5;de

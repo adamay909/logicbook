@@ -1,0 +1,356 @@
+Here are some more simple practice derivations. Do not use any theorems:
+
+\begin{enumerate}
+ \cover{\setlength{\itemsep}{5em}}
+ \item 
+
+ From \p{\seq{\Gamma}{p}} to \p{\seq{\Gamma}{q\limplies p}} (Hint: you can add 
+ anything you want to the datum of a sequent).
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+
+ }
+ {
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{p}{premise}
+
+\ai{\Gamma ,  q}{p}{1}
+
+\ai{\Gamma }{q\mc{\limplies  }p}{2,\condI}
+
+\end{argumentN}
+}
+
+\item
+
+ From \p{\seq{\Gamma}{r}} and \p{\seq{\Delta}{\lnot r}} to \p{\seq{\Gamma,
+   \Delta}
+ {s}} (Hint: you can add anything you want to the datum of a sequent).
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+
+ }
+ {
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{r}{premise}
+
+\ai{\Delta }{\mc{\lnot  }r}{premise}
+
+\ai{\Gamma ,  \mc{\lnot  }s}{r}{1}
+
+\ai{\Gamma ,  \mc{\lnot  }s}{\mc{\lnot  }r}{2}
+
+\ai{\Gamma }{\mc{\lnot  }\lnot  s}{3,4,\negI}
+
+\ai{\Gamma }{s}{5,\negE}
+
+\end{argumentN}
+
+}
+
+\newpage
+\item
+
+ From \p{\seq{\Gamma}{s}} to \p{\seq{\Gamma}{\lnot \lnot s}} (Hint: assume 
+ \p{\lnot s})
+ .
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+
+ }
+ {
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{s}{premise}
+
+\ai{\mc{\lnot  }s}{\mc{\lnot  }s}{A}
+
+\ai{\Gamma ,  \mc{\lnot  }s}{s}{1}
+
+\ai{\Gamma }{\mc{\lnot  }\lnot  s}{2,3,\negI}
+
+\end{argumentN}
+
+}
+
+\item 
+
+ From \p{\seq{\Gamma}{\lnot \lnot p \limplies q}} to \p{\seq{\Gamma}{p\limplies 
+ q}} (Hint: part of the derivation adapts the previous one).
+
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+
+ }
+ {
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\lnot  \lnot  p\mc{\limplies  }q}{premise}
+
+\ai{p}{p}{A}
+
+\ai{\mc{\lnot  }p}{\mc{\lnot  }p}{A}
+
+\ai{p,  \mc{\lnot  }p}{p}{2}
+
+\ai{p}{\mc{\lnot  }\lnot  p}{3,4,\negI}
+
+\ai{\Gamma ,  p}{q}{1,5,\condE}
+
+\ai{\Gamma }{p\mc{\limplies  }q}{6,\condI}
+
+\end{argumentN}
+}
+
+\newpage
+\item From \p{\seq{\Gamma}{\lnot \lnot p \limplies \lnot \lnot q}} to 
+ \p{\seq{\Gamma}
+ {p\limplies q}} (Hint: adapt the previous two derivations).
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+
+ }
+ {
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\lnot  \lnot  p\mc{\limplies  }\lnot  \lnot  q}{premise}
+
+\ai{p}{p}{A}
+
+\ai{\mc{\lnot  }p}{\mc{\lnot  }p}{A}
+
+\ai{p,  \mc{\lnot  }p}{p}{2}
+
+\ai{p}{\mc{\lnot  }\lnot  p}{3,4,\negI}
+
+\ai{\Gamma ,  p}{\mc{\lnot  }\lnot  q}{1,5,\condE}
+
+\ai{\Gamma ,  p}{q}{6,\negE}
+
+\ai{\Gamma }{p\mc{\limplies  }q}{7,\condI}
+
+\end{argumentN}
+}
+
+
+
+\item 
+
+ From \p{\seq{\Gamma}{\lnot\lnot s \lor w}} to \p{\seq{\Gamma}{s\lor w}} (Hint: 
+ \disjE{} is your friend and don't forget about \disjI).
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+ }
+ {
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\lnot  \lnot  s\mc{\lor  }w}{premise}
+
+\ai{\mc{\lnot  }\lnot  s}{\mc{\lnot  }\lnot  s}{A}
+
+\ai{\mc{\lnot  }\lnot  s}{s}{2,\negE}
+
+\ai{\mc{\lnot  }\lnot  s}{s\mc{\lor  }w}{3,\disjI}
+
+\ai{w}{w}{A}
+
+\ai{w}{s\mc{\lor  }w}{5,\disjI}
+
+\ai{\Gamma }{s\mc{\lor  }w}{1,4,6,\disjE}
+
+\end{argumentN}
+ }
+
+\newpage
+\item From \p{\seq{\Gamma}{p\land (q\land r)}} to \p{\seq{\Gamma}{(p\land r) 
+ \land q}} (Hint: you only need \conjE{} and \conjI{}).
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+ }
+ {
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{p\mc{\land  }(q\land  r)}{premise}
+
+\ai{\Gamma }{p}{1,\conjE}
+
+\ai{\Gamma }{q\mc{\land  }r}{1,\conjE}
+
+\ai{\Gamma }{r}{3,\conjE}
+
+\ai{\Gamma }{p\mc{\land  }r}{2,4,\conjI}
+
+\ai{\Gamma }{q}{3,\conjE}
+
+\ai{\Gamma }{(p\land  r)\mc{\land  }q}{5,6,\conjI}
+
+\end{argumentN}
+
+}
+
+\item From \p{\seq{\Gamma}{(p\lor q)\lor r}} to \p{\seq{\Gamma}{q\lor (p\lor r)}}
+(Hint: apart from assumptions, you only need \disjI{} and \disjE{}).
+
+ \opts{
+
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+  \dotline
+ }
+ {
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{(p\lor  q)\mc{\lor  }r}{premise}
+
+\ai{p\mc{\lor  }q}{p\mc{\lor  }q}{A}
+
+\ai{p}{p}{A}
+
+\ai{p}{p\mc{\lor  }r}{3,\disjI}
+
+\ai{p}{q\mc{\lor  }(p\lor  r)}{4,\disjI}
+
+\ai{q}{q}{A}
+
+\ai{q}{q\mc{\lor  }(p\lor  r)}{6,\disjI}
+
+\ai{p\mc{\lor  }q}{q\mc{\lor  }(p\lor  r)}{2,5,7,\disjE}
+
+\ai{r}{r}{A}
+
+\ai{r}{p\mc{\lor  }r}{9,\disjI}
+
+\ai{r}{q\mc{\lor  }(p\lor  r)}{10,\disjI}
+
+\ai{\Gamma }{q\mc{\lor  }(p\lor  r)}{1,8,11,\disjE}
+
+\end{argumentN}
+}
+
+
+\end{enumerate}
+
+

@@ -1,0 +1,12 @@
+\p{
+\begin{center}
+\begin{tabular}{c c||c}
+ A  & B & (A \comp[0] B)\\
+\hline
+$T$ & $T$ & $F$ \\
+$T$ & $F$ & $F$  \\
+$F$ & $T$ & $F$ \\
+$F$ & $F$ & $F$ \\
+\end{tabular}
+\end{center}
+}

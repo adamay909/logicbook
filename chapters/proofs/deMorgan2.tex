@@ -1,0 +1,30 @@
+\begin{argument*}
+
+\ai{\lnot (P \land Q)}{\lnot (P \land Q)}{A}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{\lnot (\lnot P \lor \lnot Q)}{A}
+
+\ai{}{\lnot (\lnot P \lor \lnot Q) \limplies (\lnot \lnot P \land \lnot \lnot Q)}{DM1}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{\lnot \lnot P \land \lnot \lnot Q}{2,3,\condE}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{\lnot \lnot P}{4,\conjE}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{P}{5,\negE}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{\lnot \lnot Q}{4,\conjE}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{Q}{7,\negE}
+
+\ai{\lnot (\lnot P \lor \lnot Q)}{P \land Q}{6,8,\conjI}
+
+\ai{\lnot (P \land Q),\lnot (\lnot P \lor \lnot Q)}{\lnot (P \land Q)}{1}
+
+\ai{\lnot (P \land Q)}{\lnot \lnot (\lnot P \lor \lnot Q)}{9,10,\negI}
+
+\ai{\lnot (P \land Q)}{\lnot P \lor \lnot Q}{11,\negE}
+
+\ai{}{\lnot (P \land Q) \limplies (\lnot P \lor \lnot Q)}{12,\condI}
+
+\end{argument*}
+

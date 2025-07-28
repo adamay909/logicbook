@@ -1,0 +1,34 @@
+\begin{argument*}
+
+\ai{p \lor q}{p \lor q}{A}
+
+\ai{p}{p}{A}
+
+\ai{p,\lnot q}{p}{2}
+
+\ai{p}{\lnot q \limplies p}{3,\condI}
+
+\ai{}{(\lnot q \limplies p) \limplies (\lnot p \limplies \lnot \lnot q)}{4,Contraposition}
+
+\ai{p}{\lnot p \limplies \lnot \lnot q}{4,5,\condE}
+
+\ai{\lnot p}{\lnot p}{A}
+
+\ai{p,\lnot p}{\lnot \lnot q}{6,7,\condE}
+
+\ai{p,\lnot p}{q}{8,\negE}
+
+\ai{p}{\lnot p \limplies q}{9,\condI}
+
+\ai{q}{q}{A}
+
+\ai{q,\lnot p}{q}{11}
+
+\ai{q}{\lnot p \limplies q}{12,\condI}
+
+\ai{p \lor q}{\lnot p \limplies q}{1,10,13,\disjE}
+
+\ai{}{(p \lor q) \limplies (\lnot p \limplies q)}{14,\condI}
+
+\end{argument*}
+

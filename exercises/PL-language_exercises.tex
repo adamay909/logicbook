@@ -1,0 +1,558 @@
+\section*{The language of predicate logic}
+
+
+\newcommand{\ansk}[1]{\opts{
+  
+  \vskip 0.5em
+  \dotline
+
+ }
+ {#1}
+}
+
+\newcommand{\ansF}{\dotfill True/\anscircled{False}}
+\newcommand{\ansT}{\dotfill \anscircled{True}/False}
+
+\renewcommand{\lbh}[1]{\input{|"lbhelper -p -f #1"}}
+
+\begin{enumerate}
+
+ \item \p{Rx} means that x is a rodent. \p{Fx} means that x is a feline. \p{Exy} 
+  means that x eats y. \p{Cx} means that x is cute. Let \p{j} be a constant 
+  referring to Jerry, \p{t} be a constant referring to Tom, \p{m} be a constant 
+  referring to Minnie, and \p{k} be a constant referring to Kitty.  Translate 
+  the following English sentences into sentences of predicate logic.
+
+  \coverbox{The provided answers are `standard' answers. There might be other 
+  translations that are just as good.}
+
+  \begin{enumerate}
+   \setlength{\itemsep}{1em}
+   \item Jerry is a rodent.
+
+	\ansk{\p{Rj}}
+
+   \item Kitty is a feline.
+
+	\ansk{\p{Fk}}
+
+   \item Felines are cute.
+
+	\ansk{\p{\lforall x (Fx \limplies Cx)}}
+
+   \item Tom is not cute.
+
+	\ansk{\p{\lnot Ct}}
+
+	\item If Tom is feline, then some felines are not cute.
+
+	 \ansk{\p{Ft \limplies \lthereis x (Fx\land \lnot Cx)}}
+
+	\item Tom does not eat Jerry.
+
+	 \ansk{\p{\lnot Etj}}
+
+	\item Minnie is not a feline.
+
+	 \ansk{\p{\lnot Fm}}
+
+	\item If something is not a feline, it is a rodent.
+
+	 \ansk{\p{\lforall x (\lnot Fx \limplies Rx)}}
+
+	\item Some things are rodents.
+
+	 \ansk{\p{\lthereis x Rx}}
+
+	\item There are rodents.
+
+	 \ansk{\p{\lthereis x Rx}}
+
+
+	\item Rodents are not cute.
+
+	 \ansk{\p{\lforall x (Rx \limplies \lnot Cx)}}
+
+	\item No rodent is cute.
+
+	 \ansk{\p{\lnot \lthereis x (Rx \land Cx)}}
+
+	\item If Minnie is a rodent, Kitty eats Minnie.
+
+	 \ansk{\p{Rm \limplies Ekm}}
+
+	\item Some rodents eat felines.
+
+	 \ansk{\p{\lthereis x (Rx \land \lthereis y (Fy \land Exy))}}
+
+	\item There are rodents that eat felines.
+
+	 \ansk{\p{\lthereis x (Rx \land \lthereis y (Fy \land Exy))}}
+
+	\item No rodents eat felines.
+
+	 \ansk{\p{\lnot\lthereis x (Rx \land \lthereis y (Fy \land Exy))}}
+
+	\item Kitty does not eat rodents.
+
+	 \ansk{\p{\lnot\lthereis x (Rx \land Ekx)}}
+
+	\item If something is a rodent, Kitty does not eat it.
+
+	 \ansk{\p{\lforall x (Rx \limplies \lnot Ekx)}}
+
+	\item Some rodents are cute.
+
+	 \ansk{\p{\lthereis x (Rx \land Cx)}}
+
+	\item Some cute things eat cute things.
+
+	 \ansk{\p{\lthereis x \lthereis y [Cx \land (Cy \land Exy)]}}
+
+   \end{enumerate}
+
+\newpage
+
+  \item Let the domain of discourse be all 5C (Pomona, Pitzer, Scripps, Harvey 
+   Mudd, CMC) students.  Let \p{Fx} mean that x is a Pomona student, \p{Gx} mean 
+   that x is a Scripps student, \p{Hx} mean that x is a Harvey Mudd student, 
+   \p{Jx} mean that x is a Pitzer student.  Let's also say no one attends two 5C 
+   colleges at once (I think that's true),  every 5C college has some students.  
+   Let \p{Px} mean that x is currently taking PHIL60, and let's say that PHIL60 
+   has a mix of 5C students except CMC students.  Finally,
+	let \p{Sxy} mean that x and y are taking the same class. 
+
+   Given this interpretation, indicate for each of the following sentences 
+   whether or not it is true.
+
+   \begin{enumerate}
+
+   \setlength{\itemsep}{1em}
+
+
+   \item \lbh{KXxGxXxZx}
+
+	\ansT
+
+	\coverbox{The sentence says that there are Scripps students and there are 
+	Pitzer students.}
+
+   \item \lbh{XxKFxHx}
+
+	\ansF
+
+	\coverbox{The sentence says that there is someone who is both a Pomona and a 
+	Mudd student.}
+
+
+
+   \item \lbh{UxCFxZx}
+
+	 \ansF
+
+	 \coverbox{The sentence says that every Pomona student is a Pitzer student.}
+
+	\item \lbh{UxCGxNHx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that anyone who is a Scripps student is not a Mudd 
+	 student.}
+
+	\item \lbh{XxKZxHx}
+
+	 \ansF
+
+	 \coverbox{The sentences says that there is someone who is both a Pitzer 
+	 student and a Mudd student.}
+
+	\item \lbh{XxKPxFx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that there is someone who is taking PHIL60 and is 
+	  a Pomona student. Or, more colloquially, there is a Pomona student who is 
+	 taking PHIL60.}
+
+	\item \lbh{XyKPyFy}
+
+	 \ansT
+
+	 \coverbox{This means exactly the same thing as the previous sentence.}
+
+	\item \lbh{NUxCPxHx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that not everyone who is taking PHIL60 is a Mudd 
+	 student.}
+
+	\item \lbh{UxUyCKPxPySxy}
+
+	 \ansT
+
+	 \coverbox{The sentence says that if any two people are taking PHIL60, then 
+	 they are taking the same course.}
+
+	\item \lbh{UxUyCSxyKPxPy}
+
+	 \ansF
+
+	 \coverbox{The sentence says that if two people are taking the same course, 
+	 then they are both taking PHIL60.}
+
+	\item \lbh{UxAFxAGxAHxZx}
+
+	 \ansF
+
+	 \coverbox{The sentence says that everyone is a Pomona, Scripps, Mudd, or 
+	 Pitzer student. (That's false since the domain is all the 5C students.)}
+
+
+	\item \lbh{XxNAFxAGxAHxZx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that there is someone who is not attending Pomona, 
+	 Scripps, Mudd, or Pitzer.}
+
+	\item \lbh{XxKNFxNGx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that some people are neither Pomona nor Scripps 
+	 students.}
+
+	\item \lbh{XxKKNFxNGxPx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that there are some who are neither Pomona nor 
+	 Scripps students who are taking PHIL60.}
+
+	\item \lbh{UxUyCKGxHyNSxy}
+
+	 \ansF
+
+	 \coverbox{The sentence says that no Scripps and Mudd students are taking the 
+	 same class.}
+
+	\item \lbh{XxXyKKFxZySxy}
+
+	 \ansT
+
+	 \coverbox{The sentence says that some Pomona and Pitzer students are taking 
+	 the same class.}
+
+	\item \lbh{UzCPzAFzAGzAHzZz}
+
+	 \ansT
+
+	 \coverbox{The sentence says that anyone taking PHIL60 is a Pomona, Scripps, 
+	 Mudd, or Pitzer student.}
+
+
+	\item \lbh{UxCPxXyKZySxy}
+
+	 \ansT
+
+	 \coverbox{The sentence says that anyone who is taking PHIL60 is taking the 
+	 same class with some Pitzer student.}
+
+	\item \lbh{UxXyCPxKZySxy}
+
+	 \ansT
+
+	 \coverbox{This says the same as the previous sentence.}
+
+	\item \lbh{NXxKPxNAFxAGxAHxZx}
+
+	 \ansT
+
+	 \coverbox{The sentence says that there is no one who is taking PHIL60 but 
+	 isn't a Pomona, Scripps, Mudd, or Pitzer student.}
+
+	\item \lbh{NXxKPxKNFxKNGxKNHxNZx}
+
+	 \ansT
+
+	 \coverbox{This is saying the same as the previous sentence.}
+
+	 
+
+   \end{enumerate}
+
+\newpage
+
+
+  \item For each of the following sentences, create an interpretation that makes the 
+   sentence true.
+\coverbox{
+My answers are only examples. They are kept very simple to give you a sense of 
+how to produce models without too much thought.}
+
+
+   \begin{enumerate}
+
+	\item \p{Gb}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+	  \begin{itemize}
+
+	  \item Domain: Just Bernie
+
+	  \item Extension of \p{G}: Bernie
+
+	  \item Referent of \p{b}: Bernie
+	  \end{itemize}
+
+
+	 }
+
+	\item \p{Gc \limplies Fc}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+	\begin{itemize}
+
+	 \item Domain: Just Charlie
+
+	 \item Extension of \p{G}: empty
+
+	 \item Extension of \p{F}: empty
+
+	 \item Referent of \p{c}: Charlie
+
+	\end{itemize}
+	 }
+
+	\item \lbh{KCGcFcNFd}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+
+	 \begin{itemize}
+
+	  \item Domain: Charlie and Dannie
+
+	  \item Extension of F: Charlie
+
+	  \item Extension of G: Charlie
+
+	  \item Referent c: Charlie
+
+	  \item Referent of d: Dannie
+
+	\end{itemize}
+
+}
+
+
+	\item \lbh{XxFx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+
+	 \begin{itemize}
+
+	 \item Domain: Taylor
+
+	\item Extension of F: Taylor
+
+  \end{itemize}
+
+ }
+
+	\item \lbh{XxGx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+	\begin{itemize}
+
+	 \item Domain: Britney
+
+	 \item Extension of G: Britney
+
+	\end{itemize}
+
+	 }
+
+	\item \lbh{KXxFxXxGx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+	
+	  \begin{itemize}
+
+	   \item Domain: Taylor and Britney
+
+	   \item Extension of F: Taylor
+
+	   \item Extension of G: Britney
+
+	  \end{itemize}
+	 
+
+	 }
+
+	\item \lbh{KXxFxNXxGx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+
+	\begin{itemize}
+
+	 \item Domain: Lexi
+
+	 \item Extension of F: Lexi
+
+	 \item Extension of G: Empty
+
+	\end{itemize}
+
+	 }
+
+
+
+	\item \lbh{UxCGxFx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+
+	  \begin{itemize}
+
+	   \item Domain: Venus
+
+	   \item Extension of G: Venus
+
+	   \item Extension of F: Venus
+
+   \end{itemize}
+
+  }
+
+
+
+	\item \lbh{NUxCGxFx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+	  \begin{itemize}
+
+	   \item Domain: Venus and Pluto
+
+	  \item Extension of G: Venus and Pluto
+
+	 \item Extension of F: Venus
+
+   \end{itemize}}
+
+	\item \lbh{NXxAFxGx}
+
+	 \opts{
+
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+	  \dotline
+
+	 }
+	 {
+
+	  \begin{itemize}
+
+	   \item Domain: Ivy
+
+	  \item Extension of F: empty
+
+	 \item Extension of G: empty
+
+   \end{itemize}
+  }
+
+
+
+ \end{enumerate}
+
+
+\end{enumerate}
+
+
+
+
+
+

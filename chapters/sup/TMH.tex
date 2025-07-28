@@ -1,0 +1,55 @@
+
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+
+ \node(start) [terminal]{}; 
+ 
+ \node(s1) [decision,right=of start] {j-th machine halts on j-th input?};
+
+
+ \node(y1) [decision, below=of s1] {On 0?};
+
+ \node(y2) [process, right=of y1] {write 0};
+
+ \node(y3) [process, below=of y2] {move left};
+
+
+ \node(y4) [process, left=of y1] {write 1};
+
+ \node(y5) [process, below=of y4] {move left};
+
+ \node(n1) [terminal, right =of s1]{STOP};
+
+
+ \draw[arrow] (y1)--node[anchor=south]{Yes}(y2);
+
+  \draw[arrow] (y2)--(y3);
+
+  \draw[arrow] (y3)--++(0,-1)-|(y1);
+ 
+ \draw[arrow] (y1)--node[anchor=south]{No}(y4);
+
+  \draw[arrow] (y4)--(y5);
+
+  \draw[arrow] (y5)--++(0,-1)-|(y1);
+
+  \draw[arrow](s1)--node[anchor=west]{Yes}(y1);
+
+  \draw[arrow](s1)--node[anchor=south]{No}(n1);
+
+  \draw[arrow](start)--(s1);
+
+
+\end{tikzpicture}
+
+\end{document}
+
+
+

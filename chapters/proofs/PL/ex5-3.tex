@@ -1,0 +1,22 @@
+\begin{argument*}
+
+\ai{\Gamma}{\lforall x (Wx \limplies Mx)}{premise}
+
+\ai{\Delta}{\lforall x (Mx \limplies Bx)}{premise}
+
+\ai{We}{We}{A}
+
+\ai{\Gamma}{We \limplies Me}{1,\uniE}
+
+\ai{\Delta}{Me \limplies Be}{2,\uniE}
+
+\ai{\Gamma, We}{Me}{3,4,\condE}
+
+\ai{\Gamma, \Delta, We}{Be}{5,6,\condE}
+
+\ai{\Gamma, \Delta}{We \limplies Be}{7,\condI}
+
+\ai{\Gamma, \Delta}{\lforall x (Wx \limplies Bx)}{8,\uniI}
+
+\end{argument*}
+

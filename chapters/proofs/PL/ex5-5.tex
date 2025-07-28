@@ -1,0 +1,20 @@
+\begin{argument*}
+
+\ai{\Gamma}{\lthereis x (Fx)}{premise}
+
+\ai{\lforall x \lnot Fx}{\lforall x \lnot Fx}{A}
+
+\ai{Fa}{Fa}{A}
+
+\ai{\lforall x \lnot Fx}{\lnot Fa}{2,\uniE}
+
+\ai{Fa, \lforall x \lnot Fx}{\lnot Fa}{4}
+
+\ai{Fa, \lforall x \lnot Fx}{Fa}{3}
+
+\ai{Fa}{\lnot \lforall x \lnot Fx}{5,6,\negI}
+
+\ai{\Gamma}{\lnot \lforall x \lnot Fx}{1,7,\exE}
+
+\end{argument*}
+

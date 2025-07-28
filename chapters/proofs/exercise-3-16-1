@@ -1,0 +1,10 @@
+\Gamma;APQ;;premise
+\Delta;NP;;premise
+P;P;;a
+\Delta,NQ;NP;2
+P,NQ;P;3
+\Delta,P;NNQ;4,5;ni
+\Delta,P;Q;6;ne
+Q;Q;;a
+\Gamma,\Delta;Q;1,7,8;de
+

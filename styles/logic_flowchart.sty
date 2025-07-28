@@ -1,0 +1,32 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{logic_flowchart}
+
+\usepackage{logicfonts}
+
+\usepackage{logic_commands}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+
+
+\tikzstyle{terminal} = [circle, text centered, draw=black]
+
+%\tikzstyle{io} = [trapezium, trapezium stretches=false, % A later addition
+%trapezium left angle=70, trapezium right angle=110, height=1cm,  text centered, 
+%text width=2cm, draw=black]
+
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text 
+centered, text width=3cm, draw=black
+]
+
+\tikzstyle{decision} = [diamond, aspect=2.0,  text centered, text width=3cm,
+draw=black] 
+
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{line} = [thick,-]
+
+ \tikzset{node distance=1cm and 2cm}
+

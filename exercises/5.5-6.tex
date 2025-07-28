@@ -1,0 +1,218 @@
+
+\subsection*{Exercises for 5.5--5.6}
+\begin{enumerate}
+ \setlength{\itemsep}{2.5em}
+\item Consider the following formula:
+
+ \p{\lforall x\big[(Px\lor Sx)\limplies Cx\big]}
+ 
+\begin{enumerate}
+ \item Construct an interpretation that makes the above formula true.
+
+
+ \item Construct an interpretation that makes the above formula false.
+ 
+\end{enumerate}
+  \answer{ 
+
+   The following models are just examples.
+
+   \begin{enumerate}
+	\item An intuitive interpretation: Let \p{Px} mean that x is a Pomona 
+	 student, \p{Sx} mean that x is a Scripps student, and \p{Cx} mean that x is 
+	 a 5C student. On this interpretation, the above formula is true.
+
+   A formal model: 
+
+   \begin{itemize}
+	\item Domain of discourse: Charlie, Logan, Rowan, Sidney.
+
+	\item Referent of constants: \p{c} refers to Charlie, \p{l} refers to Logan, 
+	 \p{r} refers to Rowan, \p{s} refers to Sidney.
+
+	\item Extension of \p{P}: Charlie and Logan. Extension of \p{S}: Rowan and 
+	 Sidney. Extension of \p{C}: Charlie, Logan, Rowan, and Sidney.
+
+   \end{itemize}
+
+  \item An intuitive interpretation: Let \p{Px} mean that x is a Pitzer student, 
+   \p{Sx} mean that x is a Scripps student, and \p{Cx} mean that x is a CMC 
+   student. On this interpretation, the above formula is false.
+
+   A formal model:
+
+   \begin{itemize}
+	\item Domain of discourse: Charlie, Logan, Rowan, Sidney.
+
+	\item Referent of constants: \p{c} refers to Charlie, \p{l} refers to Logan, 
+	 \p{r} refers to Rowan, \p{s} refers to Sidney.
+
+	\item Extension of \p{P}: Charlie and Logan. Extension of \p{S}: Rowan and 
+	 Sidney. Extension of \p{C}: empty.
+
+   \end{itemize}
+ \end{enumerate}
+
+
+  }
+
+\item Consider the following formula:
+
+ \p{Pa \limplies \forall x(Rx\limplies \lnot Pa)}
+
+ \begin{enumerate}
+
+  \item Construct an interpretation that makes the formula true.
+
+  \item Construct an interpretation that makes the formula false.
+
+ \end{enumerate}
+
+\answer{
+
+ \begin{enumerate}
+
+  \item Notice that the whole formula is a conditional so that if \p{Pa} is 
+   false, the whole is true. We therefore only need to make sure \p{Pa} is false 
+   in our model.
+
+   \begin{itemize}
+
+	\item Domain of discourse: Ben, Jerry.
+	\item Referents of constants: \p{a} refers to Ben, \p{b} refers to Jerry.
+	\item Extension of \p{P}: empty. Extension of \p{R}: Ben and Jerry.
+   \end{itemize}
+
+  \item \p{Pa} must be true, and \p{\lforall x(Rx\limplies\lnot Pa)} has to be 
+   false. The latter requires that \p{R\kappa\limplies\lnot Pa} be false for 
+   some constant \p{\kappa}.
+
+   \begin{itemize}
+
+	\item Domain of discourse: Ben, Jerry.
+	\item Referents of constants: \p{a} refers to Ben, \p{b} refers to Jerry.
+	\item Extension of \p{P}: Ben. Extension of \p{R}: Ben and Jerry.
+	
+   \end{itemize}
+
+ \end{enumerate}
+
+}
+
+
+\item Consider the following formula:
+
+ \p{\lforall x\lforall y(Rxy \limplies Ryx)}
+
+ \begin{enumerate}
+
+  \item Construct an interpretation that makes the formula true.
+
+  \item Construct an interpretation that makes the formula false.
+
+ \end{enumerate}
+
+\answer{
+
+ \begin{enumerate}
+
+  \item Intuitively, any interpretation of \p{R} as a symmetric relationship 
+   makes the formula true.
+
+   \begin{itemize}
+
+	\item Domain of discourse: Jill, Joe, George, Laura.
+	\item Referents of constants: \p{j_1} refers to Jill, \p{j_2} refers to Joe, 
+	 \p{g} refers to George, \p{l} refers to Laura.
+	\item Extension of \p{R}: the ordered pairs <Jill, Joe>, <Joe,Jill>, <George,
+	 Laura>, <Laura, George>.
+
+   \end{itemize}
+	(Think of \p{Rxy} as meaning x is married to y.)
+
+	\item Intuitively, any interpretation of \p{R} as an asymmetric relationship 
+	 makes the formula false.
+
+	 \begin{itemize}
+	  \item Domain of discourse: Kamala, Mike.
+	  \item Referents of constants: \p{k} refers to Kamala, \p{m} refers to 
+	   Mike.
+	  \item Extension of \p{R}: the ordered pair <Kamala, Mike>.
+	 \end{itemize}
+	(Think of \p{Rxy} as meaning x is the successor of y as vice president.)
+  \end{enumerate}
+
+ }
+
+\item Consider the following formula:
+
+ \p{\lthereis xFx \limplies \lnot\lforall x\lnot Fx}
+
+ Explain why it is not possible to construct an interpretation that makes this formula 
+ false.
+\answer{
+
+ Since the formula is a conditional, its being false require the truth of 
+ \p{\lthereis xFx} and the falsity of \p{\lnot\lforall x\lnot Fx}. If 
+ \p{\lthereis xFx} is true, then the extension of \p{F} has at least one member.  
+ On the other hand, if \p{\lnot\lforall x\lnot Fx} is false, then \p{\lforall 
+ x\lnot Fx} is true which means that the extension of \p{F} is empty. Since the 
+ extension of \p{F} cannot be both empty and non-empty, there can be no model 
+ that makes the above formula false.
+
+}
+
+
+\item Consider:
+
+ \p{\lthereis xFx \land \lforall x\lnot Fx}
+
+ Explain why it is not possible to construct an interpretation that makes this formula 
+ true.
+\answer{
+
+ Since the sentence is a conjunction, its truth requires the truth of 
+ \p{\lthereis xFx} and the truth of \p{\lforall x\lnot Fx}. But no model can 
+ make both true (see above for a bit more detail).
+}
+
+
+
+
+
+\item Which of the following are logical truths? For those that are not,
+  provide counterexamples. (A counterexample is a quick of providing an interpretation 
+  that makes the sentence false. For instance, consider \lbh{-p -f 
+  CUxKMxHxAUxMxUxHx}. Here is a counterexample: suppose everyone in class is a 
+  CMC or a HMC student. It doesn't follow that everyone is a CMC student or 
+  everyone is a HMC student---maybe there's a mix of the two groups).
+
+ \begin{enumerate}
+
+
+
+ \item \lbh{-p -f CUxCFxGxCUxFxUxGx}
+   
+  \item \lbh{-p -f CXxCFxGxCXxFxXxGx}
+   
+  \item \lbh{-p -f CKXxFxXxGxXxKFxGx}
+   
+  \item \lbh{-p -f CXxKFxGxKXxFxXxGx}
+   
+ \end{enumerate}
+\answer{
+
+ (a) and (d) are logical truths. 
+
+ (b), (c) are not logical truths. You can see that by constructing 
+ counterexamples.  E.g.:
+ (b) It might that there is someone who gets grumpy when hungry, but that does 
+ not mean that if there is someone hungry, there is someone grumpy (the hungry 
+ person need not be one who gets grumpy when hungry).
+
+ (c) There are vegans, and there are carnivores. It does not follow that there 
+ are some who are both vegan and carnivore.
+ 
+
+}
+\end{enumerate}

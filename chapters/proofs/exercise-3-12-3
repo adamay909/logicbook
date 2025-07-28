@@ -1,0 +1,11 @@
+\Gamma;KPAQR;;premise
+\Gamma;P;1;ke
+\Gamma;AQR;1;ke
+Q;Q;;a
+\Gamma,Q;KPQ;2,4;ki
+\Gamma,Q;AKPQKPR;5;di
+R;R;;a
+\Gamma,R;KPR;2,7;ki
+\Gamma,R;AKPQKPR;8;di
+\Gamma,\Gamma,\Gamma;AKPQKPR;3,6,9;de
+\Gamma;AKPQKPR;10

@@ -1,0 +1,13 @@
+\Gamma;CPQ;;premise
+NANPQ;NANPQ;;a
+NP;NP;;a
+NP;ANPQ;3;di
+NANPQ,NP;NANPQ;2
+NANPQ;NNP;4,5;ni
+NANPQ;P;6;ne
+\Gamma,NANPQ;Q;1,7;ce
+\Gamma,NANPQ;ANPQ;8;di
+\Gamma;NNANPQ;2,9;ni
+\Gamma;ANPQ;10;ne
+
+

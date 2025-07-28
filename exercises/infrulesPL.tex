@@ -1,0 +1,181 @@
+\section*{Inference Rules for Predicate Logic}
+
+Fill in blanks.
+
+\begin{enumerate}
+ \setlength{\itemsep}{2em}
+
+ \item
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\mc{\lnot  }\lthereis  x  Fx}{\mc{\lnot  }Fk}{premise}
+
+\ai{\mc{\lnot  }\lthereis  x  Fx}{\mask{\mc{\lforall  x  }\lnot Fx}}{1,\uniI}
+
+\end{argumentN}
+
+\item
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{Fk\mc{\limplies  }Gk}{Hc}{premise}
+
+\ai{\mask{Fk\mc{\limplies  }Gk}}{\mc{\lforall  x  }Hx}{1,\uniI}
+
+\end{argumentN}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\mc{\lthereis  x  }(Gx\lor  Hx)}{Fa}{premise}
+
+\ai{\mask{\mc{\lthereis  x  }(Gx\lor  Hx)}}{\mask{\mc{\lforall  x  }Fx}}{1,\uniI}
+
+\end{argumentN}
+
+\item
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{Fa}{\mc{\lforall  x  }(Hx\limplies  Px)}{premise}
+
+\ai{Fa}{\mask{Ha\mc{\limplies  }Pa}}{1,\uniE}
+
+\ai{Ha}{Ha}{A}
+
+\ai{Fa,  Ha}{Pa}{2,3,\condE}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{Fa}{\mc{\lforall  x  }(Hx\limplies  Px)}{premise}
+
+\ai{\mask{Fa}}{\mask{Hb\mc{\limplies  }Pb}}{1,\uniE}
+
+\ai{Hb}{Hb}{A}
+
+\ai{Fa,  Hb}{Pb}{2,3,\condE}
+
+\end{argumentN}
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\mc{\lthereis  x  }Qx}{\mc{\lthereis  x  }Qx}{A}
+
+\ai{Qa}{\mc{\lthereis  x  }Rx}{premise}
+
+\ai{\mask{\mc{\lthereis  x  }Qx}}{\mask{\mc{\lthereis  x  }Rx}}{1,2,\exE}
+
+\end{argumentN}
+
+\item
+
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{Qb}{Qb}{A}
+
+\ai{\mask{Qb}}{\mask{\mc{\lthereis  x  }Qx}}{1,\exI}
+
+\end{argumentN}
+
+\newpage
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\Gamma }{\lthereis  z  Wz\mc{\limplies  }\lthereis  z  Mz}{premise}
+
+\ai{\Delta }{Wa}{premise}
+
+\ai{\Delta }{\mask{\mc{\lthereis  z  }Wz}}{2,\exI}
+
+\ai{\Gamma ,  \Delta }{\mc{\lthereis  z  }Mz}{1,3,\condE}
+
+\end{argumentN}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\mc{\lthereis  x  }Fx}{\mc{\lthereis  x  }Fx}{premise}
+
+\ai{Fa}{Fa}{A}
+
+\ai{\mask{Fa}}{\mask{\mc{\lthereis  y  }Fy}}{2,\exI}
+
+\ai{\mc{\lthereis  x  }Fx}{\mc{\lthereis  y  }Fy}{1,3,\exE}
+
+\end{argumentN}
+
+
+\item 
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai[0.4]{\mc{\lthereis  x  }(Rx\lor  Fx)}{\mc{\lthereis  x  }(Rx\lor  Fx)}{A}
+
+\ai[0.4]{Ra\mc{\lor  }Fa}{Ra\mc{\lor  }Fa}{A}
+
+\ai[0.4]{\mc{\lforall  x  }[(Rx\lor  Fx)\limplies  Wx]}{\mc{\lforall  x  }[(Rx\lor  Fx)\limplies  Wx]}{A}
+
+\ai[0.4]{\mc{\lforall  x  }[(Rx\lor  Fx)\limplies  Wx]}{\mask{(Ra\lor  Fa)
+ \mc{\limplies  }
+Wa}}{3,\uniE}
+
+\ai[0.4]{\mc{\lforall  x  }[(Rx\lor  Fx)\limplies  Wx],  Ra\mc{\lor  }Fa}{Wa}{2,4,\condE}
+
+\ai[0.4]{\mc{\lforall  x  }[(Rx\lor  Fx)\limplies  Wx],  Ra\mc{\lor  }Fa}{\mc{\lthereis  x  }Wx}{5,\exI}
+
+\ai[0.4]{\mask{\mc{\lforall  x  }[(Rx\lor  Fx)\limplies  Wx],  \mc{\lthereis  x  
+  }
+(Rx\lor  Fx)}}{\mask{\mc{\lthereis  x  }Wx}}{1,6,\exE}
+
+\end{argumentN}
+
+\item
+%title: %
+\begin{argumentN}[1]
+%generated  by  gentzen
+
+\ai{\mc{\lthereis  x  }\lforall  y  Lyx}{\mc{\lthereis  x  }\lforall  y  Lyx}{A}
+
+\ai{\mc{\lforall  y  }Lyr}{\mc{\lforall  y  }Lyr}{A}
+
+\ai{\mc{\lforall  y  }Lyr}{Ldr}{2,\uniE}
+
+\ai{\mc{\lforall  y  }Lyr}{\mc{\lthereis  x  }Ldx}{3,\exI}
+
+\ai{\mc{\lforall  y  }Lyr}{\mask{\mc{\lforall  y  }\lthereis  x  Lyx}}{4,\uniI}
+
+\ai{\mask{\mc{\lthereis  x  }\lforall  y  Lyx}}{\mc{\lforall  y  }\lthereis  x  
+Lyx}
+{1,
+5,\exE}
+
+\end{argumentN}
+
+
+
+
+\end{enumerate}

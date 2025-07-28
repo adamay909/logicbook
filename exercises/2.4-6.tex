@@ -1,0 +1,118 @@
+\section*{Exercises for 2.4--2.6}
+
+\begin{enumerate}
+
+ \item Produce the syntax tree for each of the following:
+
+  \begin{enumerate}
+
+   \item \plsh{KKPQAPQ}
+
+	\answer{{\plsts{KKPQAPQ}}}
+   
+   \item \plsh{AKSTNR}
+
+	\answer{{\plsts{AKSTNR}}}
+
+   \item \plsh{KPKQR}
+
+	\answer{{\plsts{KPKQR}}}
+   
+   \item \plsh{KARST}
+
+	\answer{{\plsts{KARST}}}
+
+   \item \plsh{ARKST}
+
+	\answer{{\plsts{ARKST}}}
+
+   \item \plsh{ANAPRKQS}
+
+	\answer{{\plsts{ANAPRKQS}}}
+
+  \end{enumerate}
+
+ \item Give the truth table for \plsh{KPKQR}.
+  
+  \answer{{\pltt{KPKQR}}.}
+
+
+
+ \item Give the truth table for \plsh{KARST}.
+
+  \answer{{\pltt{KARST}}}
+
+ \item Give the truth table for \plsh{ARKST}.
+
+  \answer{{\pltt{ARKST}}}
+
+
+ \item Give the truth table for \plsh{NKPQ}.
+
+  \answer{{\pltt{NKPQ}}}
+
+ \item Give the truth table for \plsh{ANPNQ}.
+
+  \answer{{\pltt{ANPNQ}}}
+
+ \item Give the truth table for \plsh{NARS}.
+
+  \answer{{\pltt{NARS}}}
+
+ \item Give the truth table for \plsh{KNRNS}.
+
+  \answer{{\pltt{KNRNS}}}
+
+ \item Show, using a truth table, that \plsh{APNP} is a tautology.
+
+  \answer{{\pltt{APNP}}}
+
+ \item Show, using a truth table, that \plsh{KPNP} is a contradiction.
+
+  \answer{{\pltt{KPNP}}}
+
+ \item Explain why any sentence of the form \p{s \lor \lnot s} is a tautology 
+  (even if \p{s} is not an atomic sentence).
+
+  \answer{ 
+
+   Given any interpretation, \p{s} is either true of false. If \p{s} is true in 
+   that interpretation, \p{s\lor \lnot s} is also true in that interpretation.  
+   If \p{s} is false, then \p{\lnot s} is true, so \p{s\lor \lnot s} is true in 
+   that interpretation. So \p{s \lor \lnot s} is true in every interpretation,  
+   which means that \p{s \lor \lnot s} is a tautology.
+
+  }
+  \newcommand{\ansF}[1]{\dotfill True/\anscircled{False}}
+ \newcommand{\ansT}[1]{\dotfill \anscircled{True}/False}
+
+ \item True or False?
+
+  \begin{enumerate}
+
+   \item If one disjunct of a disjunction is a tautology, then the whole 
+	disjunction is a tautology.
+
+	\ansT
+
+   \item If a disjunction is a tautology, one of the disjuncts is a tautology.
+
+	\ansF
+
+   \item The negation of a contradiction is a tautology.
+
+	\ansT
+
+   \item  \p{s_1 \land s_2} is consistent iff. \p{s_1} and \p{s_2} are 
+	consistent with each other.
+
+	\ansT
+
+   \item If \p{s_1} and \p{s_2} are inconsistent with each other, then \p{s_1 
+	\lor s_2} is inconsistent.
+
+	\ansF
+
+  \end{enumerate}
+
+\end{enumerate}

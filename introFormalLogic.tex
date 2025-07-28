@@ -1,0 +1,65 @@
+%!TEX program = xelatex
+%
+% Thinking of Thinking
+% An introductory logic textbook by Masahiro Yamada. 
+%
+\documentclass[table]{logicbook}
+\usepackage{logicfonts}
+\usepackage{logic_commands}
+
+
+%comment following for final version
+%\usepackage[notcite]{showkeys}
+
+%*********************************
+%DIRECTORIES
+%*********************************
+\newcommand{\chdir}{chapters}
+\newcommand{\ttdir}{\chdir/TruthTables}
+\newcommand{\exdir}{\chdir/exercises}
+\newcommand{\prdir}{\chdir/proofs}
+\newcommand{\supdir}{\chdir/sup}
+\newcommand{\bibdir}{\chdir/bib}
+
+%*********************************
+%HELPER COMMANDS
+%*********************************
+%you need to install lbhelper and also allow
+%executing external commands through LaTeX.
+
+\newcommand{\plsh}[1]{\input{|"lbhelper -f #1"}}% (sentential logic formula)
+\newcommand{\plshn}[1]{\input{|"lbhelper -f -m=false #1"}}% (sentential logic 
+%formula)
+\newcommand{\plshs}[1]{\input{|"lbhelper -seq '#1'"}} %SL sequent
+\newcommand{\plshsn}[1]{\input{|"lbhelper -m=false -seq '#1'"}} %SL sequent
+\newcommand{\pltt}[1]{\input{|"lbhelper -tt #1"}} %truth table
+\newcommand{\plstf}[1]{\input{|"lbhelper -stf #1"}} %syntax tree full
+\newcommand{\plsts}[1]{\input{|"lbhelper -sts #1"}} %syntax tree simple
+\newcommand{\plshp}[1]{\input{|"lbhelper -p -f #1"}}% (predicate logic formula)
+\newcommand{\plshpn}[1]{\input{|"lbhelper -p -m=false -f #1"}}% (predicate logic 
+%formula)
+\newcommand{\lbh}[1]{\input{|"lbhelper #1"}}%call lbhelper 
+
+
+\begin{document}
+\newpage
+\title{Introduction to Formal Logic}
+\author{Masahiro Yamada}
+\date{}
+
+\frontmatter \newpage
+\maketitle
+
+\include{about}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\newpage
+\mainmatter
+
+\include{firstPart}
+
+\bibliography{\bibdir/1,\bibdir/4, \bibdir/6}
+
+\end{document}

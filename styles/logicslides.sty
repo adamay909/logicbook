@@ -1,0 +1,175 @@
+%To be used with beamer document class to produce slides for
+%logic class
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{logicslides}
+\usepackage{makecell}
+\usepackage{qtree}
+\usepackage{arydshln}
+\usepackage[MnSymbol]{mathspec}
+\setmathsfont(Latin)[Scale=0.85]{Noto Sans Math}
+\setmathsfont(Greek)[Scale=0.9,Lowercase=Regular]{TeX Gyre Pagella Math}
+%\setmainfont[Scale=0.85]{Noto Sans Math}
+
+\newcommand{\plsh}[1]{\input{|"lbhelper -f #1"}}% (sentential logic formula)
+\newcommand{\plshn}[1]{\input{|"lbhelper -f -m=false #1"}}% (sentential logic 
+%formula)
+\newcommand{\plshe}[1]{\input{|"lbhelper -e #1"}}
+\newcommand{\plsheab}[1]{\input{|"lbhelper -ab -e #1"}}
+\newcommand{\plshs}[1]{\input{|"lbhelper -s '#1'"}} %SL sequent
+\newcommand{\plshsn}[1]{\input{|"lbhelper -m=false -s '#1'"}} %SL sequent
+\newcommand{\pltt}[1]{\input{|"lbhelper -tt #1"}} %truth table
+\newcommand{\plstf}[1]{\input{|"lbhelper -stf #1"}} %syntax tree full
+\newcommand{\plsts}[1]{\input{|"lbhelper -sts #1"}} %syntax tree simple
+\newcommand{\plshp}[1]{\input{|"lbhelper -p -f #1"}}% (sentential logic formula)
+\newcommand{\plshpn}[1]{\input{|"lbhelper -p -m=false -f #1"}}% (sentential 
+
+\newcommand{\lbhelper}[1]{\input{|"lbhelper #1"}}
+%To use with enumerate environment. Each pritem will be shown on a separate 
+%slide.
+\newcommand{\pritem}[1]{\stepcounter{enumi}\only<\arabic{enumi}>
+{\addtocounter{enumi}{-1} \item #1}}
+
+\newcommand{\cover}[1]{}
+
+%**********************************
+%	SYMBOLS
+%**********************************
+%
+%therefore
+\def\ltherefore{\ensuremath{\ensuremath{\therefore}}}
+
+%negation
+\def\lnot{\ensuremath{\neg}} 
+
+%disjunction
+\def\lor{\ensuremath{\mathrel\vee}}
+
+%conjunction
+\def\land{\ensuremath{\mathrel\wedge}}
+
+%material implication
+\def\limplies{\ensuremath{\supset}}
+
+%material bi-conditional
+\def\liff{\ensuremath{\leftrightarrow}}
+
+%NAND
+\def\lnand{\ensuremath{\uparrow}}
+
+%NOR
+\def\lnor{\ensuremath{\downarrow}}
+
+%universal quantifier
+\def\lforall{\ensuremath{\forall}}
+
+%existential quantifier
+\def\lthereis{\ensuremath{\exists}}
+
+%derivable
+\def\lproves{\ensuremath{\vdash}}
+\def\lprovesnot{\ensuremath{\nvdash}}
+
+%semantically provable
+\def\lentails{\ensuremath{\vDash}}
+\def\lentailsnot{\ensuremath{\nvDash}}
+
+%empty set
+\def\nullset{\ensuremath{\emptyset}}
+
+%composition sign for generic sentential connective
+\newcommand*{\comp}[1][]{\ensuremath{\otimes_{#1}}}
+
+%Language L
+\newcommand*\lL[1][]{\ensuremath{\mathcal{L}_{#1}}}
+
+%blank as in "fill in the blank"
+\newcommand*{\blank}{\underline{\hspace*{2.5em}}}
+
+%\renewcommand{\phi}{\varphi}
+
+%identity sign
+\setlength{\medmuskip}{1mu}
+\newcommand{\ident}[2]{#1\mathbin{=}#2}
+\newcommand{\nident}[2]{#1\mathbin{\neq}#2}
+
+
+\newcommand*{\conj}[1]{\ensuremath{\overline{#1}}}
+
+% Sequent
+\newcommand{\seq}[2]{#1 \lproves #2}
+
+\newcommand{\seqA}[3][0.25]{\makebox[#1\textwidth][l]
+ {\ensuremath{#2}} \makebox[1em]
+{\lproves}\ \ensuremath{#3}}
+
+\newcommand{\sqA}[4][0.25]{\makebox[#1\textwidth][l]
+ {\ensuremath{#2}} \makebox[1em]
+{\lproves}\ \ensuremath{#3}\explx{#4}}
+
+\newcommand{\sqAs}[4][0.25]{\makebox[#1\textwidth][l]
+ {\footnotesize{\ensuremath{#2}}} \makebox[1em]
+{\lproves}\ \ensuremath{#3}\expl{#4}}
+
+% Primitive Inference Rules 
+\newcommand{\negI}{\ensuremath{\lnot}I}
+\newcommand{\negE}{\ensuremath{\lnot}E}
+
+\newcommand{\conjI}{\ensuremath{\land}I}
+\newcommand{\conjE}{\ensuremath{\land}E}
+
+\newcommand{\disjI}{\ensuremath{\lor}I}
+\newcommand{\disjE}{\ensuremath{\lor}E}
+
+
+\newcommand{\condI}{\ensuremath{\limplies}I}
+\newcommand{\condE}{\ensuremath{\limplies}E}
+
+
+\newcommand{\uniE}{\ensuremath{\lforall}E}
+\newcommand{\uniI}{\ensuremath{\lforall}I}
+
+\newcommand{\exE}{\ensuremath{\lthereis}E}
+\newcommand{\exI}{\ensuremath{\lthereis}I}
+
+
+\newcommand{\iI}{\ensuremath{=}I}
+\newcommand{\iE}{\ensuremath{=}E}
+
+
+\newcounter{argnum}[section]
+\def\aitem{\item[\stepcounter{argnum}\arabic{argnum}.]}
+\def\aergo{\item[$\ltherefore$~\stepcounter{argnum}\arabic{argnum}.]}
+
+\newcommand{\texpl}[1]{\dotfill({#1)}}
+\newcommand{\expl}[1]{\hspace{2em} \dotfill #1}
+\newcommand{\explx}[1]{\hspace{0.2em} \dotfill #1}
+
+\newcommand{\p}[1]{${\mathrm{#1}}$}%for type setting formal stuff
+
+\newcommand{\pp}[1]{$\langle$#1$\rangle$}%surround text with angled brackets
+
+\newcommand{\pq}[1]{`#1'}%surround text with single quotation marks
+
+
+\newcommand{\mc}[1]{#1}
+
+
+\newcounter{enummain}
+\newcounter{argstore}
+\newcounter{tmp}
+
+
+\newenvironment{argument}%
+{\begin{enumerate}}
+  {\end{enumerate}}
+
+  \newenvironment{argumentNamed}[1][]%
+{\textbf{#1.}\begin{enumerate}}
+  {\end{enumerate}}
+
+
+  %argument* starts the lines at no.1 but stores line numbers like argument
+\newenvironment{argument*}%
+{\begin{enumerate}\setcounter{argstore}{\value{argnum}}\setcounter{argnum}{0}}
+ {
+\addtocounter{argnum}{\value{argstore}}\end{enumerate}}

@@ -1,0 +1,26 @@
+\begin{argument*}
+
+\ai{\Gamma}{P \limplies Q}{premise}
+
+\ai{\lnot (\lnot P \lor Q)}{\lnot (\lnot P \lor Q)}{A}
+
+\ai{\lnot P}{\lnot P}{A}
+
+\ai{\lnot P}{\lnot P \lor Q}{3,\disjI}
+
+\ai{\lnot (\lnot P \lor Q),\lnot P}{\lnot (\lnot P \lor Q)}{2}
+
+\ai{\lnot (\lnot P \lor Q)}{\lnot \lnot P}{4,5,\negI}
+
+\ai{\lnot (\lnot P \lor Q)}{P}{6,\negE}
+
+\ai{\Gamma,\lnot (\lnot P \lor Q)}{Q}{1,7,\condE}
+
+\ai{\Gamma,\lnot (\lnot P \lor Q)}{\lnot P \lor Q}{8,\disjI}
+
+\ai{\Gamma}{\lnot \lnot (\lnot P \lor Q)}{2,9,\negI}
+
+\ai{\Gamma}{\lnot P \lor Q}{10,\negE}
+
+\end{argument*}
+

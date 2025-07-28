@@ -1,0 +1,1900 @@
+
+
+\section{Introduction}\label{secAxioms}
+\newcommand{\model}{\p{\mathfrak I}}
+
+In the previous chapters we have seen sentential logic. It is called
+`sentential' because it focuses on sentences and logical relations that hold
+between sentences. We have seen that the proof system we constructed is 
+complete. Any tautology can be proven and that means that whenever the truth of 
+\p{s} guarantees the truth of \p{t}---i.e. \p{s\lentails t}---we can also prove 
+that \p{\seq{}{s\limplies t}}. And this means that any valid argument can be 
+turned into a successful derivation. You might therefore hope that we are done 
+with formalizing reasoning.  But, alas, things are more complicated.
+
+Consider the following piece of reasoning:
+
+\begin{Example}\label{ex:ch4-1}
+ All whales are mammals. Ed is a whale. So Ed is a mammal.
+\end{Example}
+
+This seems like a fine piece of reasoning. On the assumption that all whales are 
+mammals and that Ed is a whale, it surely follows that Ed is a mammal. But how 
+would we formalize this?
+
+Let's use the following keys:
+
+\begin{lkey*}
+\item[A] All whales are mammals.
+\item[B] Ed is a whale.
+\item[C] Ed is a mammal.
+\end{lkey*}
+
+Then the above reasoning looks as follows:
+
+\begin{argument}
+ \aitem \sqA{\Gamma}{A}{premise}
+ \aitem \sqA{\Delta}{B}{premise}
+ \aitem \sqA{\Gamma,\Delta}{C}{1,2,??}
+\end{argument}
+
+
+There is no inference rule that would license the move to line 3 from lines 1 
+and 2: It cannot be that given some arbitrary three sentences \p{s_1,s_2} and 
+\p{s_3}, we can infer from \p{\seq{\Gamma}{s_1}} and \p{\seq{\Delta}{s_2}} to        
+\p{\seq{\Gamma,\Delta}{s_3}}. But the argument about Ed in the example above is 
+surely cogent. So we have an example of an argument that can be stated in plain 
+English without difficulties, but cannot be formalized in sentential logic. 
+
+Let's think about the example a bit more. Compare:
+
+\begin{itemize}
+
+ \item All whales are mammals.
+
+ \item If anything is a whale, then it is a mammal.
+
+\end{itemize}
+
+These two sentences say the same thing: the first is true iff. the second is  
+true. Let's use this and rewrite the example:
+
+\begin{Example}\label{ex:edTheWhale}
+ All whales are mammals. That is to say, if anything is a whale, then it is a 
+ mammal. So if Ed is a whale, then Ed is a mammal. Ed is a whale. It follows 
+ that Ed is a mammal.
+\end{Example}
+
+Breaking this up into lines, we get:
+
+\begin{argument}
+
+ \aitem If anything is a whale, then it is a mammal.
+ \aergo If Ed is a whale, then Ed is a mammal.
+ \aitem Ed is a whale.
+ \aergo Ed is a mammal.
+
+\end{argument}
+
+Lines 5 through 7 pose no difficulties for sentential logic. We can partially 
+formalize the argument as (using the same keys as before):
+
+\begin{argumentN}[8]
+\aitem ???
+ \aitem \sqA{\Delta}{B\limplies C}{8,?}
+ \aitem \sqA{\Theta}{B}{premise}
+ \aitem \sqA{\Delta,\Theta}{C}{9,10,\condE}
+
+\end{argumentN}
+
+The trouble is with formalizing the move from 4 to 5. How do we get to line 9 
+(which corresponds to line 5 of the version in English)?
+
+You might be tempted by the thought that 4 is a conditional connecting the 
+sentences `anything is a whale' with `it is a mammal'. So let's try the 
+following keys:
+
+\begin{lkey*}
+
+\item[D] Anything is a whale.
+\item[E] It is a mammal.
+
+\end{lkey*}
+
+And then we get:
+
+\begin{argumentN}[8]
+
+ \aitem \sqA{\Gamma}{D\limplies E}{premise}
+ \aitem \sqA{\Delta}{B\limplies C}{8,?}
+ \aitem \sqA{\Theta}{B}{premise}
+ \aitem \sqA{\Delta,\Theta}{C}{9,10,\condE}
+
+\end{argumentN}
+
+But this will not do. First of all, there is no way to derive 9 from 8. Secondly, 
+and much more importantly for our purposes, 4 (if anything is a whale, then it 
+is a mammal) is \emph{not} a conditional. If it were, then both `anything is a 
+whale' and `it is a mammal' must be sentences. Take the former. That might be 
+interpreted to mean that everything is a whale. That's false. Given the truth 
+conditions of a conditional, the whole conditional would therefore be true no 
+matter what the consequent. For instance, it would be true that if anything is a 
+whale, it is a reptile. And that can't be right. Moreover, take `it is a 
+mammal'.  What does the `it' in `it is a mammal' refer to? There is nothing in 
+particular the `it' refers to.  And that means that `it is a mammal' cannot be 
+true or false: there is nothing of which it is claimed that \emph{it} is a 
+mammal.  So it is not a sentence, and 8 misconstrues 4.
+
+Let's think again. There should be no doubt that 5 follows from 4. When you 
+compare the two, you will notice that they have more in common than the `if, 
+then' construction.  They are both instances of:
+
+\begin{center}
+ if \blank{} is a whale, then \blank{} is a whale.
+
+\end{center}
+
+The difference between 4 and 5 consists in how the blanks are filled in. This is 
+a similarity that cannot be captured with sentential logic because the language 
+of sentential logic is incapable of revealing structures smaller than whole 
+sentences. But it seems that the cogency of the move from 4 to 5 has something 
+to do with these sub-sentential structures.
+
+In the following we will introduce a formal language---the language of predicate 
+logic---that is capable of representing sub-sentential structures and formulate 
+rules of inferences that can exploit them. Taken together, we will have a system 
+of \emph{first-order predicate logic}.
+
+\section{Quantifiers and Variables}
+
+Take a look again at 
+
+\begin{center}
+
+ if \blank is a whale, then \blank is a mammal
+
+\end{center}
+
+
+This is not a sentence. It is more like a \emph{template} of a sentence. You can 
+generate a sentence by filling in the blanks. Let us use letters like \p{x} and 
+\p{y} to represent the blanks. Using letters allows us to distinguish between 
+templates like: 
+
+ \begin{itemize}
+  \item if \p{x} is a whale, then \p{x} is a mammal
+  \item if \p{x} is a whale, then \p{y} is a mammal
+ \end{itemize}
+
+The rule is that blanks represented by the same letter within a template must be 
+filled in the same way. So in the first template, if you plug `Ed' into the 
+first \p{x}, you must plug `Ed' into the second as well. But blanks represented 
+by different letters can be filled in differently. For instance, in the second 
+template you can fill `Ed' into the \p{x} and `Gina' into \p{y} and get the 
+sentence `if Ed is a whale, then Gina is a mammal' which is a sentence you 
+cannot get by filling in the blanks of the first template. We will call letters 
+that represent blanks \emph{variables}.
+
+`If Ed is a whale, then Ed is a mammal' and `if Ed is a whale, then Gina is a 
+mammal' are both sentences. Why? Because each of them makes a claim about the 
+world and can be true or false. A template does not yet make any claims about 
+the world and that is why the templates above are not sentences. We can get 
+sentences by plugging into the variables.
+
+But there is another way of getting a sentence out of the templates. Consider  
+prefixing a template with `for any x':
+\begin{center}
+
+ for any x, if x is a whale, then x is a mammal
+
+\end{center}
+
+In more ordinary English, we might put this as: everything is such that if it is 
+a whale, then it is a mammal. Or more colloquially: if anything is a whale,
+ it is a mammal. Even more colloquially: all whales are mammals.  This, too, is 
+ a sentence since it is the sort of thing that is either true or false.  And 
+ this is not a complex sentence formed by connecting two sentences.  Rather, it 
+ is a sentence whose parts are not themselves sentences.
+
+There is one more way of getting a sentence out of a template that we will be 
+discussing in this chapter. We can prefix the template above with `there is an x 
+such that' and get a sentence as well:
+
+\begin{center}
+
+ there is an x such that if x is a whale, then x is a mammal
+
+\end{center}
+
+
+The language of predicate logic formalizes these features of sentence templates.
+
+Before we proceed, let me make some more observations. The template like `if 
+\p{x} is whale, then \p{x} is a mammal' is itself made out of two templates:
+\begin{center}
+
+ x is a whale
+
+ x is a mammal
+
+\end{center}
+
+Connecting these templates with the `if ... then ...' construction gives us the 
+template `if \p{x} is a whale, then \p{x} is a mammal'. But we could easily 
+connect these two with a different connective. For example, `\p{x} is a whale 
+and \p{x} is a mammal', or `\p{x} is a whale or \p{x} is a mammal', etc. So 
+templates can be turned into compound templates using the familiar logical 
+connectives.
+
+While some templates are compound templates that connect two or more templates, 
+others like `\p{x} is a whale' are not. These atomic (i.e., non-compound)
+templates take subject-verb form in English. We will have something similar in 
+our formal language. 
+
+Not all sentences of English take a simple subject-verb form. In fact, most 
+don't. For instance, `Hermione is married to Ron' involves Hermione and Ron, not 
+just Hermione. And `Harry mediates between Hermione and Ron' involves Harry, 
+Hermione and Ron. A template for generating such a sentence would be `\p{x} 
+mediates between \p{y} and \p{z}'.  We want our formal language to have such 
+templates as well.
+
+
+
+
+
+\section{Formalization}
+
+Let us introduce a formal language \lL[Q]{}. The Q stands for quantifier. Just 
+as with \lL, our aim is to construct a bare-bones language that is simple and 
+does the job of representing what we want to represent but nothing else. 
+
+Let us start. \lL[Q]{} has \emph{formulas}. The intuitive characterization of a 
+formula is that  both sentences and templates are formulas. The formulas are 
+such that:
+
+\begin{itemize}
+
+ \item If \p{\phi} is a formula, so is \p{\lnot\phi}.
+
+ \item If \p{\phi} and \p{\psi} are formulas, so are \p{(\phi \land \psi)}, 
+  \p{(\phi \lor \psi)}, \p{(\phi \limplies \psi)}.
+
+\end{itemize}
+
+(\p{\phi} is Greek lowercase phi, and \p{\psi} is Greek lowercase psi). Notice 
+that if we restrict \p{\phi} and \p{\psi} to sentences, this is the same we had 
+for \lL.  So we can expect our new language \lL[Q] to carry over many of the 
+features of \lL.
+
+What does a formula look like? We need a general characterization that can cover 
+both sentences and templates. Compare the sentence `Ed is a whale' with the 
+template `\p{x} is a whale'. They have something in common, namely the `is a 
+whale' part. But they differ in that `Ed' is a proper name whereas \p{x} is a 
+variable.  
+
+\begin{itemize}
+ 
+ \item \lL[Q] has \emph{predicates} corresponding to expressions like `is a 
+  whale' in English.  
+
+\item \lL[Q] has \emph{variables} like the \p{x} and \p{y} that we have been 
+ using.
+
+\item \lL[Q] has \emph{constants} which correspond to proper names likes `Ed' in 
+ English. 
+
+ \end{itemize}
+
+ If we combine a predicate with a variable, we get a template. If we combine a 
+ predicate with a constant, we get a sentence. Let us introduce the word 
+ \emph{term} to cover both variables and constants. Then a formula is something 
+ that combines a predicate with a term.
+
+ Some predicates must be combined with multiple terms to generate a formula.  
+ For instance, the predicate corresponding to `... mediates between ... and ...' 
+ combines with three terms to yield a formula; e.g., `\p{x} mediates between 
+ \p{y} and \p{z}'. A predicate that combines with \emph{n} terms to yield a 
+ formula is called an \emph{n}-place predicate. So  `... mediates between ...  
+ and ...' is a 3-place predicate.  We will say the following about formulas in 
+ \lL[Q]:
+
+\begin{itemize}
+
+ \item If \p{\mathcal{F}} is an n-place predicate, \p{\tau_1}, \p{\tau_2}, 
+  \ldots, \p{\tau_n} are terms, then \p{\mathcal{F}\tau_1\tau_2\ldots\tau_n} is 
+  a formula.
+
+\end{itemize}
+
+(\p{\tau} is the Greek lowercase tau). So we give \lL[Q] a bunch of predicates, 
+a bunch of constants, and a bunch variables, and that gives us  a bunch of 
+formulas (in fact, infinitely many).
+You can read, for example, \p{Fx} as `\p{x} is F' and \p{Fc} as `c is F'. In 
+this course, we will mostly be dealing with 1-place, or \emph{monadic}, 
+predicates.
+
+This looks scarier than it is. Notice that once we have formulas, they combine 
+to form more complex formulas according to  the same principles as the compound 
+sentences of \lL{} we saw earlier. So what is new is a way of representing the 
+internal structure of sentences and templates. Think of \lL[Q]{} as a language 
+with a very primitive grammar: any atomic formula starts with a predicate and 
+has one or more terms attached.  Because the grammar is extremely primitive, the 
+order of the terms is important (just as in English, word order matters).
+
+Some examples:  
+
+\begin{itemize}
+ 
+ \item Let \p{W} be a 1-place predicate that can be translated into `is a whale' 
+  in English, and let \p{x} be a variable.  Then \p{Wx} is a formula of \lL[Q]{} 
+  which can be translated as `\p{x} is a whale' (so it's a template, rather than 
+  a sentence). Let \p{e} be the name for Ed in \lL[Q]{}
+---i.e., \p{e} is a constant of \lL[Q]{}. Then \p{We} is a formula of \lL[Q]{} 
+that we can translate as `Ed is a whale' (so it's a sentence). 
+
+\item Let \p{M} be a 3-place predicate \p{M} such that \p{Mxyz} translates into 
+ `\p{x} mediates between \p{y} and \p{z}' (it's often easier to explain what a 
+ predicate in \lL[Q]{} means by providing a full template for a sentence). if 
+ \p{h_1} is a constant that names Harry, \p{h_2} a constant that names Herminone, 
+ and \p{r} a constant that names Ron, then \p{Mh_1h_2r} can be translated as 
+ `Harry mediates between Herminone and Ron'.
+
+\item Let \p{T} be a 2-place predicate such that \p{Txy} translates into `\p{x} 
+ is taller than \p{y}'. Then if \p{s} is a constant naming Sherlock and \p{j} is 
+ a constant naming John, \p{Tsj} can be translated as `Sherlock is taller than 
+ John' while \p{Tjs} can be translated into `John is taller than Sherlock'. Word 
+ order matters.
+
+ \end{itemize}
+ 
+ 
+ There is one more important feature of \lL[Q].  Recall that we can take a 
+ template like `\p{x} is a whale', prefix it with `for any x' or `there is an 
+ \p{x}  such that' and get a sentence out of it. To accomplish the same in 
+ \lL[Q], we will say:
+
+\begin{itemize}
+
+ \item if \p{\phi} is a formula and \p{\upsilon} a variable,  
+  \p{\lforall\upsilon\phi} is a formula.
+
+\end{itemize}
+
+(\p{\upsilon} is Greek lowercase upsilon). You can read \p{\lforall\upsilon} as 
+`for all \p{\upsilon}' and it is known as the
+\emph{universal quantifier}. For instance , \p{\forall x Wx} means that for all 
+\p{x}, \p{x} is a whale (assuming \p{Wx} means that \p{x} is a whale)---or more 
+colloquially, everything is a whale.  And if \p{Mx} means that \p{x} is a mammal, 
+then the sentence 'for all \p{x}, if \p{x} is a whale, then \p{x} is a mammal' 
+can be put as \p{\lforall x (Wx\limplies Mx)}.
+
+We will also have another quantifier called the existential quantifier:
+
+\begin{itemize}
+
+ \item if \p{\phi} is a formula and \p{\upsilon} a variable, 
+  \p{\lthereis\upsilon\phi} is a formula.
+
+\end{itemize}
+
+You can read \p{\lthereis\upsilon} as `there is an \p{\upsilon} such that'. For 
+instance, \p{\lthereis x Wx} means `there is an \p{x} such that \p{x} is a 
+whale' (again keeping the same meaning for \p{W} as above)---or, more 
+colloquially, `there are whales' (the plural `whales' is not meant to commit us 
+to the existence of multiple whales; there might be just one).
+
+
+Altogether, we can characterize  a language \lL[Q]---a language of first-order 
+predicate logic, as it is known---in the following way:
+
+\begin{enumerate}
+
+ \item There are infinitely but countably many constants.
+
+ \item There are infinitely but countably many variables.
+
+ \item There are infinitely but countably many predicates.
+
+ \item If \p{\mathcal{F}} is an \emph{n}-place predicate, \p{\tau_1}, \p{\tau_2}, 
+  \ldots, \p{\tau_n} are terms (constants and variables), then \p{\mathcal{F}
+   \tau_1\tau_2\ldots
+  \tau_n} is a formula.
+
+ \item If \p{\phi} is a formula, then \p{\lnot\phi} is a formula.
+
+ \item If \p{\phi} and \p{\psi} are formulas, then \p{(\phi \land \psi)}, 
+  \p{(\phi \lor \psi)}, \p{(\phi \limplies \psi)} are all formulas.
+
+  \item If \p{\phi} is a formula and \p{\upsilon} a variable, then \p{\lforall 
+	\upsilon
+   \phi} is a formula.
+
+ \item if \p{\phi} is a formula and \p{\upsilon} a variable,  
+  \p{\lthereis\upsilon\phi} is a formula.
+ 
+ \item Nothing else is a formula.
+
+\end{enumerate}
+
+It is customary (but not required) to use lower case letters from the end of the 
+Roman alphabet like \p{x}, \p{y}, \p{z} as variables.    And it is customary to 
+use upper case Roman alphabet letters like \p{F}, \p{G}, \p{H} for predicates, 
+and lower case letters from the start of the Roman alphabet like \p{a}, \p{b}, 
+\p{c} for constants.  If we need more, we will generally resort to subscripts.  
+And for ease of exposition, we will call the quantifiers \emph{connectives} so 
+we can say that the main connective of \p{\lforall x Fx} is \p{\lforall x}. 
+
+It is good practice to always explicitly state which letters are used as 
+variables, which as predicates, and which as constants. And no letter should be 
+used as both a variable and a constant in the same context.
+
+Notice that a formula of \lL[Q]{} need not be a sentence. We need to do a little 
+bit more work to be able to clearly specify what a sentence of \lL[Q]{} is.
+
+
+
+\section{Scope, Bound and Free Variables}
+
+
+Let \p{Lxy} stand for `\p{x} loves \p{y}'. We can prefix this with a universal 
+quantifier:
+
+\begin{argument}
+ \aitem \plshp{UxLxy}
+\end{argument}
+
+This means `For any \p{x}, \p{x} loves \p{y}'. The universal quantifier does not 
+affect \p{y}. \p{y} is still a simple blank so that 1 is still a template.  We 
+say that the \p{x} in \p{Lxy} is \emph{bound} by the quantifier \p{\forall x}
+.  \p{y} is not bound by any quantifier. We say that \p{y} is a \emph{free} 
+variable---\p{y} is still just a blank and you are free to plug into it a 
+constant to get a sentence, but you cannot plug a constant into \p{x} given that 
+it is bound.  
+
+We can prefix another quantifier to bind \p{y}. E.g.:
+
+\begin{argument}
+ \aitem \plshp{UyUxLxy}
+\end{argument}
+
+For any \p{y} and any \p{x}, \p{x} loves \p{y}. That is, we can plug anything 
+into \p{y} and plug anything into \p{x} and the result will be true. And this 
+means that in this case, the order of the quantifiers does not matter:
+
+\begin{argument}
+ \aitem \plshp{UxUyLxy}
+\end{argument}
+
+3 means the same as 2. But this is a special case. Usually, the order of 
+quantifiers matters greatly. Start with 1 again but let's think of a different 
+way of binding \p{y}:
+
+\begin{argument}
+ \aitem \plshp{XyUxLxy}
+\end{argument}
+
+There is a \p{y}, such that any \p{x} loves \p{y}. So if everybody loves Raymond, 
+4 is true. But if there isn't anyone who is loved by everyone, 4 would be false.  
+Now consider the following:
+
+\begin{argument}
+ \aitem \plshp{UxXyLxy}
+\end{argument}
+
+For any \p{x}, there is a \p{y} such that \p{x} loves \p{y}. Notice that this 
+does not require that there be someone whom everyone loves. Maybe no one loves 
+Raymond. But that does not conflict with everyone's having someone they love 
+(it's just that that someone is never Raymond).  5 would still be true in that 
+case, but not 4. 4 and 5 mean different things.
+
+To capture the difference between 4 and 5, logicians speak of the \emph{scope} 
+of a quantifier. The scope of a quantifier is simply the formula to which it is 
+attached. The scope of the existential quantifier \p{\lthereis y} in 4 is the 
+formula \p{\forall xLxy}. But in 5 it is \p{Lxy}. The scope of the universal 
+quantifier \p{\lforall x} in 4 is \p{Lxy} but in 5 it is \p{\lthereis yLxy}.  
+Differences in scope usually matter a great deal.
+
+A quantifier always names the variable it binds. The quantifier 
+\p{\lforall\upsilon} binds all instances of \p{\upsilon} that would be free 
+without the quantifier. For instance, in 2 above, the quantifier \p{\lforall y} 
+binds \p{y} in \p{\lforall xLxy} because the \p{y} in that formula is still 
+free. On the other hand, consider:
+\begin{itemize}
+ \aitem \p{\lforall x\lforall xLxy}
+\end{itemize}
+In 6, the left-most quantifier \p{\lforall x} does not bind anything because it 
+names the variable to be bound as \p{x} but there is no free \p{x} within its 
+scope.  And the \p{y} remains free in 6. It is in general bad practice to attach 
+a quantifier that does not bind anything even though the rules for \lL[Q]{} do 
+not forbid it. 
+
+There are some tricky issues to be aware of when dealing with scope. Take the 
+following two templates:
+\begin{argument}
+ \aitem \p{Wx}
+ \aitem \p{Mx} 
+\end{argument}
+
+(\p{Wx} means \p{x} is a whale, \p{Mx} means \p{x} is a mammal).
+We can take 7 and prefix it with a quantifier:
+\begin{argument}
+ \aitem \p{\lthereis xWx}
+\end{argument}
+
+We can take 9 and 8 and connect them with the conditional to get a new formula:
+
+\begin{argument}
+\aitem \p{\lthereis xWx \limplies Mx}
+\end{argument}
+
+Notice that the \p{x} in \p{Mx} is still free because it is not within the scope 
+of the existential quantifier at the left end. This means we can bind the \p{x} 
+in  \p{Mx}. For example:
+
+\begin{argument}
+ \aitem \p{\forall x(\lthereis xWx\limplies Mx)}
+\end{argument}
+
+Notice that the universal quantifier binds the \p{x} in \p{Mx} but does not bind 
+the \p{x} in \p{Wx} because the latter \p{x} is already bound by the existential 
+quantifier. While 11 is allowed by the rules of \lL[Q]{} it is confusing and it 
+will make life really difficult when we move to inferences involving 
+quantifiers.  The solution is to rename one of the \p{x}'s.  They are just 
+blanks with labels to keep track of what gets plugged into what.  So there is no 
+change in meaning if we rename one of the \p{x}'s. E.g.:
+
+\begin{argument}
+ \aitem \p{\forall y(\lthereis xWx\limplies My)}
+\end{argument}
+
+For any \p{y}, if there are whales, then \p{y} is a mammal (that's probably 
+false).
+
+\textbf{Going forward, we will require that all variables of a given name within 
+the scope of a quantifier must be bound by the same quantifier.} 11 fails this 
+requirement because not all  \p{x}'s within the scope of the universal 
+quantifier are bound by it. But 12 meets this requirement. 
+
+One more point of notation. Given the variable \p{\upsilon}, we will write 
+\p{\phi(\upsilon)} to stand for a formula in which \p{\upsilon} occurs as a free 
+variable.  \p{\phi} can be any formula so it may contain other variable that are 
+already bound by quantifiers within \p{\phi}. But when we write 
+\p{\phi(\upsilon)}, \p{\upsilon} is free within \p{\phi}. So when we write 
+\p{\lforall x\phi(x)}, the universal quantifiers binds the \p{x} in \p{\phi} 
+because \p{x} is free within \p{\phi}. When there are multiple free variables in 
+\p{\phi}, we will indicate that by a comma-separated list; e.g., 
+\p{\phi(\upsilon_1,\upsilon_2)} is a formula in which there are two free 
+variables \p{\upsilon_1} and \p{\upsilon_2}.
+
+We will also sometimes write \p{\phi(\kappa)} where \p{\kappa} is a constant to 
+mean that some free variable in \p{\phi} was replaced by the constant   
+\p{\kappa}. As I said earlier, it is very good practice to always be explicit 
+about which letters are used for constants, and which for variables.
+
+
+\subsection{Sentences of \lL[Q]{}}
+
+We now can specify which formulas of \lL[Q]{} are sentences: a formula \lL[Q]{} 
+is a sentence iff. it contains no free variables.
+
+
+
+
+
+
+\section{Semantics for \lL[Q]}\label{sec:semanticsPL}
+
+So far we have relied on an intuitive understanding of what sentences of \lL[Q]{} 
+mean. It is time to introduce a more formal account of the semantics of \lL[Q].  
+In particular, we want to have a more rigorous definition of when a sentence of 
+\lL[Q]{} is true.
+
+In the case of sentential logic, we used interpretations to figure out things 
+like whether a given sentence is a tautology. An interpretation there assigned 
+truth values to atomic sentences, and that enabled us to figure out the truth 
+value of a compound sentence in that interpretation. We will do something 
+similar for our language of predicate logic. However, since the smallest 
+building blocks of the sentences of predicate logic are not entire sentences, 
+but terms and predicates, our interpretations make assignments to those. Since 
+the building blocks are not sentences, the interpretation cannot  assign truth 
+values to them. So what does an interpretation do?  The following specifies what 
+an interpretation does.
+
+
+  
+First, an interpretation of \lL[Q]{} specifies a \emph{domain of discourse}, or 
+just \emph{domain}.  This is the set of things our language \lL[Q]{} can talk 
+about.  `Thing' is understood in the broadest possible sense: anything that can 
+be named can be a thing. There is no requirement of any kind of commonality 
+among the members of the domain save that they all must be `things.' And a 
+domain of discourse can have finitely many, countably many, or even uncountably 
+many things as members. The set \{Julius Caesar, Beethoven's Ninth Symphony, the 
+United Nations Security Council, Cantor's Diagonal Argument\} can be a  domain 
+of discourse, and so can be the set of all rational numbers.  However, the 
+domain of discourse cannot be empty.
+
+Next, an interpretation assigns to each constant of \lL[Q]{} a member of the domain of 
+discourse.  That is, it specifies for each constant a thing in the domain that 
+is named---or \emph{referred to}---by that constant. Let's call the thing named 
+by a constant its \emph{referent}.  Notice that different constants can name the 
+same thing: some things have more than one name like the first emperor of Rome 
+who is variously known as Octavius, Octavian, Augustus.  But there is no 
+constant without a referent; i.e., every name is a name of something.  Finally,  
+not everything in the domain need be assigned as the referent of a 
+constant---like most streets in Japan, some things might have no names.
+
+Thirdly, an interpretation assigns to each predicate of \lL[Q]{} an 
+\emph{extension}. For a one-place predicate \p{\mathcal{F}}, the interpretation 
+assigns a set of members of the domain. Intuitively, the extension of 
+\p{\mathcal{F}} is the set of all the members of the domain that are 
+\p{\mathcal{F}}. For example, if the domain is the set of all students at the 
+Claremont Colleges, an interpretation could assign all the Pomona College 
+students to \p{P}, which would enable us to translate \p{Px} as `x is a Pomona 
+College student'. For a two-place predicate \p{R}, the extension is a set of 
+ordered pairs. For instance, the interpretation might assign to \p{H} all the 
+pairs \p{<\mathfrak{m},\mathfrak{n}>} such that \p{\mathfrak{m}} is taller than 
+\p{\mathfrak{n}} (those are m and n in a font style known as Fraktur). That 
+would enable us to translate \p{Hxy} as `x is taller than y'. Notice that the 
+pairs must be ordered, i.e., the order in which the members of the pairs are 
+listed matters.  More generally, for each n-place predicate \p{\mathcal F}, the 
+interpretation assigns a set of ordered n-tuplets as the extension of 
+\p{\mathcal F}.  Finally, the extension of a predicate may be empty: there might 
+be nothing that is \p{\mathcal F}.
+
+The above suffices to explain what it takes for an atomic sentence of \lL[Q]
+{} that consists of a single 1-place predicate and a constant  to be true given 
+an interpretation \p{\mathfrak I} (that's an I in Fraktur): a sentence 
+\p{\mathcal{F}
+\kappa} is \emph{true in an interpretation \p{\mathfrak I}}  iff.  given \p{\mathfrak I} 
+the referent of \p{\kappa} is in the extension of \p{\mathcal F}.   We will also 
+sometimes say that  an interpretation \p{\mathfrak{I}} \emph{satisfies}  
+\p{\mathcal F\kappa} true to mean that \p{\mathcal{F}\kappa} is true in 
+\p{\mathfrak I}.
+ 
+More generally, given an n-place predicate \p{\mathcal R}, an interpretation 
+\p{\mathfrak{I}} makes true \p{\mathcal R\kappa_1 \ldots\kappa_n} iff.  
+\p{<ref(\kappa_1),\ldots, ref(\kappa_n)>} is in the extension of \p{\mathcal R} 
+where \p{ref(\chi)} is the referent of \p{\chi}.
+This takes care of the quantifier-free atomic sentences.
+
+What about quantifier-free compound sentences? We can adapt the understanding 
+from sentential logic:
+\begin{itemize}
+
+ \item \p{\lnot s} is true in \p{\mathfrak I}  iff.  \p{s} is not true in 
+  \model.
+
+ \item  \p{s_1 \land s_2} is true in \model{}  iff.  both \p{s_1} and \p{s_1} 
+  are true in \model.
+
+ \item \p{s_1 \lor s_2} is true in \model{}  iff.  at least one of \p{s_1} and 
+  \p{s_2} is true in \model.
+
+\item  \p{s_1 \limplies s_2} is true in \model{} iff.   at least one of \p{\lnot 
+ s_1} or \p{s_2} is true in \model.
+
+\end{itemize}
+
+We say that a sentence is \emph{false} iff. it is not true.
+
+Let's move to quantified sentences---those sentences that have a quantifier as 
+the main connective. Consider \p{\lforall x Fx}. We want this to be a reasonable 
+translation of `everything is \p{F}' (that's how we have been treating 
+quantified sentences). The obvious thing to say is: \p{\lforall\upsilon \mathcal 
+F\upsilon} is true in \model{}  iff. the extension of \p{\mathcal F} contains 
+every member of the domain. While this is unobjectionable, it does not help us 
+with figuring out whether \p{\mathfrak I} makes true \p{\lforall \upsilon 
+\mathcal (F\upsilon \limplies \mathcal G\upsilon)} and other such more complex 
+quantified sentences.  Recall that the complex sentence just mentioned is not a 
+compound sentence since it has no parts that are themselves sentences so that we 
+cannot figure out whether it is true in \model{} by building up from its 
+component sentences.
+
+
+\newcommand{\llqex}{\p{\mathcal L_Q^+}}
+
+Consider \p{\lforall \upsilon \phi(\upsilon)}. Intuitively, this is true in 
+\model, iff. everything in the domain is as described by \p{\phi}. So if 
+everything in the domain is the referent of one constant or another, \p{\lforall 
+\upsilon \phi(\upsilon)} is true in \model{} iff. \p{\phi(\kappa)} is true for 
+all constants of \lL[Q]. But remember that not everything in the domain need be 
+named by a constant. For instance, let the domain be people, and let \p{N} be a 
+predicate that has all the nice people in the world in its extension but nobody 
+else.  Let's make sure that all our constants refer to one or another person in 
+the extension of \p{N}.  The not-nice people shall remain nameless. This  would 
+make all sentences  of the form \p{N\kappa} true in the interpretation. Would 
+that mean that everyone is nice? Hardly. What to do?
+
+The solution is to pretend that there is a name for everything. Roughly,  
+\p{\lforall \upsilon \phi(\upsilon)} is true in \model{} iff. any member 
+\p{\mathfrak m} of the domain is such that if it had the name \p{\kappa}, 
+\p{\phi(\kappa)} would be true.
+
+Let's be more precise. There are two points to note. First, one way of getting a 
+name for \p{\mathfrak m} is to take an existing name \p{c} and change its 
+interpretation so that it refers to \p{\mathfrak m}. But that risks making a 
+sentence that is true on the old interpretation false on the new one. For 
+instance, if \p{c} originally refers to \p{\mathfrak t} and \p{\mathfrak t} is 
+in the extension of \p{F}, then \p{Fc} is true in the original interpretation.  
+But if we change the interpretation of \p{c} so that it refers to \p{\mathfrak s} 
+and \p{\mathfrak s} is not in the extension of \p{F}, \p{Fc} would be false on 
+the new interpretation. We do not want to introduce such changes in introducing 
+a constant referring to \p{\mathfrak m}.  So what we do is introduce a \emph{new} 
+constant \p{\kappa} and interpret this new constant as referring to \p{\mathfrak 
+m} while keeping everything else unchanged. Even though \lL[Q]{} has infinitely 
+many constants, we can add infinitely many more (e.g., we could start with 
+having constants that have even numbers as subscripts, and then add constants 
+with odd numbers as subscripts as the new ones).
+
+Secondly, we cannot in general name everything all at once because there are 
+domains that have more members than there are constants. E.g., the domain of 
+real numbers has uncountably many members, whereas we have only countably many 
+constants.\footnote{This is also why we can't solve the problem by modifying the 
+ rules of the language so that every member of the domain has a name: that would 
+rule out too many interesting collections of things from being the domain---like 
+the real numbers.} So we are not asking what would happen if everything had a 
+name.  Rather, we ask for each particular \p{\mathfrak m} what would happen if 
+we introduced a new constant for \emph{it}.
+
+So here is the more precise formulation for when a universally quantified 
+sentence is true: \p{\lforall \upsilon \phi(\upsilon)} is true in \model{} iff.  
+each member \p{\mathfrak m} of the domain is such that if \p{\kappa} is a new 
+constant referring to \p{\mathfrak m}, \p{\phi(\kappa)} is true (alternatively,
+there is no member \p{\mathfrak m} of the domain such that if \p{\kappa} is a 
+new constant referring to \p{\mathfrak m}, \p{\phi(\kappa)} is false).
+
+Similarly, \p{\lthereis \upsilon \phi(\upsilon)} is true in \model{} iff. there 
+is some member \p{\mathfrak m} such that if \p{\kappa} is a new constant 
+referring to \p{\mathfrak m}, then \p{\phi(\kappa)} is true.
+
+You might be puzzled by the fact these specifications of when quantified 
+sentences are true do not mention the `old' constants. Do they not matter? The 
+point to notice is that if \p{\kappa_1} and \p{\kappa_2} are constants referring 
+to the same thing in the domain, then \p{\phi(\kappa_1)} is true in \model{} 
+iff. \p{\phi(\kappa_2)} is true in \model{}.
+
+We now have everything we need to figure out whether or not  any sentence of 
+\lL[Q]{} is true in a given interpretation \model. One thing worth noting is 
+this: whether or not a sentence \p{s} is true in \model{} is solely a matter of 
+the referents and extensions of the constants and predicates occurring in \p{s}.  
+This will be of some use when discussing inferences in predicate logic.
+
+ This all may  sound a bit  abstract and scary. Let's discuss some examples to 
+ make things more concrete.
+
+\subsection{Examples}
+
+But first: we defined \lL[Q]{} to have infinitely many constants and predicates.  
+However, we are usually interested in only a small number of them, namely those 
+that appear in the sentences whose truths we are interested in. Since the 
+semantic of \lL[Q]{} is such that the truth of a sentence in an interpretation 
+only depends on the interpretation of the constants and predicates that occur in 
+the sentence, we can safely ignore all the other constants and predicates. So in 
+the following examples, only a small number of constants and predicates have 
+their interpretations specified.
+
+\subsubsection*{Example 1}
+
+Let our language have 3 constants of interest: \p{j}, \p{t}, \p{h}. And let it 
+have two one-place predicates of interest: \p{F}, \p{R}.
+
+The following specifies our interpretation \model:
+
+\begin{description}
+
+ \item[Domain of Discourse:] Jerry the mouse, Tom the cat, Hobbes the tiger.
+
+ \item[Referents of Constants:] \p{j} refers to Jerry, \p{t} refers to Tom, \p{h} 
+  refers to Hobbes.
+
+ \item[Extensions or Predicates:] The extension of \p{F} is \{Tom, Hobbes\}; the 
+  extension of \p{R} is \{Jerry\}
+
+\end{description}
+
+Let's consider some sentences.
+
+\begin{itemize}
+
+ \item \p{Ft} is true in \model{} because the referent of \p{t}, Tom, is in the 
+  extension of \p{F}.
+
+ \item \p{Rt} is not true in \model{} because the referent of \p{t}, Tom, is not 
+  in the extension of \p{R}.
+
+ \item \p{Rj} is true in \model{}  because the referent of \p{j}, Jerry, is in 
+  the extension of \p{R}.
+
+ \item \p{Fj} is not true in \model{}  because the referent of \p{j}, Jerry, is 
+  not in the extension of \p{F}.
+
+ \item \p{ \lnot Fj} is true in \model{} because  \p{Fj} is not true in \model.  
+
+ \item \p{Rj \limplies Rt} is false in \model{}  because neither \p{\lnot Rj} 
+  nor \p{Rt} is true in \model.
+
+ \item \p{ \lforall x Fx} is not true in \model{} because there is a member of 
+  the domain, Jerry, such that if we introduce \p{c_{Jerry}} as a constant 
+  referring to Jerry, \p{Fc_{Jerry}} is not true in the extended interpretation.
+
+ \item \p{ \lforall x (Fx \lor Rx)} is true in model{}  because each member 
+  \p{\mathfrak m} of the domain is such that if we introduce a new constant 
+  \p{c_{new}} to refer to it,  \p{Fc_{new} \lor Rc_{new}} is true in the 
+  extended interpretation. 
+
+\end{itemize}
+
+
+\subsubsection*{Example 2}
+
+Same language as above but with the following interpretation \model:
+
+\begin{description}
+
+ \item[Domain of Discourse:] Jar Jar Binks, Harry.
+
+ \item[Referents of Constants:] \p{j} refers to Jar Jar Binks, \p{t} refers to 
+  Jar Jar Binks, \p{h} refers to Harry.
+
+ \item[Extensions of Predicates:] The extension of \p{F} is \{Jar Jar Binks, 
+  Harry\}. The extension of \p{R} is empty.
+
+\end{description}
+
+Let's consider some sentences:
+
+\begin{itemize}
+
+ \item \p{Ft} is true in \model{} because the referent of \p{t}, Jar Jar Binks, 
+  is in the extension of F.
+
+ \item \p{Rt} is not true in \model{}  because the referent of \p{t}, Jar Jar 
+  Binks, is not in the extension of \p{R}.
+
+ \item \p{Rj} is not true in \model{}  because the referent of \p{j}, Jar Jar 
+  Binks,  is not in the extension of \p{R}.
+
+ \item \p{Fj} is true in \model{}  because the referent of \p{j}, Jar Jar Binks, 
+  is in the extension of \p{F}.
+
+ \item \p{ \lnot Fj} is not true in \model{} because  \p{Fj} is true in 
+  \model.
+   
+
+ \item \p{Rj \limplies Rt} is true in \model{} because \p{\lnot Rj} is true in 
+  \model.
+
+ \item \p{ \lforall x Fx} is true in \model{}  because each member \p{\mathfrak 
+  m} of the domain is such that if we introduced a new constant \p{c_{\mathfrak 
+  m}} to refer to it,  \p{Fc_{\mathfrak m}} is true in the extended interpretation (since 
+  all members of the domain are in the extension of \p{F}).
+  
+ \item \p{ \lforall x (Fx \lor Rx)} is true in \model{}  because each member 
+  \p{\mathfrak m} of the domain is such that if we introduce a new constant 
+  \p{c_{\mathfrak m}} to refer to it, \p{Fc_{\mathfrak m} \lor Rc_{\mathfrak m}} 
+  is true in the extended interpretation.
+
+\end{itemize}
+
+
+Notice how changing the interpretation changes which sentences are true in the interpretation and 
+which not.
+
+
+
+\subsubsection*{Example 3}
+
+Same language as above but with the following interpretation:
+
+\begin{description}
+
+ \item[Domain of Discourse:] Jar Jar Binks, Harry, JFK.
+
+ \item[Referents of Constants:] \p{j} refers to Jar Jar Binks, \p{t} refers to 
+  Jar Jar Binks, \p{h} refers to Harry.
+
+ \item[Extensions of Predicates:] The extension of \p{F} is \{Jar Jar Binks, 
+  Harry\}. The extension of \p{R} is \{JFK\}.
+
+\end{description}
+
+for quantifier-free sentences, this interpretation behaves like the one in the previous 
+example (check it). But:
+
+\begin{itemize}
+
+ \item \p{\lforall x Fx} is not true in \model{}  because introducing a new 
+  constant \p{c_{J\!F\!K}} to refer to JFK results in an extended interpretation 
+  in which \p{Fc_{J\!F\!K}} is not true  because JFK is not in the extension of 
+  \p{F}
+  .
+
+\end{itemize}
+
+
+
+\section{Entailment, Logical Truth, Contradiction}
+
+Suppose \p{\lforall x (Fx\land Gx)} is true in \model. In that case, \p{\lforall 
+x Fx} is also true in \model. Suppose \p{\lforall x (Fx \lor Gx)} and 
+\p{\lforall x \lnot Gx} are both true in \model. In that case, \p{\lforall x Fx} 
+is true in \model. So the truth in \model{} of some sentences can guarantee 
+truth of some sentence \p{\phi}. We will write
+
+\begin{center}
+
+ \p{\Gamma \lentails \phi}
+
+\end{center}
+
+to mean that every interpretation is such if all the sentences in \p{\Gamma} are 
+true, then \p{\phi} is also true. More colloquially, the truth of the sentences 
+in \p{\Gamma} guarantees the truth of \p{\phi}.  We will read it as `\p{\Gamma} 
+entails \p{\phi}', just as we did in sentential logic.
+
+Some sentences are true in every possible interpretation. E.g.,\p{\lforall x (Fx 
+\lor \lnot Fx)} is true in every possible interpretation. A sentence that is 
+true in every interpretation is called a \emph{logical truth}. Any tautology of 
+sentential logic is a logical truth, but not all logical truths are 
+tautologies---just look at the one mentioned in this paragraph. We will write
+
+\begin{center}
+
+ \p{ \lentails \phi} 
+
+\end{center}
+
+to mean that \p{\phi} is a logical truth. 
+
+A logical falsehood is a sentence that is false in every possible 
+interpretation.
+
+We say that  a set of sentences is \emph{satisfiable} iff. if there is an 
+interpretation \model{} such that all sentences in the set are true in \model.  
+Derivatively, we will say that an individual sentence is satisfiable iff.  the 
+set containing it as its unique member is satisfiable.
+
+
+
+
+\section{Reasoning With Quantifiers: Two Simple Rules}\label{sec:
+Quantifier-Reasoning}
+
+Let's go back to the argument in Example~\ref{ex:edTheWhale} (the one about Ed 
+the whale). Our difficulty was that sentential logic could not account for the 
+obvious cogency of that argument, and that seemed to be due to the limitations 
+of \lL{}. Let's see how \lL[Q]{} can help.
+
+Let \p{e} be a constant naming Ed, \p{x} a variable, and \p{Wx} and \p{Mx} mean 
+`\p{x} is a whale' and `\p{x} is a mammal' respectively. We can formalize the 
+argument as follows:
+
+\begin{argument}
+
+ \aitem \sqA{\Gamma}{\forall x(Wx\limplies Mx)}{premise}
+ \aitem \sqA{\Gamma}{We\limplies Me}{1,?}
+ \aitem \sqA{\Delta}{We}{premise}
+ \aitem \sqA{\Gamma,\Delta}{Me}{2,3,\condE}
+
+\end{argument}
+
+The move from 1 to 2 is obviously cogent. If every \p{x} is such that if it is 
+\p{W}, then it is \p{M}, it follows that any particular thing \p{e} is such that 
+if it is \p{W}, it is \p{M}. We can turn this point into an inference rule:
+
+\begin{infrule}
+
+ \item[Universal Quantifier Elimination (\p{\lforall}E)] From \p{\seq{\Lambda}
+  {\lforall\upsilon\phi(\upsilon)}}, infer \p{\seq{\Lambda}{\phi(\kappa)}}, for 
+  any constant \p{\kappa}. (All instances of \p{\upsilon} must be replaced by 
+  \p{\kappa}.)
+
+\end{infrule}
+
+This is also often called Universal Instantiation because it formalizes the 
+activity of giving an instance of a universal claim.  We can now fill in the 
+inference rule in the above argument:
+
+\begin{argumentN}[1]
+
+ \aitem \sqA{\Gamma}{\forall x(Wx\limplies Mx)}{premise}
+ \aitem \sqA{\Gamma}{We\limplies Me}{1,\uniE}
+ \aitem \sqA{\Delta}{We}{premise}
+ \aitem \sqA{\Gamma,\Delta}{Me}{2,3,\condE}
+
+\end{argumentN}
+
+Here is another obvious inference rule:
+
+
+\begin{infrule}
+
+ \item[Existential Quantifier Introduction (\p{\lthereis}I)] Given a constant 
+  \p{\kappa}, infer from \p{\seq{\Lambda}
+ {\phi(\kappa)}} to \p{\seq{\Lambda}\lthereis\upsilon\phi(\upsilon)}. (At least 
+ one---but not necessarily all---instances of \p{\kappa} must be replaced by 
+ \p{\upsilon}.)
+
+\end{infrule}
+
+This also is obvious: if \p{\kappa} is \p{\phi}, then there is something that is 
+\p{\phi}, viz. \p{\kappa}. Here is an example illustrating the use of \exI.  
+
+\begin{argumentN}[1]
+
+ \aitem \sqA{\Gamma}{\forall x(Wx\limplies Mx)}{premise}
+ \aitem \sqA{\Gamma}{We\limplies Me}{1,\uniE}
+ \aitem \sqA{\Delta}{We}{premise}
+ \aitem \sqA{\Gamma,\Delta}{Me}{2,3,\condE}
+ \aitem \sqA{\Gamma,\Delta}{ \lthereis x Mx}{4,\exI}
+
+\end{argumentN}
+
+If \p{\Gamma,\Delta} prove that Ed is a whale, then \p{\Gamma,\Delta} prove that 
+there is a whale. 
+
+Notice that \exI{} allows the following inference:
+
+\begin{argument*}
+
+ \ai{\Gamma}{Ldd}{premise}
+ \ai{\Gamma}{\lthereis x Lxd}{1,\exI}
+
+\end{argument*}
+
+If \p{Ldd} means that Donald loves Donald, then it follows that there is someone 
+(i.e., Donald) who loves Donald.
+
+
+For the logical connectives of \lL{} we have a pair of rules for each of them.  
+The same is true for the quantifiers.  What we have so far is one half of the 
+inference rules for quantifiers. Let's discuss the other two in the following 
+sections.
+
+
+
+
+
+
+\section{Universal Quantifier Introduction}
+
+
+Take any constant \p{c} and a predicate \p{F}. We can easily prove \p{\seq{}
+{Fc\lor\lnot Fc}}. All we have to do is take our earlier proof of EM and replace 
+\p{p} with \p{Fc}:
+
+
+\begin{argument*}
+
+\ai[0.25]{\lnot (Fc \lor \lnot Fc)}{\lnot (Fc \lor \lnot Fc)}{A}
+
+\ai[0.25]{Fc}{Fc}{A}
+
+\ai[0.25]{Fc}{Fc \lor \lnot Fc}{2,\disjI}
+
+\ai[0.25]{Fc,\lnot (Fc \lor \lnot Fc)}{Fc \lor \lnot Fc}{3}
+
+\ai[0.25]{\lnot (Fc \lor \lnot Fc),Fc}{\lnot (Fc \lor \lnot Fc)}{1}
+
+\ai[0.25]{\lnot (Fc \lor \lnot Fc)}{\lnot Fc}{4,5,\negI}
+
+\ai[0.25]{\lnot (Fc \lor \lnot Fc)}{Fc \lor \lnot Fc}{6,\disjI}
+
+\ai[0.25]{}{\lnot \lnot (Fc \lor \lnot Fc)}{1,7,\negI}
+
+\ai[0.25]{}{Fc \lor \lnot Fc}{8,\negE}
+
+\end{argument*}
+
+Now, when you inspect the above argument, it is easy to see that we could run 
+the same argument with any other constant. So we should be allowed to conclude 
+\p{\seq{}{\lforall x (Fx\lor\lnot Fx)}}.
+
+
+What we just did is universalize from a particular case. That is usually a very 
+bad idea (e.g., ``Donald is narcissist, therefore everyone is a narcissist'' is 
+an obvious \emph{non sequitur}\footnote{`non sequitur' is Latin for `it does not 
+follow.'}).  So why does the above work?  It is crucial that there is 
+\emph{nothing} special about \p{c} in the proof of \p{\seq{}{Fc\lor \lnot Fc}}.  
+What does that mean?  Different things differ from each other in various ways.  
+But they also have things in common.  To say that there was nothing special 
+about \p{c} in the above proof is to say that nothing that makes \p{c} different 
+from other things played a role in the proof.  This is why we can be confident 
+that the universalization to all \p{x} works.
+
+So the thought is that if we can show that \p{\phi(c)} is true without depending 
+on anything that distinguishes \p{c} from other things, then we can universalize 
+to the claim that \p{\lforall\upsilon\phi(\upsilon)}. Let's put this as an 
+inference rule:
+
+\begin{infrule}
+
+ \item[Universal Quantifier Introduction (\p{\lforall}I)] Given a constant 
+  \p{\kappa}, from \p{\seq{\Lambda}
+   {\phi(\kappa)}} infer \mbox{\p{\seq{\Lambda}{\lforall\upsilon
+  \phi(\upsilon)}}}, provided \p{\kappa} does not appear in any of the sentences 
+  in \p{\Lambda}. (Must replace all instances of \p{\kappa} in \p{\phi(\kappa)}  
+  with \p{\upsilon}.) 
+
+ \end{infrule}
+
+
+The proviso ensures that no claims about \p{\kappa} are needed to support 
+\p{\phi(\kappa)} which means that nothing that might distinguish \p{\kappa} from 
+other things plays a role in the support for \p{\phi(\kappa)}. 
+
+We can now formalize the universalization of a tautology:
+
+
+\begin{argument*}
+
+\ai{}{Fc \lor \lnot Fc}{EM}
+
+\ai{}{\plshpn{UxAFxNFx}}{1,\uniI}
+
+\end{argument*}
+
+So there are theorems involving quantifiers, too.
+
+
+Notice that this introduces a sequent whose succedent is \p{Fc \lor \lnot Fc} 
+without first declaring that \p{c} is a constant.  If \p{c} is understood as a 
+variable, this would not be a sentence and the sequent makes no sense. We will 
+be charitable and interpret everything in such a way that any unbound term is 
+understood as a constant with the exception that a term that is previously used 
+as a variable somewhere in the derivation  cannot be understood as a constant.  
+And once a letter is used for a constant, you cannot use it as a name for a 
+variable later.
+For example, take
+
+\begin{argument*}
+
+ \ai{\Gamma}{\lforall x Fx}{premise}
+ 
+ \ai{\Gamma}{Fy}{1, \uniE}
+
+\end{argument*}
+
+In this case, \p{y} on line 2 is understood as a constant. Because \p{y} does 
+not appear as a variable previously. But the following is \emph{not} ok:
+
+\begin{argument*}
+
+ \ai{\Gamma}{\lforall y Fy}{premise}
+ 
+ \ai{\Gamma}{Fy}{1, \uniE}
+
+\end{argument*}
+
+\p{y} is used as a variable on line 1, and that means that \p{y} must be 
+understood as an unbound variable on line 2 which renders the sequent there 
+senseless. Similarly, you cannot do
+
+\begin{argument*}
+
+ \ai{\Gamma}{Fx}{premise}
+
+ \ai{\Gamma}{\lthereis x Fx}{1, \exI}
+
+\end{argument*}
+
+\p{x} on the first line must be understood as a constant, but then you cannot 
+use it as a variable name on line 2.
+
+Finally, we will adopt the convention that when a constant appears for the first 
+time in a derivation, it is a \emph{new} constant that is being added to \lL[Q] 
+unless it is explicitly specified otherwise in the context.
+Remember our discussion of the semantics of quantified sentences: it is possible 
+to add new constants without affecting what is true without that new constant.  
+All sentences that appear prior to the introduction of the constant should be 
+understood as sentences in the language without the new constant. This makes 
+life a lot easier when it comes to applying \uniI.
+
+Here is an example: all whales are mammals, and all mammals are warm-blooded; it 
+follows that all whales are warm-blooded. We can formalize this using the same 
+interpretation of the predicate letters as as in the previous section:
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\Gamma}{\lforall x (Wx\limplies Mx)}{premise}
+
+\ai{\Delta}{\lforall x (Mx\limplies Bx)}{premise}
+
+\ai{Wn}{Wn}{A}
+
+\ai{\Gamma}{Wn\limplies Mn}{1,\uniE}
+
+\ai{\Delta}{Mn\limplies Bn}{2,\uniE}
+
+\ai{\Gamma, Wn}{Mn}{3,4,\condE}
+
+\ai{\Gamma, \Delta, Wn}{Bn}{5,6,\condE}
+
+\ai{\Gamma, \Delta}{Wn\limplies Bn}{7,\condI}
+
+\ai{\Gamma, \Delta}{\lforall x (Wx\limplies Bx)}{8,\uniI}
+
+\end{argumentN}
+
+
+
+Here is an informal version of what this does: all whales are mammals, and all 
+mammals are warm-blooded. Pick anything that's a whale. Let's call it Nina.  
+Since Nina is a whale, Nina is a mammal, and therefore warm-blooded. Nothing 
+depended on our choice of Nina. So all whales are warm-blooded.
+
+In the derivation, we introduce a new constant \p{n} on line 3 with the 
+assumption \p{\seq{Wn}{Wn}}. We can tell it's a constant since if it were a 
+variable the sequent would not make sense, and \p{n} does not occur in the 
+previous lines as a variable. And it's a \emph{new} constant because \p{n} 
+appears there for the first time. Because \p{n} is a new constant, it cannot 
+appear in \p{\Gamma,\Delta}: those must be sets of sentences of the original 
+language because they are introduced into the derivation before the new constant 
+is introduced.  So we know the proviso for \uniI{} is met for the inference to 
+line 9.
+
+There is one more rule of inference. It is, you guessed it, the Existential 
+Quantifier Elimination rule. We will discuss that in the next section. 
+
+
+\section{Existential Quantifier Elimination}
+
+
+Here is something obvious: if all whales are mammals, and there are whales, it 
+follows that there are mammals. This means that we should be able to infer from 
+\p{\seq{\Gamma}{\lforall x}{(Wx \limplies Mx)}} and \p{\seq{\Delta}
+{\lthereis x Wx}} to \p{\seq{\Gamma,\Delta}{\lthereis x Mx}}. 
+
+
+The inference rules we have so far do not enable us to make the inference, 
+though. So we need a new inference rule. What should that look like? Here is a 
+thought.  Consider the following argument:
+
+\begin{Example}
+
+All whales are mammals, and there are whales.  Let's suppose Cindy is one of the 
+whales. On this supposition, Cindy is a mammal because of the first premise.  So, 
+on the supposition that Cindy is a whale, there are mammals.  Now, we don't know 
+that Cindy is a whale. But there are whales and that means that what we did is 
+like picking a whale and naming it Cindy. So whether or not the real Cindy is a 
+whale, there are mammals. 
+
+\end{Example}
+
+We will call the reasoning pattern exhibited here Existential Quantifier 
+Elimination. Given a general existential claim, we pretend that the claim is 
+true of a particular thing, \p{\kappa}, show that something follows on that 
+pretense, and conclude that it follows even without the pretense.
+
+We do need to be careful. Consider:
+
+\begin{Example}
+
+ There are scientist. So let's suppose Donald is a scientist. Donald believes 
+ that injecting bleach can cure infectious diseases. So on the supposition that 
+ Donald is a scientist, there are scientists who believe that injecting bleach 
+ can cure infectious diseases.   Therefore, there are scientists who believe 
+ that injecting bleach can cure infectious diseases.
+
+\end{Example}
+
+This is a terrible piece of reasoning. How does it differ from the Cindy case?  
+The problem is that believing that injecting bleach can cure infectious diseases 
+is a special fact about Donald. Had you picked somebody else, say Deborah, you 
+wouldn't have been able to say that Deborah believes that injecting bleach can 
+cure infectious diseases. In the Cindy case, the reasoning does not depend on 
+anything special about Cindy. That's crucial.
+
+Here is a rule of inference that captures the Cindy case while ruling out the 
+Donald case:
+
+\begin{infrule}
+
+ \item[Existential Quantifier Elimination (\exE)] From \p{\seq{\Lambda_1}
+   {\lthereis\upsilon\phi(\upsilon)}} and \p{\seq{\Lambda_2,\phi(\kappa)}
+  {\psi}}, infer \p{\seq{\Lambda_1,\Lambda_2}{\psi}}, provided \p{\kappa} does not 
+  appear in any of \p{\Lambda_1}, \p{\Lambda_2}, and \p{\psi}.
+
+ \end{infrule}
+
+A note on the  proviso that \p{\kappa} must not appear in any of   \p{\Lambda_1}, 
+\p{\Lambda_2}, and \p{\psi}. Requiring that \p{\kappa} not appear in \p{\Lambda_1} or 
+\p{\Lambda_2} ensures we do not illicitly depend on some special features of 
+\p{\kappa}.  By requiring that \p{\kappa} not appear in \p{\psi}, we prevent 
+concluding something about \p{\kappa} even though \p{\Lambda_1} and \p{\Lambda_2} say 
+nothing about \p{\kappa}.
+
+
+We can now formalize the argument in the above Example involving Cindy:
+
+
+%Derive from \p{\seq{\Gamma}{\lforall x (Wx\limplies Mx)}} to \p{\seq{\Gamma, \Delta}{\lthereis z (Mz)}}
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\Gamma}{\lforall x (Wx\limplies Mx)}{premise}
+
+\ai{\Delta}{\lthereis y Wy}{premise}
+
+\ai{Wc}{Wc}{A}
+
+\ai{\Gamma}{Wc\limplies Mc}{1,\uniE}
+
+\ai{\Gamma, Wc}{Mc}{3,4,\condE}
+
+\ai{\Gamma, Wc}{\lthereis z Mz}{5,\exI}
+
+\ai{\Gamma, \Delta}{\lthereis z Mz}{2,6,\exE}
+
+\end{argumentN}
+
+
+
+Here is another example of \exE{} in action. Suppose there is something that is 
+F. It follows that not everything is not-F. E.g., if there are reasonable people, 
+not everyone is unreasonable. That means we should be able to infer from 
+\p{\seq{\Gamma}{\lthereis x Fx}} to \p{\seq{\Gamma}{\lnot\lforall x\lnot Fx}}.  
+Here is one way: Assume that something is F, and also assume that everything is 
+not-F. Let Alec be F. But given the second assumption, Alec is not-F. But then 
+Alec is both F and not-F. That's a contradiction. Something has to give. Since 
+we are going to keep the first assumption, we must give up the second 
+assumption.  Thus, not everything is not-F. 
+
+We can formalize this:
+
+%Derive from \p{\seq{\Gamma}{\lthereis x (Fx)}} to \p{\seq{\Gamma}{\lnot \lforall x (\lnot Fx)}}
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\Gamma}{\lthereis xFx}{premise}
+
+\ai{\lforall x \lnot Fx}{\lforall x \lnot Fx}{A}
+
+\ai{Fa}{Fa}{A}
+
+\ai{\lforall x \lnot Fx}{\lnot Fa}{2,\uniE}
+
+\ai{Fa, \lforall x \lnot Fx}{\lnot Fa}{4}
+
+\ai{Fa, \lforall x \lnot Fx}{Fa}{3}
+
+\ai{Fa}{\lnot \lforall x \lnot Fx}{5,6,\negI}
+
+\ai{\Gamma}{\lnot \lforall x \lnot Fx}{1,7,\exE}
+
+\end{argumentN}
+
+
+
+
+
+
+\section{Proof System for Predicate Logic}
+
+Here is our proof system for predicate logic in one place. We now use Greek 
+lower case letters for sentence variables. You may: 
+
+\begin{infrule}
+
+ \item[Assumption Introduction (A)] Infer   \p{\seq{\phi}
+  {\phi}}.
+
+ \item[Conjunction Introduction (\conjI)] From \p{\seq{\Lambda_1}{\phi_1}} and 
+  \p{\seq{\Lambda_2}{\phi_2}}, infer \p{\seq{\Lambda_1, \Lambda_2}{\phi_1 \land \phi_2}}.
+
+
+ \item[Conjunction Elimination (\conjE)] From \p{\seq{\Lambda}{\phi_1 \land \phi_2}}, 
+  infer \p{\seq{\Lambda}{\phi_1}} as well as \p{\seq{\Lambda}{\phi_2}}.
+
+ \item[Disjunction Introduction (\disjI)] From \p{\seq{\Lambda}{\phi_1}}, infer 
+  \p{\seq{\Lambda}{\phi_1 \lor \phi_2}} as well as \p{\seq{\Lambda}{\phi_2 \lor \phi_1}}, for 
+  any \p{\phi_2}.
+
+ \item[Disjunction Elimination (\disjE)] From \p{\seq{\Lambda_1}{\phi_1\lor \phi_2}} and
+  \p{\seq{\phi_1, \Lambda_2}{\phi_3}} and \p{\seq{\phi_2, \Lambda_3}{\phi_3}}, infer 
+  \p{\seq{\Lambda_1, \Lambda_2, \Lambda_3}{\phi_3}}.
+
+ \item[Negation Introduction (\negI)] From \p{\seq{\Lambda_1, \phi_1}
+  {\phi_2}} and \p{\seq{\Lambda_2, \phi_1}{\lnot \phi_2}}, infer \p{\seq{\Lambda_1, \Lambda_2}
+ {\lnot \phi_1}}.
+
+ \item[Negation Elimination (\negE)] From \p{\seq{\Lambda}{\lnot\lnot \phi}}, 
+  infer \p{\seq{\Lambda}{\phi}}.
+
+ \item[Conditional Introduction (\condI)] From \p{\seq{\Lambda, \phi_1}
+  {\phi_2}}, infer \p{\seq{\Lambda}{\phi_1 \limplies \phi_2}}.
+ 
+ \item[Conditional Elimination (\condE)] From \p{\seq{\Lambda_1}
+  {\phi_1\limplies \phi_2}} and \p{\seq{\Lambda_2}{\phi_1}}, infer \p{\seq{\Lambda_1, \Lambda_2}
+ {\phi_2}}.
+
+
+ \item[Universal Quantifier Introduction (\p{\lforall}I)] Given a constant 
+  \p{\kappa}, from \p{\seq{\Lambda}
+   {\phi(\kappa)}} infer \mbox{\p{\seq{\Lambda}{\lforall\upsilon
+  \phi(\upsilon)}}}, provided \p{\kappa} does not appear in any of the sentences 
+  in \p{\Lambda}. (Must replace all instances of \p{\kappa} in \p{\phi(\kappa)
+  } with \p{\upsilon}.) 
+
+ \item[Universal Quantifier Elimination (\p{\lforall}E)] From \p{\seq{\Lambda}
+  {\lforall\upsilon\phi(\upsilon)}}, infer \p{\seq{\Lambda}{\phi(\kappa)}}, for 
+  any constant \p{\kappa}. (All instances of \p{\upsilon} must be replaced by 
+  \p{\kappa}.)
+ 
+ \item[Existential Quantifier Elimination (\exE)] From \p{\seq{\Lambda_1}
+   {\lthereis\upsilon\phi(\upsilon)}} and \p{\seq{\Lambda_2,\phi(\kappa)}
+  {\psi}}, infer \p{\seq{\Lambda_1,\Lambda_2}{\psi}}, provided \p{\kappa} does not 
+  appear in any of \p{\Lambda_1}, \p{\Lambda_2}, and \p{\psi}.
+
+ \item[Existential Quantifier Introduction (\p{\lthereis}I)] Given a constant 
+  \p{\kappa}, infer from \p{\seq{\Lambda}
+ {\phi(\kappa)}} to \p{\seq{\Lambda}\lthereis\upsilon\phi(\upsilon)}. (At least 
+ one---but not necessarily all---instances of \p{\kappa} must be replaced by 
+ \p{\upsilon}.)
+
+\end{infrule}
+
+
+Also, you may rewrite the datum side of sequents in the following ways:
+
+\begin{enumerate}
+ \renewcommand{\labelenumi}{\alph{enumi}.}
+ 
+ \item You may reorder items within the datum as you see fit.
+
+ \item You may delete duplicate items within the datum.
+
+ \item You may add arbitrary items to the datum of a sequent.
+
+\end{enumerate}
+
+Finally, you may introduce new constants into a derivation using Assumption 
+Introduction or Universal Quantifier Elimination. The new constant must not 
+appear on any previous line nor be declared a constant in the surrounding 
+context.
+
+
+
+\section{Theorems}\label{sec:theoremsPL}
+
+As we have already seen, predicate logic has theorems, too.  A proof proves a 
+theorem if it proves a sequent with an empty datum by using only the rules of 
+our proof system. It is exactly like what it was in the case of sentential 
+logic. And we can prove theorems in just the same sort of ways as before. E.g., 
+
+%Prove \p{\seq{}{\lthereis x (Fx)\limplies \lnot \lforall x (\lnot Fx)}}
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\lthereis x Fx}{\lthereis x Fx}{A}
+
+\ai{\lforall x \lnot Fx}{\lforall x \lnot Fx}{A}
+
+\ai{Fa}{Fa}{A}
+
+\ai{Fa, \lforall x \lnot Fx}{Fa}{3}
+
+\ai{\lforall x \lnot Fx}{\lnot Fa}{2,\uniE}
+
+\ai{Fa}{\lnot \lforall x \lnot Fx}{4,5,\negI}
+
+\ai{\lthereis x Fx}{\lnot \lforall x \lnot Fx}{1,6,\exE}
+
+\ai{}{\lthereis x Fx\limplies \lnot \lforall x \lnot Fx}{7,\condI}
+
+\end{argumentN}
+
+
+
+
+\subsection{More Theorems}
+
+Here are some useful theorems:
+
+
+
+\begin{theorems}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CXxFxNUxNFx}}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CNUxNFxXxFx}}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CUxFxNXxNFx}}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CNXxNFxUxFx}}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CXxNFxNUxFx}}
+ 
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CNUxFxXxNFx}}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CUxNFxNXxFx}}
+
+ \thrm[Quantifier Exchange (QE)]{ \plshpn{CNXxFxUxNFx}}
+
+ \thrm[Confinement (CF)]{\plshpn{CKUxFxUxGxUxKFxGx}}
+
+ \thrm[Confinement (CF)]{\plshpn{CUxKFxGxKUxFxUxGx}}
+
+ \thrm[Confinement (CF)]{\plshpn{CAUxFxUxGxUxAFxGx}}
+
+
+\thrm[Confinement (CF)]{\plshpn{CKXxFxXxGxXxXyKFxGy}}
+
+\thrm[Confinement (CF)]{\plshpn{CXxXyKFxGyKXxFxXxGx}}
+
+\thrm[Confinement (CF)]{\plshpn{CAXxFxXxGxXxAFxGx}}
+
+\thrm[Confinement (CF)]{\plshpn{CXxAFxGxAXxFxXxGx}}
+
+\end{theorems}
+
+
+
+\section{Generalizing the Theorems}
+
+Take a look at the theorem we proved in the last section. The proof takes a 
+particular predicate \p{F} but it is obvious that you could replace it with any 
+other predicate and construct a parallel proof. So just like the proofs we saw 
+of theorems of sentential logic, the proof of that Theorem (and the other 
+theorems) is a proof template. You can replace any 1-place predicate with any 
+other 1-place  predicate. 
+
+You will notice that the sentences involved in that proof of the last section 
+are very simple.  For instance, \plshp{XxFx} has an existential quantifier 
+attached to the simplest formula possible. But quantifiers can also be attached 
+to complex formulas. We can easily generalize the proof in the previous section 
+to cover cases in which the existential quantifier is attached to a complex 
+formula by replacing \p{Fx} with \p{\phi(x)} and \p{Fa} with \p{\phi(a)} (\p{a} 
+is a constant). \p{\phi(x)} is a formula in which \p{x} is free and \p{\phi(a)} 
+is the formula obtained by substituting \p{a} into \p{x}:
+
+%Prove \p{\seq{}{\lthereis x φ(x)\limplies \lnot \lforall x [\lnot φ(x)]}}
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\lthereis x φ(x)}{\lthereis x φ(x)}{A}
+
+\ai{\lforall x \lnot φ(x)}{\lforall x \lnot φ(x)}{A}
+
+\ai{φ(a)}{φ(a)}{A}
+
+\ai{φ(a), \lforall x φ(x)}{φ(a)}{3}
+
+\ai{\lforall x \lnot φ(x)}{\lnot φ(a)}{2,\uniE}
+
+\ai{φ(a)}{\lnot \lforall x \lnot φ(x)}{4,5,\negI}
+
+\ai{\lthereis x φ(x)}{\lnot \lforall x \lnot φ(x)}{1,6,\exE}
+
+\ai{}{\lthereis x φ(x)\limplies \lnot \lforall x \lnot φ(x)}{7,\condI}
+
+\end{argumentN}
+
+
+
+The proofs for the other theorems can be generalized in the same fashion. For 
+the rest of the course, you may assume that we have proven the theorems in this 
+generalized form.
+
+
+\section{Soundness of the System of Predicate Logic}
+
+Given the explanation of the inference rules, it is plausible that our proof 
+system is sound.  We will use the same terminology as in Section
+\ref{sec:soundnessSL}: \p{ \Gamma \lproves \phi} is correct iff. \p{ \Gamma 
+\lentails \phi}.  What we want to show is that if a derivation consists of only 
+correct sequents, then extending the proof by one more line via one of our four 
+new rules will result in another correct sequent. 
+
+
+\subsection{Existential Quantifier Introduction}
+
+This is easy to see given the semantics of the existential quantifier. Any 
+interpretation in which \p{\phi(c)} is true is also such that \p{\lthereis x 
+\phi(x)} is true.
+
+\subsection{Universal Quantifier Elimination}
+
+This, too is easy to see given the semantics of the universal quantifier.
+
+\subsection{Universal Quantifier Introduction}
+
+Suppose \p{\Gamma\lentails \phi(c)} where \p{c} does not appear in any of the 
+sentences of \p{\Gamma}. Let \p{\mathfrak I} be an interpretation in which all 
+the sentences in \p{\Gamma} are true. We are supposing that \p{\phi(c)} is also 
+true in \p{\mathfrak I}. Consider an interpretation \p{\mathfrak I'} which is 
+just like \p{\mathfrak I} except that it assigns a different referent to \p{c}.  
+All the sentences in \p{\Gamma} must still be true in \p{\mathfrak I'} because 
+\p{c} does not appear in any sentence in \p{\Gamma} so that the referent of \p{c} 
+makes no difference to the truth of those sentences. So \p{\phi(c)} must also be 
+true in \p{\mathfrak I'} because \p{\Gamma \lentails \phi(c)}. But this means 
+that any interpretation that makes all sentences in \p{\Gamma} true also make 
+\p{\phi(c)} true independently of the referent of \p{c}. Thus, if \p{\Gamma 
+\lentails \phi(c)}, then \p{\Gamma \lentails \lforall x \phi(x)} provided \p{c} 
+does not appear in any sentence in \p{\Gamma}. This shows that \uniI{} is a 
+valid rule of inference.
+
+
+\subsection{Existential Quantifier Elimination}
+
+Suppose we can prove \p{\seq{\Delta, \phi(c)}{\psi}} where \p{c} does not appear 
+in \p{\Delta} or \p{\psi} and that the sequent is correct. That is, \p{\Delta, 
+\phi(c) \lentails \psi}. The point to notice is that this is a claim about 
+truth.  What it says is that if \p{\phi(c)} is true, then \p{\phi(\kappa)} is 
+true for any constant \p{\kappa} that refers to the same thing as \p{c}. I.e., 
+if an interpretation is such that the sentences in \p{\Delta} are true and there 
+is something that is \p{\phi} (if \p{\kappa} refers to it,  then \p{\phi(\kappa)} 
+is true), then \p{\psi} is also true in that interpretation.
+
+With this in mind, suppose we also have \p{\Gamma \lentails \lthereis x \phi(x)
+}, and consider an interpretation \p{\mathfrak I} that makes all sentences in 
+\p{\Gamma} and \p{\Delta} true. Given the semantics of the existential 
+quantifier, \p{\mathfrak I} is such that there is something in the domain that 
+is \p{\phi}. Thus, \p{\mathfrak I} also makes \p{\psi} true: \p{\Gamma,
+\Delta \lentails \psi}. This shows that \exE{} is a valid rule of inference.
+
+
+\subsection{Completeness}
+
+
+What about completeness? Can our system prove all truths of logic?
+
+As stated, our system is not complete. Here is a truth of logic that cannot be 
+proved in our system:
+
+\begin{center}
+
+ \p{Fc \limplies \lforall x Fc}
+
+\end{center}
+
+Notice that the universal quantifier does not bind anything in its scope. We 
+have been discouraging such formulas but it is allowed. Given the semantics of 
+the universal quantifier, \p{\lforall x Fc} is equivalent to \p{Fc} so the above 
+is indeed a truth of logic.
+
+We can modify Universal Quantifier Introduction a bit to allow inferring from 
+\p{\seq{\Lambda}{\phi}} to \p{\seq{\Lambda}{\lforall \upsilon \phi}} (notice 
+that \p{\phi} is unmodified).  This modified system is complete but we will not 
+be able to prove it here.  I have to ask you to take my word for it.
+ 
+If you are interested, Kurt \citet{Godel1929} was the first person to prove the 
+completeness of predicate logic. The proof was his doctoral dissertation.  
+Nowadays the preferred proof of completeness is one that was given by Leon 
+\citet{Henkin1949}.  
+
+
+
+
+\section{Counting and Identity}\label{secIdentity}
+
+The sentence \p{\lthereis x Fx} tells us that there is at least one thing that  
+is \p{F}. But it does not tell us how many. Maybe there is only one, but maybe 
+there are gazillions. \p{\lthereis xFx} does not distinguish between those 
+cases. How could we say there is exactly one thing which is \p{F}?
+
+
+Let's start with an easier question. How could we say that there are at least 
+two things that are \p{F}? To say that there are two things that are \p{F} is to 
+say that there are two distinct things that are \p{F}. We might try:
+
+
+\begin{argument}
+ \aitem \plshp{KXxFxXyFy}
+\end{argument}
+
+There is an \p{x} which is \p{F}, and  there is a \p{y} which is \p{F}. But this 
+does not work. \p{\lthereis x Fx} is true just in case there is at least one 
+thing that is \p{F}. And the same goes for \p{\lthereis y Fy}. They are two ways 
+of saying the same thing. So even if there is only one thing that is \p{F}, 1 
+would be true. We need to ensure that \p{x} and \p{y} are different things.  Let 
+us write \p{\nident{x}{y}} to mean that \p{x} is not identical to \p{y}.  And we 
+will write \p{\ident{x}{y}} to mean that \p{x} is identical to \p{y}. That is, 
+we will use the identity sign the way it is normally used. We could then try:
+\begin{argument}
+ \aitem \plshp{KKXxFxXyFyN=xy}
+
+\end{argument}
+
+But this still does not work because the formula \p{\nident{x}{y}} is outside 
+the scope of either quantifier. What we want to say is something like: we can 
+find an \p{x} which is \p{F}, and find a \p{y} which is \p{F}, and when we 
+compare \p{x} and \p{y} we find that they are two distinct things. 2 doesn't say 
+that.  To be able to compare the two things we find, we have to get them within 
+the scope of the same quantifier. The following will do:
+
+\begin{argument}
+\aitem \plshp{XxKFxXyKFyN=xy}
+\end{argument}
+
+This says   that there is an \p{x} which is \p{F} and also a \p{y} which is \p{F}
+but is different from \p{x}. That means there are at least two things that are  
+\p{F}. It's the existential claim starting with \p{\lthereis y} inside the scope 
+of the \p{\lthereis x} that guarantees the existence of a second thing that is 
+\p{F}. 
+
+As an example, suppose our domain contains only mom, dad, grandma, and Fido.  
+Fido is a dog, the others are humans; dad is male, the other humans in the 
+domain are women. As you can see, there are at least two women in our domain: 
+mom and grandma. And if we let \p{Fx} mean `\p{x} is a woman' we can see that 
+the above sentence is true given our domain of discourse. There is someone, e.g.  
+mom, who is a woman and there is someone else, e.g., grandma, who is a woman but 
+is not mom.
+
+Let's get back to the original question, How do we say that there is exactly one 
+thing which is \p{F}? Consider Fido.  Fido is the only dog in our domain so 
+there is exactly one dog in the domain.  Since we now know how we could say that 
+there are at least two dogs in the domain, we can also say that there is exactly 
+one dog: there are dogs, but it is not true that there are at least two dogs.  
+And that means there is a thing which is a dog but there is no second thing that 
+is a dog. More generally, there is exactly one \p{F} is to say that there is at 
+least one things that is \p{F} but there is no second thing that is  \p{F}.  We 
+can say this using the following sentence:
+\begin{argument}
+\aitem   \plshp{XxKFxNXyKFyN=xy}
+
+\end{argument}
+
+Notice the negation sign in front of the \p{\lthereis y}. That rules out that 
+there is a second thing that is \p{F}.  Alternatively, we could also say:
+
+\begin{argument}
+ 
+ \aitem  \p{\lthereis x\big[Fx \land\lforall y(Fy \limplies\ident{x}{y})
+ \big]}
+
+\end{argument}
+
+
+Continuing with our example domain of discourse, we can see that there are 
+exactly two women: mom and grandma. How could we say that in our formal language?  
+That is not hard. We start with the sentence that says there are at least two 
+and add something that rules out the existence of a third. Like this:
+\begin{argument}
+
+\aitem \plshp{XxKFxXyKKFyN=xyNXzKKFzN=xzN=yz}
+
+\end{argument}
+
+There is an \p{x} which is \p{F}, another thing \p{y} which is also \p{F}, but 
+there is no further thing distinct from both \p{x} and \p{y} that is also \p{F}.
+
+We can say that there are at least three by removing the negation sign in the 
+sentence above:
+
+\begin{argument}
+
+\aitem \plshp{XxKFxXyKKFyN=xyXzKKFzN=xzN=yz}
+
+\end{argument}
+
+We can then say that there are exactly three by adding a clause that rules out 
+the existence of any further thing that is \p{F}. You get the drift. We could 
+continue that forever. So for every natural number \emph{n}, we can say that 
+there are exactly \emph{n} things that are \p{F} as well as that there are at 
+least \emph{n} things that are \p{F}. Of course, we will run out of letters of 
+the Roman alphabet quickly, so will have to resort to subscripts. The genius of 
+the Arabic numerals guarantees we will never run out of them. 
+
+
+
+
+\section{Axioms}\label{sec:axioms}
+
+When I introduced the identity sign in the previous section, I cheated a bit by 
+depending on your previous understanding of the \p{=} symbol. Let's a look at it 
+more closely.
+
+A formula like \p{\ident{x}{y}} expresses a relation between \p{x} and \p{y}.  
+So the identity sign is just a 2-place predicate. We could have kept our 
+notation more consistent by writing \p{\setlength{\thickmuskip}{0.5mu}=xy} but 
+that looks very unfamiliar, so we (like everybody else) will use the more 
+familiar style.  Since \p{=} is just a 2-place predicate, if we treat it like 
+any other 2-place predicate, there is no reason why it should mean identity.  In 
+declaring that the symbol is to be used in familiar ways, I  imposed a certain 
+interpretation of it. In other words, I restricted the permissible interpretations of our 
+language to those that take \p{=} to mean identity.  What are the features of a 
+interpretation that take \p{=} to mean identity?
+
+We can specify the requirements in terms of the sentences that must come out to 
+be true. Any interpretation that takes \p{=} to mean identity must make all sentences 
+that fit the following templates true:
+\begin{argument}
+
+ \aitem \plshp{=xx}
+
+ \aitem \plshp{CK=xy/fx/fy}
+
+\end{argument}
+
+That is, everything is identical with itself, and if \p{x} and \p{y} are 
+identical, whatever is true of \p{x} is true of \p{y} (the latter is known as 
+the indiscernibility of identicals, or Leibniz's Law).
+
+Sentences that are declared to be true are called \emph{axioms}. So the above 
+templates give us an infinite number of axioms. We want to make sure that our 
+system can make use of these axioms. We can accomplish that by adding the 
+following inference rule to our system:
+
+\begin{infrule}
+\item[Axiom] If \p{\alpha} is an axiom, infer \p{\seq{}{\alpha}}.
+\end{infrule}
+
+
+Notice that the sequents that this rule allows us to infer have empty datums.  
+However, the succedents of these sequents are not truths of logic. For instance, 
+we can infer \p{\seq{}{\ident{\kappa}{\kappa}}} but \p{\ident{\kappa}{\kappa}} 
+is true only under a particular interpretation of the \p{=} sign. 
+
+The characterization of an axiom as a sentence declared to be true without proof 
+may make it sound like an assumption. But the role of an axiom is importantly 
+different from an assumption.  In our proof system, an assumption is introduced 
+as \p{\seq{s}{s}} which is a correct sequent under any and all interpretations.  
+So in introducing an assumption, we say nothing about which interpretation we 
+want to use. An axiom is different. Making an axiom true---or, equivalently, 
+ensuring that Axiom does not lead us astray by enabling us to infer a 
+falsehood---requires that we use some interpretations but not others as can be 
+seen for the need to interpret \p{=} as identity given the axioms governing
+\p{=}. In the case identity, it is trivial to ensure \p{=} means identity no 
+matter what the domain of discourse is: the extension of \p{=} is simply the set 
+of all ordered pairs \p{<\mathfrak m, \mathfrak m>} where \p{\mathfrak m} is a 
+member of the domain.  Because of this, the axioms governing \p{=} are typically 
+added to the proof system to yield what is known as predicate logic \emph{with 
+identity}.
+
+But we can also add axioms that impose much more serious constraints in the 
+permissible interpretations.  Here is an intuitive example: we might declare 
+that the following as axioms:
+
+\begin{enumerate}
+ \item \plshp{UxXyKTyxN=xy}
+ \item \plshp{UxUyUzCKTxyTyzTxz}
+ \item \plshp{UxUyCTxyNTyx}
+ \end{enumerate}
+ 
+Tthese three combined require an infinite domain of discourse---e.g., if \p{Tab} 
+means that \p{a} is taller than \p{b}, then those axioms require the existence 
+of ever taller items in the domain. 
+
+Axioms like the ones just discussed play an important role in mathematics.  Such 
+axioms are used to define the subject matter by imposing requirements that can 
+only be met by some domains but not others.  For instance,
+Euclidean geometry (the kind you learned pre-college) is built on five axioms 
+that together determine the kinds of geometric figures that Euclidean geometry 
+deals with. Given those axioms, Euclidean geometry is not talking about figures 
+drawn on the surface of a sphere. If you change an axiom you get a different 
+subject matter. In particular, changing the so-called parallel postulate results 
+in various interesting non-Euclidean geometries.
+An axiom therefore imposes restrictions on the interpretations in ways that 
+assumptions cannot.
+
+When formalizing arguments as derivations, I resisted treating ordinary premises 
+as assumptions. Here is one way of thinking about premises. A premise takes the 
+form \p{\seq{\Gamma}{p}} and, if \p{\Gamma} is non-empty, that's the same as 
+\p{\seq{}{\widehat{\Gamma}\limplies p}} where \p{\widehat{\Gamma}} is the 
+conjunction of all the sentences of \p{\Gamma}. So we can think of the 
+introduction of a premise as the introduction of an axiom. Unlike an assumption, 
+a premise makes a substantive claim about the world and we are to choose an 
+interpretation for our language that makes that claim true.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

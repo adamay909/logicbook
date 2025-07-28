@@ -1,0 +1,2119 @@
+
+
+\section{Arguments}\label{sec:derivation intro 2}
+
+In the previous chapter we defined a formal language. Consider native speakers 
+of such a formal language \lL{}. They can say many things: not just the atomic 
+sentences, but an infinite variety of compound sentences using the logical 
+connectives \p{\lnot}, \p{\land}, \p{\lor}, and \p{\limplies}. Not only are they 
+capable of formulating an infinite variety of sentences, they are also capable 
+of saying sentences with a large variety of different truth conditions, i.e., 
+meanings.  Just how large that variety is depends on the number of atomic 
+sentences, of course. 
+
+But we do more than just say things using language. One very important use of 
+language is the presentation of \emph{arguments}. Consider:
+
+\begin{Example}\label{ex:econo-1}
+
+More investment [in indoor ventilation] would be money well spent. Better indoor 
+air boosts academic performance---maths and reading scores go up. Office-workers 
+benefit, too. Researchers have found the cognitive scores of people in 
+well-ventilated offices are 61\% higher than those of workers in conventional 
+office set-ups. (from \emph{The Economist},  May 29, 2021)
+
+\end{Example}
+
+This little snippet consists of four sentences. But it is not simply an 
+enumeration of four facts. Rather, it is trying to persuade the reader that 
+investment in indoor ventilation would be money well spent. And it attempts that 
+not by bluntly asserting the claim but by providing reasons in support of the 
+claim that investing in indoor ventilation makes sense. In short, it is an 
+argument. 
+
+The claim that an argument is meant to support is called the \emph{conclusion}.  
+A claim adduced in support of the conclusion is called a \emph{premise}.  
+Arguments often have multiple premises. In the above example, the conclusion is 
+that investment in indoor ventilation is money well spent. And there are two 
+stated premises: (a) better indoor air boosts academic performance; and (b)
+ researchers have found the cognitive scores of people in well-ventilated 
+ offices are 61\% higher than those of workers in conventional office set-ups.
+
+Our main topic of interest in this chapter is arguments. We will be looking at 
+highly formalized arguments, but before doing that let me discuss natural 
+language arguments a bit more. It will help understanding the virtues of the 
+formalizations we will be studying.
+
+Consider:
+
+\begin{Example}\label{ex:econo-2}
+
+
+From April, British prisons will have to screen all inmates who have experienced 
+domestic violence for brain injuries. Such screening should be extended to all 
+prisoners. It would enable staff to identify those whose brains have been 
+damaged and offer them appropriate support. (from \emph{The Economist}, March  
+27, 2021)
+
+\end{Example}
+
+
+The conclusion of this argument is clear enough: all prisoners should be 
+screened for brain injuries. But how is that conclusion supported? Apart from 
+the conclusion, the snippet states two facts:
+
+\begin{itemize}
+ \item[(a)] From April British prisons have to screen all inmates who have 
+  experienced domestic violence for brain injuries.
+ \item[(b)] Screening for brain injuries enables staff to identify those whose 
+  brains have been damaged and offer them appropriate support.
+\end{itemize}
+
+Does (a) support the conclusion? Upon a little reflection, it seems not: even if 
+British prisons did not screen any inmates, that would not weaken the case for 
+screening them for brain injuries. So (a) is in fact not a premise. So the 
+argument as stated has only one premise: (b). But does (b) support the 
+conclusion?  Taking (b) to support the conclusion requires accepting that even 
+criminals deserve support for dealing with the effects of brain injuries. You 
+may find that obvious, but others find that highly controversial. The point: the 
+snippet above contains a claim that is no part of the argument, and the argument 
+depends on an unstated premise about what criminals deserve. And, if you think 
+about it, the first example (Example~\ref{ex:econo-1}) also makes some unstated 
+assumptions about what is worthy of spending money on. This is a common feature 
+of arguments stated in natural languages.  We need to be careful to make sure we 
+do not miss hidden premises, and be careful not to mistake some extraneous 
+information as part of the argument.
+
+
+\section{Diagrammatic Representations of Arguments in Tree Form}
+\label{sec:argument tree}
+
+An argument presents certain connections among thoughts. In particular, they 
+present how some thoughts support other thoughts. You probably are familiar with 
+things like mind maps as ways of presenting connections between ideas.  
+Arguments can be presented in a similar fashion as diagrams.  For instance, 
+Consider a simplified version of the argument in Example~\ref{ex:econo-1}:
+
+\begin{Example}\label{ex:econo-1-simple}
+
+More investment [in indoor ventilation] would be money well spent. Better indoor 
+air boosts academic performance.
+
+\end{Example}
+
+We can represent this in the following way:
+
+\vskip 1em
+
+\begin{center}
+\begin{forest}{for tree = {grow=north,s sep=1cm, edge = <-}}
+ [More investment in indoor ventilation is money well spent.
+ [Better indoor ventilation\\ boosts academic performance., align=center]
+ ]
+\end{forest}
+\end{center}
+
+\vskip 1em
+
+The arrow represents the direction of support, so the idea expressed at the top 
+of the diagram supports the idea expressed at the bottom. But, as already 
+pointed out, it seems that there is another thought that is playing a role in 
+supporting the conclusion. We can capture that:
+
+\vskip 1em
+
+\begin{center}
+\begin{forest}{for tree = {grow=north,s sep=1cm, edge = <-}}
+ [More investment in indoor ventilation is money well spent.
+ [If better indoor ventilation\\ boosts academic performance{,}\\ then more 
+ investment in indoor\\ ventilation is money well spent., align=center]
+ [Better indoor ventilation\\ boosts academic performance., align=center]
+ ]
+\end{forest}
+\end{center}
+
+\vskip 1em
+
+It is the two thoughts at the top taken together that support the conclusion at 
+the bottom. The above is a very common pattern of argument known as \emph{modus 
+ponens}.  We can make the pattern clear by replacing the sentences with letters.  
+Let \p{A} stand for \pp{Better indoor ventilation boosts academic performance} 
+and let \p{B} stand for \pp{more investment is money well spent}. Then the above 
+can be represented as:
+
+
+\begin{center}
+\begin{forest}{for tree = {grow=north, s sep=1cm, edge=<-}}
+  [\p{B}
+  [if \p{A}{,} then \p{B}]
+  [\p{A}]
+  ]
+ \end{forest}
+ \captionof{figure}{Modus Ponens}
+\end{center}
+
+The sentences at the top are the premises, the sentence at the bottom the 
+conclusion. If you think about the meaning of the conditional, it is clear that 
+if the two premises are true, the conclusion must be, too. So the premises do 
+provide good support for the conclusion, and it does not matter what \p{A} and 
+\p{B} stand for.
+
+We can also have more complex arguments. For instance, if you are asked why we 
+should accept that better indoor ventilation boosts academic performance, we 
+might answer that test scores go up when ventilation is improved, and that if 
+scores go up, then that shows that better indoor ventilation boosts academic 
+performance. We could represent the augmented argument  by the following diagram 
+which has modus ponens occurring twice---once to get to \p{A}, and then to get 
+to \p{B}: 
+
+\vskip 1em
+\begin{center}
+ 
+ \begin{forest}{for tree = {grow=north, s sep=1cm, edge=<-}}
+  [\p{B}
+  [if \p{A}{,} then \p{B}]
+  [\p{A}
+  [if \p{C}{,} then \p{A}]
+  [\p{C}]
+  ]
+  ]
+ \end{forest}
+ \captionof{figure}{Complex Argument}
+\end{center}
+\vskip 1em
+
+More complicated arguments will be represented by larger diagrams. Arguments 
+might be thought of as having structures akin to river systems: smaller streams 
+flow together to form ever larger systems until they reach the conclusion.  
+Investigating various structures of arguments reveals a few very common patterns 
+of `confluences'. The above patterns which combines a conditional and the 
+antecedent of the conditional is among the most common patterns.  Let me discuss 
+some more common patterns.
+
+Consider the following piece of reasoning:
+
+\begin{Example}\label{ex:fed}
+
+ The Central Bank will stop raising interest rates only if inflation has been 
+ brought under control. But inflation has not been brought under control. So the 
+ Central Bank will not stop raising interest rates.
+
+\end{Example}
+
+This has the following structure known as \emph{modus tollens} (recall that 
+\pp{if A, then P} is another way of saying \pp{A only if B}):
+
+\vskip 1em
+\begin{center}
+ \begin{forest}{for tree = {grow=north, s sep=1cm}}
+  [not \p{A}
+  [not \p{B}]
+  [if \p{A}{,} then \p{B}]
+  ]
+ \end{forest}
+ \captionof{figure}{Modus Tollens}
+\end{center}
+\vskip 1em
+
+We omit the arrow heads: in such argument diagrams, the support is always from 
+top to bottom.
+
+Here is an example of another common pattern.  Socrates---often regarded as the 
+founder of Western philosophy---argued that death is a good thing in the 
+following way: death is one of two things; either it is like an eternal deep 
+sleep which is a good thing; or death means moving to another world where you 
+can spend an eternity talking to such interesting people like Homer and the 
+ancient Greek heroes, which is a good thing; so either way death is a good thing; 
+thus, death is a good thing.
+
+This is known as an \emph{argument by cases}. Here is a way of representing this:
+
+\vskip 1em
+\begin{center}
+ \begin{forest}{for tree = {grow=north, s sep=1cm}}
+  [\p{C}
+  [if \p{B}{,} then \p{C}]
+  [if \p{A}{,} then \p{C}]
+  [\p{A} or \p{B}]
+  ]
+\end{forest}
+\captionof{figure}{Argument By Cases}
+\end{center}
+\vskip 1em
+
+Here we have a confluence of three claims.
+
+Here is one more example of a common pattern. Consider a well-known argument 
+that you cannot go back in time and kill your biological mother before you were 
+even conceived:
+
+\begin{Example}
+
+You plan to go back in time and kill your mother before you were even conceived.  
+Suppose your plan succeeds. In that case, your mother does not conceive you, and 
+you do not exist. On the other hand, for your plan to succeed, you must execute 
+the plan, and that requires you to exist.  So if your plan succeeds, you do and 
+do not exist, which is a contradiction. Thus, your plan cannot succeed.
+
+\end{Example}
+
+This is an instance of what is known as \emph{reductio ad absurdum} or argument 
+by contradiction. This pattern can be represented as:
+
+\vskip 1em
+\begin{center}
+ \begin{forest}{for tree = {grow=north, s sep=1cm}}
+  [not \p{A}
+  [if \p{A}{,} then not \p{B}]
+  [if \p{A}{,} then \p{B}]
+  ]
+\end{forest}
+\captionof{figure}{Reductio ad Absurdum}
+\end{center}
+\vskip 1em
+
+
+
+\section{Arguments in Standard Form}\label{sec:standardForm}
+
+Diagrammatic representations of arguments can be very helpful for understanding 
+the structure of larger arguments, but they take a lot of space and are 
+difficult to produce without the help of technology. A far more common way of 
+representing an argument is in the form of a list of sentences. A simple list of 
+sentences is a one-dimensional structure and cannot give us all the information 
+that the two-dimensional diagrams in the previous section can represent. To make 
+up for this shortcoming, we will add \emph{annotations} to each line that gives 
+us extra information about how the sentences connect. For instance, Modus Ponens 
+is represented as:
+
+\begin{argument*}
+
+ \aitem If A, then B\texpl{premise}
+ 
+ \aitem A\texpl{premise}
+
+ \aitem B\texpl{1,2, MP}
+
+\end{argument*}
+
+The annotations at the end of each line give us enough information to 
+reconstruct the diagrams of the previous section. The keyword `premise' in the 
+annotations of lines 1 and 2 tells us that they are not represented as supported 
+by further nodes up the diagram. The `1,2' in the annotation of line 3 tells us 
+that the sentence on line 3 is supported by the sentences on lines 1 and 2.  And 
+this is enough to enable us to reconstruct the argument tree: 
+
+\begin{center}
+\begin{forest}{for tree = {grow=north, s sep=1cm}}
+  [\p{B}
+  [\p{A}]
+  [if \p{A}{,} then \p{B}]
+  ]
+ \end{forest}
+ \captionof{figure}{Modus Ponens}
+\end{center}
+
+The `MP'  in the annotation of line 3. names the pattern Modus Ponens.  As you 
+can see, we only need the references to the supporting lines in the annotation 
+to reconstruct the argument diagram, but it helps to explicitly name the pattern 
+as it helps with checking whether the conclusion really is supported by the 
+premises.
+
+From here on, the normal way of presenting arguments will be in such list form.  
+While I will occasionally display an argument in tree form when it helps making 
+the structure of an argument more vivid, you do not have to produce such 
+diagrams yourself. 
+
+Apart from making sure that the list contains enough information to reconstruct 
+the tree, we also require that an argument in \emph{standardized form}  be such 
+that a given line cannot be supported by lines below it. So the direction of 
+support is strictly from top to bottom. That helps with comprehension of the 
+argument presented. 
+
+When an argument is such that the conclusion cannot fail to be true if all the 
+premises are true, it is said to be \emph{valid}. One of the important tasks of 
+logic is figuring out which argument patterns are valid. 
+
+Let me go through the patterns of arguments discussed in the previous section.  
+They are all known to be valid. You can check that they are valid  by checking  
+truth tables: could all the premises be true without the conclusion being true?
+
+
+\subsection{Modus Ponens (MP)}
+
+I already have shown how an instance of the use of modus ponens works:
+
+\begin{argument*}
+
+ \aitem If A, then B\texpl{premise}
+ 
+ \aitem A\texpl{premise}
+
+ \aitem B\texpl{1,2, MP}
+
+\end{argument*}
+
+Any argument with a premise P and conclusion C can be turned into a logically 
+valid argument by adding the premise \pp{if P, then C}. For instance, suppose 
+someone reasons, ``Donald is rich; therefore, he is fit to be the president of a 
+country.'' We can turn this into a logically valid argument as follows:
+
+\begin{argumentNamed*}[Argument 1]
+\aitem If Donald is rich, then Donald is fit to be the president of a 
+country.~~~\texpl{premise}
+
+\aitem Donald is rich. \texpl{premise}
+
+\aitem Donald is fit to be the president of a country. \texpl{1,2, MP}
+
+\end{argumentNamed*}
+
+While this is a valid argument---\emph{if} both premises are true, then the 
+conclusion is also true---this need not give us a particularly strong reason to 
+accept the conclusion: putting it cautiously, some people might think that 
+recent history decisively shows that the first premise is false. A benefit of 
+presenting arguments in standardized form is that it enables us to see what all 
+the needed premises are which in turn allows us to see which premises might be 
+suspect.
+
+\subsection{Modus Tollens (MT)}
+
+Here is Modus Tollens in standard form:
+
+\begin{argument*}
+
+ \aitem If A, then B. \texpl{premise}
+
+ \aitem Not B.\texpl{premise}
+
+ \aitem Not A. \texpl{1,2, MT}
+
+\end{argument*}
+
+Here is an example using \ref{ex:fed}:
+
+\begin{argumentNamed*}[Argument 2]
+
+ \aitem If the Central Bank will stop raising interests rates, then inflation 
+ has been brought under control.\texpl{premise}
+ 
+ \aitem Inflation has not been brought under control.\texpl{premise}
+
+\aitem The Central Bank will not stop raising interest rates.  \texpl{1,
+ 2, MT}
+
+\end{argumentNamed*}
+
+\subsection{Argument By Cases (AC)}
+
+Here is the argument by cases in standard form:
+
+\begin{argument*}
+
+ \aitem A or B\texpl{premise}
+ 
+ \aitem If A, then C\texpl{premise}
+
+ \aitem If B, then C\texpl{premise}
+
+ \aitem C\texpl{1,2,3, AC}
+
+\end{argument*}
+
+If all premises are true, then at least one of A and B is true (by premise 1).  
+If A is true, then C is true (premise 2). If B is true, then C is true (premise 
+3). So C is true given all three premises are true. Thus, this argument form is 
+valid. 
+
+Of course, just because such an argument is valid does not mean that the 
+argument is a good one. For instance, you might wonder whether Socrates is right 
+that death must be one of the two things he lists; and even he is right about 
+that, is it so obvious that death would be a good thing on both options---a day 
+talking to Homer might be super interesting, but a whole eternity talking to him? 
+
+\subsection{Reductio ad Absurdum (RAA)}
+
+Here is Reductio ad Absurdum:
+
+\begin{argument*}
+
+ \aitem If A, then B \texpl{premise}
+
+ \aitem If A, then not B \texpl{premise}
+
+ \aitem Not A\texpl{1,2, RAA}
+
+\end{argument*}
+
+In the example about time travel we discussed earlier, let A be `your plan 
+succeeds' and B be `you exist' which gives us:
+
+\begin{argumentNamed*}[Argument 3]
+
+ \aitem If your plan succeeds, then you exist.\texpl{premise}
+
+ \aitem If your plan succeeds, then you are do not exist.\texpl{premise}
+
+ \aitem Your plan does not succeed.\texpl{1,2, RAA}
+
+\end{argumentNamed*}
+
+
+\subsection{Extracting arguments from natural language texts}
+
+Extracting arguments from natural language texts and putting them in 
+standardized form takes some practice. Let me start with an example that 
+illustrate some of the tricky aspects.
+
+Julius Caesar was assassinated by a group of Roman senators led by Brutus. The 
+conspirators accused Caesar of harboring ambitions of becoming the king of Rome 
+(Rome was a republic at the time). In Shakespeare's fictionalized version of the 
+events in the play \emph{Julius Caesar}, Marc Antony---a prominent prot\'eg\'e 
+of Caesar---gives a speech at Caesar's funeral that turns the crowd against 
+Brutus.  Here is a snippet from that speech:
+
+\begin{quote}
+You all did see that on the Lupercal\\
+I thrice presented him a kingly crown,\\
+Which he did thrice refuse: was this ambition?\\
+Yet Brutus says he was ambitious;\\
+And, sure, he is an honourable man.
+\end{quote}
+
+Notice that Marc Antony's message is that Caesar was \emph{not} ambitious, and 
+that Brutus is \emph{not} honourable, neither of which is said explicitly: the 
+former is indicated by a rhetorical question, and the latter is indicated by an 
+ironic assertion of the opposite. We can represent the case Marc Antony is 
+making as two arguments.  Here is the first part:
+ \begin{argument*}
+
+  \aitem If Caesar refused a kingly crown, then he was not 
+  ambitious.\texpl{premise}
+
+  \aitem Caesar refused a kingly crown.\texpl{premise}
+
+  \aitem Caesar was not ambitious.\texpl{1,2, MP}
+
+ \end{argument*}
+
+ And here is the second part:
+
+ \begin{argument*}
+
+ \aitem If Brutus says Caesar was ambitious, then Brutus is not honourable.  
+ 
+ \texpl{premise}
+
+ \aitem Brutus says that Caesar was ambitious. \texpl{premise}
+
+ \aitem Brutus is not honourable. \texpl{1,2, MP}
+
+\end{argument*}
+
+These arguments use Modus Ponens. We could also represent the arguments using 
+Modus Tollens:
+
+ \begin{argument*}
+
+  \aitem If Caesar was ambitious, then he did not refuse a kingly 
+  crown.
+
+  \texpl{premise}
+
+  \aitem Caesar refused a kingly crown.\texpl{premise}
+
+  \aitem Caesar was not ambitious.\texpl{1,2, MT}
+
+ \end{argument*}
+
+ And 
+
+ \begin{argument*}
+
+ \aitem If Brutus is honorable, then Brutus does not say Caesar was 
+ ambitious.
+
+ \texpl{premise}
+
+ \aitem Brutus says that Caesar was ambitious. \texpl{premise}
+
+ \aitem Brutus is not honourable. \texpl{1,2, MT}
+
+\end{argument*}
+
+It is normal for there to be multiple ways of representing an argument stated in 
+natural language. Which standardized version you choose is mostly a matter of 
+taste and convenience.
+
+You might feel that the standardized arguments using Modus Tollens don't sound 
+like good English. For instance, it might sound more natural to say `if Caesar 
+was ambitious, he wouldn't have refused a kingly crown', instead of the 
+formulation given above. We will ignore such niceties.
+
+
+\section{Shortcomings of Standardized Form}\label{sec:sf-shortcomings}
+
+Presenting arguments in standardized form helps a great deal in making sure that 
+an argument is valid. But it still has some weaknesses---or, rather, the 
+diagrammatic representation we had earlier has weaknesses. To understand the 
+weaknesses, consider the example we used to illustrate Reductio ad Absurdum 
+earlier about your plan to kill your mother before you were even conceived. One 
+way of putting the point is that if your plan succeeds, then you are unable to 
+execute the plan.  We can try to present the argument for this in standard form:
+
+\begin{argument*}
+
+ \aitem Your plan succeeds. \texpl{assumption}
+
+ \aitem If your plan succeeds, then you don't exist. \texpl{premise}
+
+ \aitem You don't exist. \texpl{1,2,MP}
+
+ \aitem If you don't exist, then you are unable to execute the 
+ plan.\texpl{premise}
+
+ \aitem You are unable to execute the plan.\texpl{3,4,MP}
+ 
+ \aitem If your plan succeeds, then you are unable to execute the plan.
+ \texpl{??}
+
+\end{argument*}
+
+
+Notice that line 1 is explained as an \emph{assumption} rather than a 
+\emph{premise}.  An assumption is just that. Unlike a premise that you can call 
+into question by asking what reasons there are for accepting it, an assumption 
+requires no such reasons to accept it. We can assume whatever we please to see 
+what follows from that assumption. Sometimes, such assumptions bear useful fruit 
+(often not).  Many formal presentations of arguments do not distinguish between 
+premises and assumptions and instead treat all premises as assumptions.  We will 
+not do that here. Assumptions are claims that we are free to introduce and 
+reject. For instance, in the argument just discussed, the assumption that your 
+plan succeeds will ultimately be rejected. Premises are not like that.  They are 
+given as true and are, in the context of the argument, not up for rejection. So 
+when we mark something as a premise, we mark it as a claim to be taken for 
+granted---and in doing so, we are also vouching that there is a good reason to  
+take the premise to be true; that reason might be explicit in the surrounding 
+context, but even if it is not, it is something that needs to be produced upon 
+request.
+
+Now to the more important point for our current purposes. What should go into 
+the annotation for line 6? It is tempting to think of the structure of the 
+argument as given by the following tree (line number are kept):
+
+
+\begin{center}
+\resizebox{\txw}{!}{
+ \begin{forest}{for tree = {grow=north, s sep=1cm}}
+[6. If your plan succeeds\\ then you are unable to execute the plan, 
+align=center
+[5. You are unable to execute the plan, align=center
+[4. If you do not exist\\ then you are unable to execute the plan, align=center]
+[3. You do not exit
+[2. If your plan succeeds\\ then you do not exist, align=center]
+[1. Your plan succeeds]
+]]]
+\end{forest}
+}
+\captionof{figure}{Attempt 1}
+\end{center}
+
+But this is somewhat misleading because it suggests that it does not matter how 
+we get to \pp{you are unable to execute the plan} even though it clearly does 
+matter: the antecedent of the conditional in the conclusion is taken from the 
+assumption made at the start which we need to get to 5.  What we are missing is 
+a clear way of indicating how a given node might depend on how previous nodes 
+are supported. 
+
+Let's think about this a little more. Think about what the tree above is telling 
+us up to \pp{you are unable to execute the plan}. The branch on the left tells 
+us that \pp{you do not exist} (the node numbered 3) follows from, or is 
+supported  by,
+\pp{ your plan succeeds} and \pp{if your plan succeeds, then you do not exist}.
+  Let's put this as:
+
+\begin{itemize}
+
+ \item Given \pp{your plan succeeds} and \pp{if your plan succeeds, then you do 
+  not exist}: \pp{you do not exist}.
+
+\end{itemize}
+
+The tree also tells us (inspecting the node numbered 5):
+
+\begin{itemize}
+
+ \item Given \pp{you do not exist} and \pp{if you do not exist, then you are 
+  unable to execute the plan}: \pp{you are unable to execute the plan}.
+
+\end{itemize}
+
+Comparing these two point, we get:
+
+\begin{itemize}
+
+ \item Given \pp{your plan succeeds} and \pp{if your plan succeeds, then you do 
+  not exist} and \pp{if you do not exist, then you are unable to execute the 
+  plan}:  \pp{you are unable to execute the plan}.
+
+\end{itemize}
+
+And from this we can conclude:
+
+\begin{itemize}
+
+ \item Given \pp{if your plan succeeds, then you do not exist} and \pp{if you do 
+  not exist, then you are unable to execute the plan}: \pp{if your plan succeeds, 
+  then you are unable to execute the plan}.
+
+\end{itemize}
+
+Let \p{S} be \pp{your plan succeeds}, \p{E} be \pp{you exist}, and \p{P} be 
+\pp{you are able to execute the plan}. We can get a better representation of 
+what is going on in our reasoning by the following tree:
+
+\begin{center}
+ \resizebox{\txw}{!}{
+ \begin{forest}{for tree = {grow=north, s sep=1cm, l sep=1cm}}
+  [6'. Given \pp{if S{,} then not-E} and \pp{if not-E{,} then not-P}{:} \pp{if S{,} then not-P} 
+  , align=center
+  [5'. Given \pp{S} and \pp{if S{,} then not-E} and \pp{if not-E{,} then not-P}{:} \pp{not-P} , 
+  align=center
+  [4'. If \pp{not-E}{,} then \pp{not-P}, align=center]
+  [3'. Given \pp{S} and \pp{if S{,} then not-E}{:} \pp{not-E}, align=center
+  [2'. If \pp{S}{,} then \pp{not-E}, align=center]
+  [1'. \pp{S}]
+]]]
+\end{forest}
+}
+\captionof{figure}{Attempt 2}
+\end{center}
+
+Here the nodes below the premises/assumptions indicate explicitly what is needed 
+to support what. You might think this is redundant since the lines connecting 
+the nodes already indicate what supports what.  But notice that this fixes the 
+earlier problem of not making clear that 6 depends on line 5's following in the 
+way it does from the premises: if 5' said \pp{given \p{D}, it follows that 
+\p{not-P}}, 6' would not follow. So the extra information we are adding to the 
+nodes is not always redundant.
+
+In list form,  the argument can be represented as:
+
+\begin{argument*}
+
+\item[1'.]  \pp{S}\texpl{assumption}
+\item[2'.] If \pp{S}{,} then \pp{not-E}\texpl{premise}
+\item[3'.] Given \pp{S} and \pp{if S{,} then not-E}{:} \pp{not-E}\texpl{1,2}
+\item[4'.] If \pp{not-E}{,} then \pp{not-P}\texpl{premise}
+\item[5'.] Given \pp{S} and \pp{if S{,} then not-E} and \pp{if not-E{,} then not-P}{:} \pp{not-P} 
+ \texpl{3,4}
+\item[6'.] Given \pp{if S{,} then not-E} and \pp{if not-E{,} then not-P}{:} 
+ \pp{if S{,} then not-P}\texpl{5}
+
+\end{argument*}
+
+
+Notice that this does not have any inference patterns in the annotations.  That 
+is because the nodes look differently from before so that we would have to 
+reformulate our inference patterns to make them usable with this style of 
+regimenting arguments. But we will not bother with that as we will move on to a 
+much more highly formalized way of presenting arguments.
+
+
+
+
+
+\section{Keeping Track of Support Relations}\label{sec:supportRelations}
+
+
+From here on, we will represent sentences using our formal language \lL{} 
+developed earlier, unless there is reason to revert to natural language 
+sentences. This will enable us to be concise, precise, and some things we want 
+to show about arguments will be easier to handle. 
+
+Toward the end of the last section, we represented arguments using lines like 
+`given ...~:~...'. We will shorten this using a  device known as  a  
+\emph{sequent}. A sequent looks thus:
+
+\begin{center}
+
+ \p{\seq{s_1, s_2, ..., s_n}{c}}
+
+\end{center}
+
+The \lproves~symbol is known as the \emph{turnstile}.  A  sequent consists of a 
+turnstile symbol flanked by a list of sentences on the left and a single 
+sentence on the right hand side. You can read \p{\seq{s_1, s_2, ..., s_n}
+{c}} as `given \p{s_1, s_2, ..., s_n}, \p{c} follows' or `\p{s_1, s_2, ..., s_n} 
+supports \p{c}'.  We will call the left side the \emph{datum} (the given), and 
+the right side the \emph{succedent}. So a sequent tells us that its datum 
+supports the succedent.  We will have to sharpen our understanding of a sequent 
+in due course, but this suffices for now. Let me just note that the datum is 
+allowed to be an empty list, and that there must be a single sentence on the 
+succedent side.
+
+You might have noticed that the premises and assumption in the last section did 
+not take the `given...~ :~ ...' form. In our formal presentation of arguments, 
+we want all lines to take a uniform form. That is, we want each line to be a 
+sequent. How can we do that? Let's think about premises and assumptions one by 
+one.
+
+A premise is a claim that is taken to have some real reason to accept it.  So in 
+principle, we can say what it is that supports a premise. But in practice, since 
+we cannot say everything in a finite amount of time and space, we simply ask the 
+audience to accept a claim as in fact supported even if the grounds are 
+unspecified. We can mimic this by using place holders.  We will use upper case 
+Greek letters to stand for a (possibly empty) list of sentences.  So 
+
+\begin{center}
+
+ \p{\seq{\Gamma}{c}}
+
+\end{center}
+
+says that given all the sentences in \p{\Gamma}, \p{c} follows (\p{ \Gamma } is 
+upper case Gamma).  E.g., we can represent the argument in Example~       
+\ref{ex:econo-1-simple} like this:  
+
+\begin{argument}
+
+\aitem \sqAs{\Gamma}{A}{premise}
+
+\aitem \sqAs{\Delta}{A \limplies B}{premise}
+
+\aitem \sqAs{\Gamma,\Delta}{B}{1,2}
+
+\end{argument}
+
+(\p{\Delta} is Greek uppercase delta.)
+
+What does this representation of the argument say? It tells us that given some 
+consideration \p{\Gamma}, \p{A} follows; given some consideration \p{\Delta},  
+\p{A\limplies B} follows. We are not told what those considerations are, so the 
+Greek letters are just placeholders to be filled in upon request. But those 
+considerations support \p{A} and \p{A\limplies B}.  And the last line tells us 
+that the considerations supporting \p{A} and \p{A\limplies B} taken together 
+support \p{B}.  Notice that it really must be \p{\Gamma} and \p{\Delta} taken 
+together that supports \p{B}.  \p{\Gamma} alone wouldn't support \p{B} because 
+the considerations in favor of \p{A} need not be considerations in favor of 
+\p{A\limplies B}; and the considerations in favor of \p{A\limplies B} need not 
+be considerations in favor of \p{A}. We need both the considerations in favor of 
+\p{A} and the considerations in favor of \p{A \limplies B} to get support for 
+\p{B} and that is what line 3 tells us.
+(The spacing around the turnstile and the small font size on the datum side is 
+for visual effect only. You don't need to replicate that when you write them by 
+hand.)
+
+What about assumptions? How should we represent an assumption in sequent form?  
+An assumption is not supported by any evidence. You might therefore be tempted 
+to use a sequent with an empty datum since wouldn't that say that nothing 
+supports the succedent? But that sort of sequent will be reserved for something 
+else (you will see the wisdom of this as we progress).  We will represent an 
+assumption using a sequent of the following form:
+
+\begin{center}
+ \p{\seq{s}{s}}
+\end{center}
+
+This says that given \p{s}, \p{s} follows.  And that is true. But it also fails 
+to give us any reason to accept \p{s} since no claim can support itself. And 
+this is exactly what an assumption is like: an assumption gives us no reason to 
+accept that the assumed sentence is actually true. Now that we have a way of 
+representing assumptions, we can represent the argument we discussed at length 
+near the end of the previous section:
+
+\begin{argument}
+
+ \aitem \sqAs{S}{S}{assumption}
+
+ \aitem \sqAs{\Gamma}{S\limplies \lnot E}{premise}
+
+ \aitem \sqAs{\Gamma,S}{\lnot E}{4,5}
+
+ \aitem \sqAs{\Delta}{\lnot E\limplies \lnot P}{premise}
+
+ \aitem \sqAs{\Gamma,\Delta,S}{\lnot P}{6,7}
+
+ \aitem \sqAs{\Gamma,\Delta}{S\limplies \lnot P}{8}
+
+\end{argument}
+
+Notice that \p{S} does not appear on the datum side of line 9. And that is 
+important: whatever considerations there are in support of the succedents of 
+lines 5 and 7, those also suffice to support the succedent of line 9:    
+\p{S\limplies \lnot P}. Whether or not an assumption is needed to support the 
+succedent of a given sequent matters. For instance, consider the following 
+argument in the initial standard form we used earlier:
+
+\begin{argument}
+ \aitem If the Moon is made of cheese, then the Moon is edible\texpl{premise}
+ \aitem The Moon is made of cheese\texpl{assumption}
+ \aitem The Moon is edible\texpl{10,11}
+\end{argument}
+
+Just a little bit of reflection shows that no reason has been given to accept 
+that the Moon is edible: line 11 is labeled an assumption and that means no 
+pretense is made that there is any reason to accept that the Moon is made of 
+cheese, but we would need that to accept the conclusion as true. Merely 
+inspecting line 12 does not reveal that. In sequent form, however, the flaw is 
+very apparent, since the argument above has the form:
+
+\begin{argument}
+ \aitem \sqAs{\Gamma}{A\limplies B}{premise}
+  \aitem \sqAs{A}{A}{assumption}
+  \aitem \sqAs{\Gamma,A}{B}{13,14}
+ \end{argument}
+
+ \p{A} shows up in the datum of the concluding line. Because we use Greek upper 
+ case letters for what supports premises, if anything other than Greek upper 
+ case letters appear in the datum of the conclusion, we know that the conclusion 
+ does not follow from the premises alone. So in line 15, the succedent \p{B} 
+ does not follow from what supports the premise on line 13. (Some Greek upper 
+ case letters case look like Roman upper case letters. Don't use them as they 
+ are likely to cause confusion.)
+
+ You might think that whenever an argument makes use of an assumption, the 
+ conclusion will be flawed in that it has no actual support. That is not so: 
+ look at the argument from line 4 to 9 above. It makes an assumption on line 4, 
+ but the datum of the assumption does not show up in the datum of line 9.  All 
+ that you need to support the succedent of line 9 are whatever considerations 
+ support the succedents of the premises (lines 5 and 7).  Logicians say that the 
+ assumption on line 4 has been \emph{discharged} (like soldiers being 
+ discharged---their services are no longer required). The sequent notation of 
+ arguments can make explicit this feature of the use of assumptions.
+
+There is one important point that I should mention here. The turnstile symbol 
+\p{\lproves} is not a part of \lL{}.  And a sequent is also not a sentence of 
+\lL[]. It is, in fact, a sentence of our meta-language that expresses a fact 
+about some sentences of \lL[], viz. that some sentence follows from some other 
+sentences.  
+
+
+
+
+
+
+
+
+
+
+\section{Inference Rules}\label{sec:inference-rules}
+
+An argument is a series of sequents. When we draw a conclusion in an argument, 
+what we do is start with a series of sequents and then add another sequent on 
+the basis of some sequents already present. Clearly, not everything goes.  Some 
+ways of extending the series of sequents are acceptable, others not. That is, 
+some arguments work, others don't. But so far, we do not have an easy way of 
+checking whether a proposed argument actually works. To facilitate checking 
+arguments, we will introduce a number of \emph{inference rules} that govern the 
+construction of formal arguments. Only arguments that are in accordance with 
+these inference rules are acceptable.
+
+
+For terminological clarity, we will call formalized arguments   
+\emph{derivations}. And we stipulate that a derivation consists of a finite 
+number of sequents---so if Socrates were to have an argument with Homer going on 
+for all eternity, the argument cannot be turned into a derivation. A derivation 
+\emph{derives} sequents from one or more preceding sequents.  Each step in the 
+derivation must be licensed by one or another inference rule.  When we make a 
+step in accordance with an inference rule, we will say that we \emph{infer} a 
+sequent from one or more preceding sequents (there is a special case where a 
+sequent is `inferred' from no preceding sequent;
+ we will discuss that soon).  
+
+Keep in mind that only arguments formalized in accordance with our proof system 
+are derivations. We will encounter lots of arguments stated in English---like 
+all the arguments about our system of logic that we must give in the 
+meta-language.  Those are not called derivations.  They are simply arguments. 
+
+In looking for inference rules, we want rules that are completely obvious. No 
+one who understands what a given rule says should be able to cogently doubt that 
+reasoning in accordance with the rule is indeed rationally permissible. But we 
+will not be formulating all inference rules that are obvious:  when we construct 
+derivations, we want to minimize the appeal to obviousness.
+
+
+Apart from a few trivial rules, we will see a pair of inference rules for each 
+of the connectives \p{\lnot}, \p{\land}, \p{\lor}, \p{\limplies}:  an 
+\emph{introduction} rule and an \emph{elimination} rule. The intuitive idea 
+behind an introduction rule for a given connective  is that it allows you to 
+infer from some premises to a conclusion that has that connective as its main 
+connective---it \emph{introduces} the connective into the train of thought.  An 
+elimination rule allows you to infer from a premise that has the connective as 
+the main connective to a conclusion that does not, often in connection with 
+other premises (though there are some complications which will see in a bit). 
+
+We have been speaking of inference \emph{rules}. Let me say a few words about 
+the notion of rules at work.
+
+Sometimes, a rule says you must do something under certain circumstances.  For 
+instance, in many jurisdictions you must pay income tax if you have income.  
+It's not that you have the option to pay income taxes but you don't have to 
+(wouldn't that be nice...).  This is certainly one kind of rule: they require 
+you to do something if a certain condition is met. Call these \emph{rules of 
+requirement}.
+
+But not all rules are rules of requirement. For instance, in many jurisdictions 
+there are rules about who may run for office. Typically, if you were born to the 
+right parents and/or in the right place and are old enough, you are eligible to 
+run for public offices. This does not mean that if you meet the eligibility 
+criteria you are required to run for office. Rather, if you meet those criteria, 
+you are permitted to run for office. This is another kind of rule: they permit 
+you to do something if certain conditions are met. Call these \emph{rules of 
+permission}.
+
+A rule of permission requires a general prohibition in the background. A rule of 
+permission gives you permission to do something that you otherwise are not 
+allowed to do. For instance, you are not allowed to run for office unless you 
+meet certain conditions. So you could think of rules of permission as rules that 
+create exemptions to a general prohibition. 
+
+Rules of inference are rules of permission. They are rules that govern how you 
+may extend a series of sequents. There is a general rule that says: you are not 
+allowed to extend a series of sequents in any way. If we only had this, we could 
+not construct derivations. The rules of inference create exemptions.  They say 
+that if a given series of sequents meets certain conditions, you \emph{may} 
+extend it in a certain way.  Whether you will extend it in that way is up to 
+you. But unless one of the inference rules says that you may do it, you are not 
+allowed to do it.  This imposes serious constraints on how we can construct 
+derivations, but this will also enable us to formulate derivations that are much 
+tighter than ordinary arguments.
+
+The combination of our formal language and the inference rules is known as the 
+\emph{proof system} of sentential logic.
+
+\remarkbox{
+The proof system I will be presenting here was developed by  Gerhard 
+\citet{Gentzen1936}. It is in fact the same system as the one E.J.  
+\citet{Lemmon1978} uses except that in his style the sequents come in a bit of 
+disguise.  Lemmon and systems influenced by him (e.g., \cite{allen2001})  
+present the datum side of sequents to the left of the line number, and instead 
+of sentences in the datum, the line numbers where a sentence was first 
+introduced is used. So the argument from 1 to 3 in this section looks in Lemmon 
+style as follows:
+\begin{center}
+ \begin{tabular}{c c l r}
+  \footnotesize{1} & (1) & \p{A} & \expl{...premise}\\
+  \footnotesize{2} & (2) & \p{A\limplies B} & \expl{...premise}\\
+  \footnotesize{1,2} & (3) & \p{B} & \expl{...  1,2}\\
+ \end{tabular}
+\end{center}
+
+The numbers in the middle in parentheses are the line numbers. The `1' to the 
+left of line numbers refers to whatever supports the succedent of line 1, and 
+the `2' refers to whatever supports the succedent of line 2. You can turn the 
+above Lemmon style presentation into our style by first replacing 1 with \p{A} 
+and 2 with \p{A\limplies B}, then moving the line numbers all the way to the 
+left, and finally inserting the turnstile in the gap created.  You will see that 
+the `premises' take the form of assumptions.
+ 
+Lemmon's style has the advantage of looking pretty much like the standardized 
+presentation of arguments if you squint a little and ignore what's to the left 
+of the line numbers---but you could say the same about our system: squint a 
+little harder and ignore what's between the line number and the turnstile.  
+Lemmon's style of presenting derivations  has the disadvantage of not being able 
+to distinguish premises and assumptions and, more importantly, some of the 
+features of the proof system that we will be investigating are harder to deal 
+with.  Once you get over the novelty of writing sequents, the Lemmon style 
+notation has no real advantages so we will go with sequents from the start. 
+
+
+ Gentzen introduced two more very well-known proof systems in his 
+ \citeyearpar{Gentzen1935a, Gentzen1935b}. One of those also uses `sequents' but 
+ the definition of a sequent in that earlier work is different from the one used 
+ in Gentzen's \citeyearpar{Gentzen1936}. I follow the latter version of `sequent 
+calculus' here.}
+
+\section{Preliminaries: Rewriting Sequents}
+
+Our inference rules will be formulated using sequents. There are some features 
+of sequents that are very useful for applying those rules. Let me briefly go 
+over them before launching into the inference rules proper.
+
+
+
+
+\subsection{Reordering lists}
+
+The datum of a sequent is simply a list of sentences. The order in which the 
+sentences are listed is irrelevant. That is obvious if you think about what a 
+sequent means. If the considerations \p{A} and \p{B} support the claim \p{C}, 
+then that fact does not depend on the order in which the considerations are 
+stated.\footnote{Humans often are swayed by the order in which considerations 
+ are presented. That is why, for instance, lawyers pay attention to the order in 
+ which witnesses are called. But this is simply a symptom of human 
+ irrationality. If the defendant has a motive to commit the crime they are 
+accused of, that fact supports the claim the defendant is guilty, and it does 
+not matter whether that consideration is stated at the start of the trial, near 
+the end, or buried among myriad other facts.}
+
+So you may rewrite a sequent by reordering the datum side as you see fit.  
+Perhaps, you want them to be in alphabetical order, or roundish looking letters  
+before the squarish ones, etc. For instance, the following is fine:
+
+\begin{argument}
+ \aitem \sqAs{\Gamma,C}{E}{some conclusion}
+ \aitem \sqAs{C,\Gamma}{E}{1}
+\end{argument}
+
+
+
+\subsection{Redundant lists}
+
+Sometimes, you will find yourself with a sequent that has duplicate items on the 
+datum side. E.g., \p{\seq{s,s}{t}}. Stating the consideration \p{s} twice does 
+not affect the support that \p{s} provides for \p{t}.%
+\footnote{Joseph Goebbels is often credited with the observation that if you 
+ repeat a lie often enough people believe it. This is another instance of human 
+ irrationality. Our proof system is designed to guard against such failures. By 
+ the way, there apparently is no evidence that Goebbels ever made this 
+particular observation about the effect of repetition. But as the saying goes, 
+if you repeat something often enough...  }
+ So we can simply get rid of the duplicate:
+\begin{itemize}
+ \aitem \sqAs{S,S}{T}{some conclusion}
+ \aitem \sqAs{S}{T}{3}
+ \end{itemize}
+
+\subsection{Summary}
+
+You may use the following principles for rewriting the datum side of sequents:
+
+\begin{enumerate}
+ \renewcommand{\labelenumi}{\alph{enumi}.}
+ 
+ \item You may reorder items within the datum as you see fit.
+
+ \item You may delete duplicate items within the datum.
+  
+
+\end{enumerate}
+
+When you rewrite a sequent using these rewrite rules, the annotation should just 
+say which line you rewrote---see the examples above. As you will see, as we get 
+used to constructing derivations, these rewrites are often  done silently in 
+combination with the application of other inference rules.  
+
+
+
+
+
+\section{Conditional Elimination and Assumption Introduction}
+
+\subsection{Conditional Elimination}
+
+Let us start with Modus Ponens. The version in our formal proof system is called 
+\emph{Conditional Elimination} rule.  It says that you may do the following:
+
+\begin{infrule}
+
+ \item[Conditional Elimination (\p{\limplies}E)] From \p{\seq{\Lambda_1}
+  {s_1\limplies s_2}} and \p{\seq{\Lambda_2}{s_1}}, infer \p{\seq{\Lambda_1, \Lambda_2}
+ {s_2}}.
+
+\end{infrule}
+
+\p{\Lambda} is  Greek upper case Lambda. This rule requires the presence of two 
+sequents: one must be a sequent whose succedent has the conditional as its main 
+connective; and the other's succedent must be the antecedent of the conditional.  
+Now, if a series of sequents has sequents of the requisite  forms present, you 
+may extend the series by a sequent with a succedent which is the consequent of 
+the conditional, and whose datum is the union of the two datums of the sequents 
+you start with.
+
+
+We can now represent the argument employing Modus Ponens in Example       
+\ref{ex:econo-1-simple} by the following derivation :
+
+\begin{argument*}
+
+\aitem \sqAs{\Gamma}{A}{premise}
+
+\aitem \sqAs{\Delta}{A\limplies B}{premise}
+
+\aitem \sqAs{\Gamma,\Delta}{B}{1,2,\condE}
+
+\end{argument*}
+
+
+
+\p{\Gamma} is \p{\Lambda_2} and \p{\Delta} is \p{\Lambda_1}, \p{A} is \p{s_1} 
+and \p{B} is \p{s_2}. The annotation of line 3 says that we got to it by 
+applying Conditional Elimination to lines 1 and 2.  You might notice that the 
+order of the sequents numbered 1 and 2 is different from the way in which they 
+are listed in the statement of \condE. That is ok. Because what the rule says is 
+that the following derivation tree is permissible:
+
+\begin{center}
+\begin{forest}{for tree={grow=north}}
+%generated by gentzen
+ [ \p{\seq{Λ_1, Λ_2}{s_2}}[ \p{\seq{Λ_2}{s_1}} , tier=word ] [ \p{\seq{Λ_1}
+ {s_1\mc{\limplies }s_2}} , tier=word ]  ]
+\end{forest}
+\end{center}
+
+Whether you list the left branch or the right one first when you list the nodes 
+in a derivation makes no difference.
+
+So the rules are to be understood in such a way that if they require the 
+presence of multiple sequents in a series, the order in which the sequents 
+appear is irrelevant.
+
+We saw earlier that sometimes making an assumption is fruitful. In our proof 
+system, you may make any assumption you please at any point---whether the 
+assumption you make is indeed fruitful is another matter, of course.  We will 
+treat this as an inference rule.  You may:
+
+\subsection{Assumption Introduction}
+
+\begin{infrule}
+ \item[Assumption Introduction (A)] Infer   \p{\seq{s}{s}}.
+\end{infrule}
+
+Of course, you are not really inferring anything when you use this rule since it 
+makes no difference what went before. But we'll call it an inference rule for 
+convenience and uniformity. Consider the lines 4 through 6 of the argument in 
+Section \ref{sec:supportRelations}. We can now add the inference rule to the 
+annotations:
+
+\begin{argumentN}[4]
+
+ \aitem \sqAs{S}{S}{A}
+
+ \aitem \sqAs{\Gamma}{S\limplies\lnot E}{premise}
+
+ \aitem \sqAs{\Gamma,S}{\lnot E}{4,5,\condE}
+
+\end{argumentN}
+
+Line 6 is arrived at via \condE{} and that rule requires us to write \p{\Gamma,S} 
+in the datum of the sequent on line 6 given the way lines 4 and 5 look.
+
+Notice that if you ignore the datum and the turnstile, the derivation looks 
+pretty much like the standardized form we saw earlier. What we are adding is a 
+device for keeping track of how, if at all, claims are supported and how that 
+affects the support for any further conclusions. 
+
+Also, we still distinguish between assumptions and premises. An assumption is 
+inferred in accordance with the Assumption Introduction rule, but a premise is 
+inserted into a derivation without being inferred. 
+
+
+
+We now have stated two rules. We will see some more in the following sections.
+
+
+
+
+\section{Three Rules for Conjunctions and Disjunctions}\label{sec:conj_disj}
+
+
+\subsection{Disjunction Elimination}
+
+Here is an inference rule that corresponds to the Argument By Cases we discussed 
+earlier.  In our formal system it is called Disjunction Elimination:
+
+\begin{infrule}
+ \item[Disjunction Elimination (\p{\lor}E)] From \p{\seq{\Lambda_1}{s_1\lor s_2}} 
+  and
+  \p{\seq{\Lambda_2,s_1}{s_3}} and \p{\seq{\Lambda_3, s_2}{s_3}}, infer \p{\seq{\Lambda_1, 
+  \Lambda_2, \Lambda_3}{s_3}}.
+
+\end{infrule}
+
+
+We can use this to formalize Socrates's argument that death is a good thing that 
+we saw earlier.  Let's use the following keys:
+\begin{lkey*}
+
+\item[\p{S}] Death is like an eternal deep sleep.
+
+\item[\p{M}] Death is a migration of the soul to another place. 
+
+\item[\p{G}] Death is a good thing.
+
+\end{lkey*}
+
+Here is Socrates's argument as a derivation:
+
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ais{\Gamma}{S\lor M}{premise}
+
+\ais{\Delta}{S\limplies G}{premise}
+
+\ais{\Theta}{M\limplies G}{premise}
+
+\ais{S}{S}{A}
+
+\ais{\Delta, S}{G}{2,4,\condE}
+
+\ais{M}{M}{A}
+
+\ais{\Theta, M}{G}{3,6,\condE}
+
+\ais{\Gamma, \Delta, \Theta}{G}{1,5,7,\disjE}
+
+\end{argumentN}
+
+
+(\p{\Theta} is Greek upper case theta.) This derivation looks a little longer 
+than the English version.  The English version
+seems to go from 1, 2, 3 straight to 8. This formalized version is more 
+explicit.  We assume each of the disjuncts in turn and show either assumption 
+supports \p{G} and then conclude line 8 using \disjE.
+
+Notice that the succedent is the same on lines 5, 7, and 8.  The action is on 
+the datum side. Line 5 tells us that  \p{S} together with \p{\Delta} supports 
+\p{G}.  Line 7 tells us that  \p{M} together with \p{\Theta} supports \p{G}.
+ So they us tell different things.  Crucially, they each tell us that accepting 
+ \p{G} requires one or the other of the assumptions made on lines 4 and 6. But 
+ when we get to line 8, it tells us that \p{G} is supported by \p{\Gamma}, 
+ \p{\Delta}, and \p{\Theta}. The assumptions made on lines 4 and 6 are no longer 
+ needed even though the assumptions were used to get to lines 5 and 7 which in 
+ turn were used (together with line 1) to get to line 8.  The assumptions on 
+ lines 4 and 6 have been \emph{discharged}.
+
+Here is the same derivation in tree form:
+
+ \begin{center}
+
+\begin{forest}{for tree={grow=north, l sep=1cm, s sep=1cm}}
+%generated by gentzen
+[ \p{\seq{Γ, Δ, Θ}{G}} 
+[ \p{\seq{Θ, M}{G}} 
+[ \p{\seq{M}{M}} 
+, tier=word ] 
+[ \p{\seq{Θ}{M\mc{\limplies }G}} 
+, tier=word ] 
+ ] 
+[ \p{\seq{Δ, S}{G}} 
+[ \p{\seq{S}{S}} 
+, tier=word ] [ \p{\seq{Δ}{S\mc{\limplies }G}} , tier=word ] ] [ \p{\seq{Γ}
+{S\mc{\lor }M}} ] ] \end{forest}
+\captionof{figure}{Socrates's argument in tree form}
+\end{center}
+
+The formulation of \disjE{} may suggest that the presence of three sequents is 
+required for the application of \disjE{} but there are special cases where we 
+only need two. We will see that in the exercises.
+
+
+
+\subsection{Disjunction Introduction}
+
+There is another rule that has to do with disjunctions. That is the Disjunction 
+Introduction rule:
+
+\begin{infrule}
+ \item[Disjunction Introduction (\p{\lor}I)] From \p{\seq{\Lambda}{s_1}}, infer 
+  \p{\seq{\Lambda}{s_1 \lor s_2}} as well as \p{\seq{\Lambda}{s_2 \lor s_1}}, for 
+  arbitrary \p{s_2}.
+\end{infrule}
+
+The truth of \p{s_1\lor s_2} only requires one of the disjuncts to be true. So 
+if \p{\Lambda} supports \p{s_1}, it must support \p{s_1\lor s_2} as well as 
+\p{s_2\lor s_1}. This rule is called Disjunction \emph{Introduction} because it 
+allows us to infer a sequent whose succedent has a disjunction as its main 
+connective.
+Disjunction Introduction may not seem like a useful rule of inference but we 
+will be seeing many fruitful application of this inference rule. 
+
+\subsection{Conjunction Elimination}
+
+Here is another inference rule that may strike you as not all that interesting 
+but in fact is of great use:
+
+\begin{infrule}
+ \item[Conjunction Elimination (\p{\land}E)] From \p{\seq{\Lambda}{s_1 \land 
+  s_2}}, infer \p{\seq{\Lambda}{s_1}} as well as \p{\seq{\Lambda}{s_2}}.
+\end{infrule}
+
+Surely, if \p{\Lambda} supports \p{s_1 \land s_2}, it follows that that very same 
+evidence supports \p{s_1} as well as \p{s_2}.  How could anything support the 
+conjunction without supporting each of the conjuncts? 
+
+
+
+
+
+
+\section{Sharpening our Understanding of \p{\lproves} and Conjunction 
+Introduction}
+\label{sec:conjI}
+
+\subsection{Conjunction Introduction}
+
+I indicated in Section~\ref{sec:inference-rules} that there will be a pair of 
+rules for each connective. Here is the second inference rule concerning 
+conjunction:
+
+
+\begin{infrule}
+ \item[Conjunction Introduction (\p{\land}I)] From \p{\seq{\Lambda_1}{s_1}} and 
+  \p{\seq{\Lambda_2}{s_2}}, infer \p{\seq{\Lambda_1, \Lambda_2}{s_1 \land s_2}}.
+\end{infrule}
+
+What it says is that if some consideration supports \p{s_1}, and if some 
+possibly different consideration supports \p{s_2}, then the two considerations 
+together support \p{s_1\land s_2}. 
+
+Conjunction Introduction may seem unexceptionable. If fossil evidence supports 
+that dinosaurs went extinct 65 million years ago, and if geological evidence 
+supports that the Earth was struck by a meteorite 65 millions ago, then fossil 
+evidence and geological evidence together support that dinosaurs went extinct 65 
+million years ago and that a meteorite struck the Earth 65 millions ago. Or, 
+more colloquially, the combined evidence supports that a meteorite struck around 
+the same time as when the dinosaurs went extinct 65 million years ago. What 
+could be more boringly obvious than this?
+
+Matters, however, are not so simple. Consider:
+
+\begin{argument}
+ \aitem \sqAs{\Gamma}{s_1}{premise}
+ \aitem \sqAs{\Delta}{s_2}{premise}
+ \aitem \sqAs{\Gamma,\Delta}{s_1\land s_2}{1,2,\conjI}
+ \aitem \sqAs{\Gamma,\Delta}{s_1}{3,\conjE}
+\end{argument}
+
+The first premise says that some consideration \p{\Gamma} supports \p{s_1}. The 
+conclusion says that \p{\Gamma} with some possibly other consideration \p{\Delta} 
+supports \p{s_1}. Notice it does not matter what \p{\Delta} is. Whatever 
+\p{\Delta} is, it is bound to support something. So the above argument shows 
+that if \p{\Gamma} supports \p{s_1}, no further information can remove the 
+support for \p{s_1}. If \p{s_1} is supported \emph{some} things considered, then 
+\p{s_1} is supported \emph{everything} considered. The intuitive notion of 
+support does not work like this.  Here is an example to see the point:
+
+\begin{Example}\label{ex:lastrade}
+During the course of investigating the gunshot murder of an industrialist, 
+inspector Lastrade finds out that the butler had motive---his boss abused him 
+badly over a long period of time---and means---the butler used to be an elite 
+sniper in the army.  This supports that the butler killed his boss.  Further 
+investigation reveals that the butler was in a different country across the 
+ocean at the time of the murder.
+\end{Example}
+
+Let \p{\Gamma} capture the evidence that shows the butler had means and motive, 
+and let \p{\Delta} capture the evidence that shows that the butler was a in a 
+different country at the time of murder. And let \p{B} be the claim that the 
+butler killed the industrialist. We have:
+
+\begin{center}
+\p{\seq{\Gamma}{B}}.
+\end{center}
+
+The little derivation from 1 to 4 given above would show that we also have:
+
+\begin{center}
+\p{\seq{\Gamma,\Delta}{B}}.
+\end{center}
+
+But surely that would be a mistake. The combination of \p{\Gamma} and \p{\Delta} 
+does not support \p{B} since that combination shows that the butler lacked 
+opportunity.
+
+The problem is that the fact that the butler has motive and means does not 
+\emph{prove} he did it. That is why some further information can overturn the 
+support for \p{B} without calling into question that the butler does have means 
+and motive. 
+
+On the other hand, if Lastrade did have genuine proof that the butler did it, 
+then no additional information can change the fact that he has proof.  We will, 
+therefore, tighten our interpretation of the turnstile symbol (\p{\lproves}). 
+
+\begin{infrule}
+
+ \item[Updated interpretation of \p{\lproves}:]
+\p{\seq{\Gamma}{s}} means that the acceptance of all the claims in \p{\Gamma} 
+\emph{conclusively} supports \p{s}. More concisely \p{\seq{\Gamma}{s}} means 
+that \p{\Gamma} \emph{proves} \p{s}. 
+
+\end{infrule}
+
+Armed with this updated interpretation of the turnstile symbol, we can accept 
+the Conjunction Introduction rule without difficulty. 
+
+
+\subsection{Monotonicity}
+
+Our proof system has the feature that once a set of considerations supports some 
+claim \p{p}, then enlarging the set of considerations will not reduce the 
+support for \p{p}, because by `support' we mean `conclusive support'.  A system 
+of reasoning that has this feature is called \emph{monotonic}. 
+
+As the Lastrade example (Example~\ref{ex:lastrade}) shows, much of our everyday 
+reasoning lacks monotonicity. And this means that our proof system has 
+limitations when it comes to its ability to formalize everyday reasoning.  
+Nevertheless, our proof system captures an important part of our reasoning 
+activities. The most obvious area of reasoning that shows monotonicity is 
+mathematics. And any discipline that employs mathematical tools employs 
+monotonic reasoning at least some of the time.
+
+But we also reason monotonically in everyday life. We often hold fixed certain 
+claims and draw conclusions from those fixed points.  That's what all the 
+example arguments except the Lastrade one do.  And we often have very good 
+reason to hold those points fixed: they are the things that are well-supported 
+by the evidence and seem safe to be treated as proven. When we formalize 
+arguments that treat certain claims as fixed---they are the premises---we 
+proceed as though there is proof for those claims. 
+
+In short, while there are many pieces of reasoning that cannot be captured by 
+our proof system, there are plenty that can be, and some of what can be handled 
+by our system is central to our knowledge generating activities.  Do not 
+underestimate the power and scope of what we are doing here.
+
+
+\subsection{One more way to rewrite sequents}\label{sec:seqRW}
+
+Since our proof system is monotonic, we will allow adding arbitrary items to the 
+datum of a sequent. E.g., the following is fine:
+
+\begin{itemize}
+
+ \aitem \sqAs{\Gamma}{S}{A}
+ \aitem \sqAs{\Gamma,\Delta}{S}{6}
+
+\end{itemize}
+
+In most cases, You could make do without this rule because you could infer from 
+line 5 to what you have on line 6 using \p{A}, \conjI, and \conjE. But it is 
+convenient to not have to do that all the time. When you rewrite sequents using 
+this rule, you must be explicit about it.
+
+
+
+\section{Exercises for \ref{sec:inference-rules} through \ref{sec:conjI}}
+
+This section is intended to get you used to using sequents in derivations.
+
+\begin{enumerate}
+%\renewcommand{\mask}[1]{#1}
+ \item A derivation is a series of sequents. Because of that, derivations 
+  contain information that the standardized presentation of arguments  we saw in 
+  Section~\ref{sec:standardForm} do not contain because that style only tracks 
+  the succedent side explicitly. The inference rules of our proof system tell you, 
+  among other things, how to keep track of things on the datum side.
+ 
+  Consider the following derivation which is missing the datum on line 3: 
+
+  %Derive from \p{\seq{\Gamma}{A \limplies B}} to \p{\seq{\Gamma, \Delta}{B}}
+
+\begin{argument*}
+%generated by gentzen
+
+\ais{\Gamma}{A \limplies B}{premise}
+
+\ais{\Delta}{A}{premise}
+
+\ais{\mask{\Gamma, \Delta}}{B}{1,2,\condE}
+
+\end{argument*}
+
+
+  What goes in the datum of line 3? You can see in the annotation that line 3 
+  got there by applying Conditional Elimination to lines 1 and 2. Line 1's datum 
+  is \p{\Gamma} and line 2's is \p{\Delta}. Conditional Elimination tells us 
+  that in that case the datum of line 3 is \p{\Gamma,\Delta} so that's what goes 
+  in there. 
+
+  Let's do a couple more of these to get used to paying attention to the datum.
+
+  Fill in the missing datums in the following two derivations:
+\begin{enumerate}\setlength{\itemsep}{1.5em}
+\item
+
+\begin{argument*}
+%generated by gentzen
+
+\ais{\Gamma}{(P \lor Q) \limplies R}{premise}
+
+\ais{\Delta}{P}{premise}
+
+\ais{\mask{\Delta}}{P \lor Q}{2,\disjI}
+
+\ais{\mask{\Gamma, \Delta}}{R}{1,3,\condE}
+
+\end{argument*}
+
+\item
+
+\begin{argument*}
+%generated by gentzen
+
+\ais{\Gamma}{(P \lor Q) \limplies R}{premise}
+
+\ais{\mask{P}}{P}{A}
+
+\ais{\mask{P}}{P \lor Q}{2,\disjI}
+
+\ais{\mask{\Gamma, P}}{R}{1,3,\condE}
+
+\end{argument*}
+
+
+
+   \item You can think of the argument (a) as formalizing something like `The 
+	college catalog says that if Masha has taken logic or has taken calculus, 
+	then she has satisfied the formal reasoning requirement.  Her transcript 
+	says that she has taken logic.  It follows that Masha has satisfied the 
+	formal reasoning requirement.' What would argument (b) be formalizing? 
+
+\end{enumerate}
+
+\item Our inference rules keep track of \emph{what} supports \emph{what}
+ ---the datum is the former what, the succedent the latter. Let's practice 
+ using our inference rules to keep track of the succedent side.
+
+ \begin{enumerate}
+
+  \item  We know that \p{P\land Q} and \p{Q\land P} are logically equivalent.  
+   That means that if \p{\Gamma} supports \p{P\land Q} it also supports 
+   \p{Q\land P}. Any decent proof system should tells us that, and ours does.  
+   Add the missing succedents in the following derivation:
+%Derive from \p{\seq{\Gamma}{S_1 \land S_2}} to \p{\seq{\Gamma}{S_2 \land S_1}}
+
+\begin{argument*}
+%generated by gentzen
+
+\ais{\Gamma}{P \land Q}{premise}
+
+\ais{\Gamma}{\mask{P}}{1,\conjE}
+
+\ais{\Gamma}{Q}{1,\conjE}
+
+\ais{\Gamma, \Gamma}{\mask{Q \land P}}{2,3,\conjI}
+
+\ais{\Gamma}{Q \land P}{4}
+
+\end{argument*}
+
+
+   
+   Hint: according to the annotations, line 5 is a rewrite of line 4. That tells 
+   you what the succedent of line 4 is.
+
+
+\item We also know from Chapter~\ref{ch:FormalLanguages} that \p{P\lor Q} and 
+ \p{Q\lor P} are logically equivalent. That means that if \p{\Gamma} supports 
+ \p{P \lor Q} it also supports \p{Q\lor P}. Our proof system shows that, too.  
+ Add the missing succedents in the following derivation:
+ \begin{argument*}
+
+  \ais{\Gamma}{P \lor Q}{premise}
+
+  \ais{P}{\mask{P}}{A}
+
+  \ais{P}{\mask{Q \lor P}}{2,\disjI}
+
+  \ais{Q}{Q}{A}
+
+  \ais{Q}{\mask{Q \lor P}}{4,\disjI}
+
+  \ais{\Gamma}{Q \lor P}{1,3,5,\disjE}
+
+ \end{argument*}
+
+
+ Notice that there are several lines with exactly the same succedent as the 
+ concluding line. An argument in the standardized form would make it much more 
+ difficult to discern when one has actually reached the desired conclusion 
+ because the standardized form only gives us the succedent side.
+\end{enumerate}
+
+\item Comprehending a derivation requires comprehending how the various sequents 
+ work together to enable us to infer to the conclusion. Annotations are there to 
+ guide our comprehension. In presenting your derivation, it is crucial to make 
+ sure that your annotation are correct. Let's practice annotating.
+
+ \p{P\land (Q\lor R)} and \p{(P\land Q) \lor (P\land R)} are logically 
+ equivalent. So if we have evidence for the former sentence, we have evidence 
+ for the latter. We can show that.  Fill in the missing annotations in the 
+ following derivation:
+
+\begin{argument*}
+
+\ais{\Gamma}{P \land (Q \lor R)}{premise}
+
+\ais{\Gamma}{P}{1,\mask{\conjE}}
+
+\ais{\Gamma}{Q \lor R}{\mask{1,\conjE}}
+
+\ais{Q}{Q}{\mask{A}}
+
+\ais{\Gamma,Q}{P \land Q}{\mask{2,4,\conjI}}
+
+\ais{\Gamma,Q}{(P \land Q) \lor (P \land R)}{5,\disjI}
+
+\ais{R}{R}{\mask{A}}
+
+\ais{\Gamma,R}{P \land R}{\mask{2,7,\conjI}}
+
+\ais{\Gamma,R}{(P \land Q) \lor (P \land R)}{\mask{8,\disjI}}
+
+\ais{\Gamma,\Gamma,\Gamma}{(P \land Q) \lor (P \land R)}{\mask{3,6,9,\disjE}}
+
+\ais{\Gamma}{(P \land Q) \lor (P \land R)}{\mask{10}}
+
+\end{argument*}
+
+
+\item Fill in the missing datums, succedents, annotations in the following  
+ derivation from \p{\seq{\Gamma}{(P\lor Q)
+ \lor R)}} to \p{\seq{\Gamma}{P\lor(Q\lor R)}}.
+ 
+\begin{argument*}
+
+\ais{\Gamma}{(P \lor Q) \lor R}{premise}
+
+\ais{\mask{P \lor Q}}{P \lor Q}{A}
+
+\ais{P}{P}{A}
+
+\ais{\mask{P}}{P \lor (Q \lor R)}{3,\disjI}
+
+\ais{Q}{\mask{Q}}{A}
+
+\ais{\mask{Q}}{Q \lor R}{5,\disjI}
+
+\ais{Q}{\mask{P \lor (Q \lor R)}}{6,\disjI}
+
+\ais{P \lor Q}{P \lor (Q \lor R)}{2,4,7,\disjE}
+
+\ais{R}{R}{A}
+
+\ais{R}{Q \lor R}{9,\disjI}
+
+\ais{R}{P \lor (Q \lor R)}{\mask{10,\disjI}}
+
+\ais{\Gamma}{P \lor (Q \lor R)}{1,8,11,\disjE}
+
+\end{argument*}
+
+\item I mentioned that \disjE{} need not require three sequents. Here is an 
+ example of that:
+
+ \begin{argument*}
+
+  \ais{\Gamma}{P \lor P}{premise}
+
+  \ais{\Delta, P}{Q}{premise}
+
+  \ais{\Gamma,\Delta}{Q}{1,2,2,\disjE}
+
+ \end{argument*}
+
+ Notice that in the annotation of the third line, line 2 is referred to twice.  
+ It is used once as \p{\seq{\Lambda_2, s_1}{s_3}} and again as \p{\seq{\Lambda_2, 
+ s_2}{s_3}}. This is possible because two of the sequents that must be matched 
+ for using \disjE{} have the same form. You can do the same using \conjI{} to 
+ derive from \p{\seq{\Gamma}{P}} to \p{\seq{\Gamma}{ P\land P}}
+ . Add the missing annotations:
+
+ \begin{argument*}
+
+  \ais{\Gamma}{P}{\mask{premise}}
+
+
+   \ais{\Gamma}{P \land P}{\mask{1,1,\conjI}}
+
+ \end{argument*}
+
+
+
+
+\item Construct the following derivations:
+
+ \begin{enumerate}
+
+  \item From \plshs{/G:KQP} to \plshs{/G:AQP}.
+
+  \item From \plshs{/G:KNQKQP} to \plshs{/G:Q}.
+
+  \item From \plshs{/G:P} to \plshs{/G:AKPPQ}
+
+
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Rules for Negation}\label{sec:negationRules}
+
+\subsection{Negation Elimination}
+
+Here is an obvious inference rule:
+
+\begin{infrule}
+ \item[Negation Elimination (\p{\lnot}E)] From \p{\seq{\Lambda}{\lnot\lnot s}}, 
+  infer \p{\seq{\Lambda}{s}}.
+\end{infrule}
+
+Double negation is affirmation. Strictly speaking, the rule should be called 
+\emph{Double} Negation Elimination but we'll omit the `double' to save a word.  
+
+\subsection{Negation Introduction}
+
+With double negation out of the way, let's look at something more interesting.  
+That's the rule corresponding to Reductio ad Absurdum we saw earlier. The 
+version in our proof system is called Negation Introduction:
+
+\begin{infrule}
+ \item[Negation Introduction (\p{\lnot}I)] From \p{\seq{\Lambda_1, s_1}
+  {s_2}} and \p{\seq{\Lambda_2, s_1}{\lnot s_2}}, infer \p{\seq{\Lambda_1, \Lambda_2}
+ {\lnot s_1}}.
+\end{infrule}
+
+We can use this to represent as a derivation the Argument 3 in Section   
+\ref{sec:standardForm}  that you cannot go back in time and kill your mother 
+before you were even conceived.  Let \p{S} mean that your plan succeeds, and 
+\p{E} that you exist:
+
+%Derive from \p{\seq{\Gamma}{S \limplies P}} to \p{\seq{\Gamma, \Delta}{\lnot S}}
+
+\begin{argument*}
+%generated by gentzen
+
+\ais{\Gamma}{S \limplies E}{premise}
+
+\ais{\Delta}{S \limplies \lnot E}{premise}
+
+\ais{S}{S}{A}
+
+\ais{\Gamma, S}{E}{1,3,\condE}
+
+\ais{\Delta, S}{\lnot E}{2,3,\condE}
+
+\ais{\Gamma, \Delta}{\lnot S}{4,5,\negI}
+
+\end{argument*}
+
+
+As with the case of \disjI{}, this derivation looks longer than the English 
+version which seems to go from lines 1 and 2 straight to line 6. This formal 
+version is more explicit. Notice that you could use \conjI{} to get from line 4 
+and 5 to a sequent with an outright contradiction as succedent: \p{\seq{\Gamma,
+\Delta,S}{P\land\lnot P}}. Our derivation is much more explicit about this 
+threat of contradiction than the English version of Reductio Ad Absurdum we saw 
+earlier.
+
+Here is an interesting point about Negation Introduction: we can use it to 
+achieve the same result as Modus Tollens. Modus Tollens, if you recall, starts 
+with a conditional and the negation of its consequent as premises and concludes 
+with the negation of the antecedent of the conditional. While some systems have 
+an inference rule corresponding to Modus Tollens as a separate inference rule, 
+our system does not. We can infer from \p{\seq{\Gamma}
+{P\limplies Q}} and \p{\seq{\Delta}{\lnot Q}} to \p{\seq{\Gamma,\Delta}{\lnot P}} 
+with the rules we already have:
+
+\begin{argumentN}[7]
+%generated by gentzen
+
+\ais{\Gamma}{P\limplies Q}{premise}
+
+\ais{\Delta}{\lnot Q}{premise}
+
+\ais{P}{P}{A}
+
+\ais{\Gamma, P}{Q}{7,9,\condE}
+
+\ais{\Delta, P}{\lnot Q}{8}
+
+\ais{\Gamma, \Delta}{\lnot P}{10,11,\negI}
+
+\end{argumentN}
+
+
+As you can see, we just need A, \condE, and \negI{} to achieve the same effect 
+as Modus Tollens.
+
+\section{Conditional Introduction}
+
+When we discussed common inference patterns, we saw a way of concluding with a 
+conditional. The last rule of our proof system corresponds to that move and is 
+called Conditional Introduction: 
+
+
+\begin{infrule}
+ \item[Conditional Introduction (\p{\limplies}I)] From \p{\seq{\Lambda, s_1}
+  {s_2}}, infer \p{\seq{\Lambda}{s_1 \limplies s_2}}.
+\end{infrule}
+
+This is surely right. If \p{\Lambda} and \p{s_1} together conclusively support 
+\p{s_2}, then  \p{\Lambda} must conclusively support that \p{s_1 \limplies s_2}.
+
+We can now formalize the argument at the end of                          
+\ref{sec:sf-shortcomings}  as a derivation---that was the argument that prompted 
+us to switch to using sequents:
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ais{S}{S}{A}
+
+\ais{\Gamma}{S\limplies  \lnot E}{premise}
+
+\ais{\Gamma, S}{\lnot  E}{1,2,\condE}
+
+\ais{\Delta}{ \lnot E\limplies  \lnot P}{premise}
+
+\ais{\Gamma, \Delta, S}{ \lnot P}{3,4,\condE}
+
+\ais{\Gamma, \Delta}{S\limplies  \lnot P}{5,\condI}
+
+\end{argumentN}
+
+
+This concludes the presentation of the inference rules.
+
+\section{Proof System}\label{sec:SL-complete}
+
+We have seen several rules of inference. They specify how you may extend a 
+series of sequents. You do not have to extend a series, but if you do, you must 
+do it in accordance with these only: everything is forbidden---\emph{alles 
+verboten} as one says in German---except for moves that are explicitly permitted 
+by these rules.  Here they are in one place. 
+
+You may:
+
+\begin{infrule}
+
+ \item[Assumption Introduction (A)] Infer   \p{\seq{s}
+  {s}}.
+
+ \item[Conjunction Introduction (\conjI)] From \p{\seq{\Lambda_1}{s_1}} and 
+  \p{\seq{\Lambda_2}{s_2}}, infer \p{\seq{\Lambda_1, \Lambda_2}{s_1 \land s_2}}.
+
+
+ \item[Conjunction Elimination (\conjE)] From \p{\seq{\Lambda}{s_1 \land s_2}}, 
+  infer \p{\seq{\Lambda}{s_1}} as well as \p{\seq{\Lambda}{s_2}}.
+
+ \item[Disjunction Introduction (\disjI)] From \p{\seq{\Lambda}{s_1}}, infer 
+  \p{\seq{\Lambda}{s_1 \lor s_2}} as well as \p{\seq{\Lambda}{s_2 \lor s_1}}, for 
+  any \p{s_2}.
+
+ \item[Disjunction Elimination (\disjE)] From \p{\seq{\Lambda_1}{s_1\lor s_2}} and
+  \p{\seq{s_1, \Lambda_2}{s_3}} and \p{\seq{s_2, \Lambda_3}{s_3}}, infer 
+  \p{\seq{\Lambda_1, \Lambda_2, \Lambda_3}{s_3}}.
+
+ \item[Negation Introduction (\negI)] From \p{\seq{\Lambda_1, s_1}
+  {s_2}} and \p{\seq{\Lambda_2, s_1}{\lnot s_2}}, infer \p{\seq{\Lambda_1, \Lambda_2}
+ {\lnot s_1}}.
+
+ \item[Negation Elimination (\negE)] From \p{\seq{\Lambda}{\lnot\lnot s}}, infer 
+  \p{\seq{\Lambda}{s}}.
+
+ \item[Conditional Introduction (\condI)] From \p{\seq{\Lambda, s_1}
+  {s_2}}, infer \p{\seq{\Lambda}{s_1 \limplies s_2}}.
+ 
+ \item[Conditional Elimination (\condE)] From \p{\seq{\Lambda_1}
+  {s_1\limplies s_2}} and \p{\seq{\Lambda_2}{s_1}}, infer \p{\seq{\Lambda_1, \Lambda_2}
+ {s_2}}.
+
+\end{infrule}
+
+
+Also, you may rewrite the datum side of sequents in the following ways:
+
+\begin{enumerate}
+ \renewcommand{\labelenumi}{\alph{enumi}.}
+ 
+ \item You may reorder items within the datum as you see fit.
+
+ \item You may delete duplicate items within the datum.
+
+ \item You may add arbitrary items to the datum of a sequent.
+
+\end{enumerate}
+
+
+These rules together form a proof system. You can use them to construct all 
+sorts of proofs. 
+
+\section{Exercises for \ref{sec:negationRules} through \ref{sec:SL-complete}}
+
+\begin{enumerate}
+\item  Here is something obvious. If we have evidence that \p{P\lor Q} and we 
+ have evidence that \p{\lnot P}, we have evidence that \p{Q}. Our proof system 
+ confirms this. Add the missing datums in the following derivation:
+%Derive from \p{\seq{\Gamma}{P \lor Q}} to \p{\seq{\Gamma, \Delta}{Q}}
+
+\begin{argument*}
+%generated by gentzen
+
+\ai{\Gamma}{P \lor Q}{premise}
+
+\ai{\Delta}{\lnot P}{premise}
+
+\ai{P}{P}{A}
+
+\ai{\mask{\Delta, \lnot Q}}{\lnot P}{2}
+
+\ai{\mask{P, \lnot Q}}{P}{3}
+
+\ai{\mask{\Delta, P}}{\lnot \lnot Q}{4,5,\negI}
+
+\ai{\Delta, P}{Q}{6,\negE}
+
+\ai{Q}{Q}{A}
+
+\ai{\mask{\Gamma, \Delta}}{Q}{1,7,8,\disjE}
+
+\end{argument*}
+
+
+
+\item Derivations can often be adapted to prove something similar. For instance, 
+ the above can be adapted easily to derive from \p{\seq{\Gamma}{\lnot P\lor Q}} 
+ and \p{\seq{\Delta}{P}} to \p{\seq{\Gamma,\Delta}{Q}}. Fill in the missing 
+ datums and annotations.
+
+%Derive from \p{\seq{\Gamma}{\lnot P \lor Q}} to \p{\seq{\Gamma, \Delta}{Q}}
+
+\begin{argument*}
+%generated by gentzen
+
+\ai{\Gamma}{\lnot P \lor Q}{premise}
+
+\ai{\Delta}{P}{premise}
+
+\ai{\mask{\lnot P}}{\lnot P}{A}
+
+\ai{\mask{\Delta, \lnot Q}}{P}{2}
+
+\ai{\mask{\lnot P, \lnot Q}}{\lnot P}{3}
+
+\ai{\mask{\Delta, \lnot P}}{\lnot \lnot Q}{4,5,\negI}
+
+\ai{\mask{\Delta, \lnot P}}{Q}{6,\negE}
+
+\ai{Q}{Q}{A}
+
+\ai{\mask{\Gamma, \Delta}}{Q}{1,7,8,\disjE}
+
+\end{argument*}
+
+
+
+ \newpage
+\item The Greek capital letters on the datum side are place-holders. You can 
+ plug anything you want into them. Take the derivation in Problem 2 above. You 
+ can plug \p{P} into \p{\Delta} and add one more step at the end to show  that 
+ you can infer from \p{\seq{\Gamma}{\lnot P \lor Q}} to \p{\seq{\Gamma}
+ {P\limplies Q}} (which we should expect given the way the conditional is 
+ defined).  Construct such a derivation.
+
+ \answer{
+%Derive from \p{\seq{\Gamma}{\lnot P \lor Q}} to \p{\seq{\Gamma}{P \limplies Q}}
+
+\begin{argument*}
+%generated by gentzen
+
+\ai{\Gamma}{\lnot P \lor Q}{premise}
+
+\ai{P}{P}{premise}
+
+\ai{\lnot P}{\lnot P}{A}
+
+\ai{P, \lnot Q}{P}{2}
+
+\ai{\lnot P, \lnot Q}{\lnot P}{3}
+
+\ai{P, \lnot P}{\lnot \lnot Q}{4,5,\negI}
+
+\ai{P, \lnot P}{Q}{6,\negE}
+
+\ai{Q}{Q}{A}
+
+\ai{\Gamma, P}{Q}{1,7,8,\disjE}
+
+\ai{\Gamma}{P \limplies Q}{9,\condI}
+
+\end{argument*}
+
+ 
+
+ }
+
+\item The following is a derivation from \p{\seq{\Gamma}{P\limplies Q}} to 
+ \p{\seq{\Gamma}{\lnot P\lor Q}}. Again, we should expect that there is such a 
+ derivation given the way the conditional was defined. Fill in the missing parts 
+ of the derivation:
+
+\begin{argument*}
+
+\ai{\Gamma}{P \limplies Q}{premise}
+
+\ai{\lnot (\lnot P \lor Q)}{\mask{\lnot (\lnot P \lor Q)}}{A}
+
+\ai{\mask{\lnot P}}{\lnot P}{A}
+
+\ai{\lnot P}{\lnot P \lor Q}{\mask{3,\disjI}}
+
+\ai{\mask{\lnot (\lnot P \lor Q),\lnot P}}{\mask{\lnot (\lnot P \lor Q)}}{2}
+
+\ai{\lnot (\lnot P \lor Q)}{\lnot \lnot P}{4,5,\negI}
+
+\ai{\mask{\lnot (\lnot P \lor Q)}}{\mask{P}}{6,\negE}
+
+\ai{\mask{\Gamma,\lnot (\lnot P \lor Q)}}{\mask{Q}}{1,7,\condE}
+
+\ai{\Gamma,\lnot (\lnot P \lor Q)}{\lnot P \lor Q}{8,\disjI}
+
+\ai{\Gamma}{\lnot \lnot (\lnot P \lor Q)}{\mask{2,9,\negI}}
+
+\ai{\Gamma}{\lnot P \lor Q}{\mask{10,\negE}}
+
+\end{argument*}
+
+ \item Suppose there is evidence that \p{P \limplies Q}. In that case,  
+  there is is evidence that \p{\lnot Q\limplies \lnot P}. Our proof system 
+  confirms this. Construct a derivation from \p{\seq{\Gamma}{P\limplies Q}} 
+  to \p{\seq{\Gamma}{\lnot Q\limplies \lnot P}}. Hint: you can adapt and 
+  modify one the derivations given in Section~\ref{sec:negationRules}.
+\answer{
+\begin{argument*}
+
+\ai{\Gamma}{P \limplies Q}{premise}
+
+\ai{\lnot Q}{\lnot Q}{A}
+
+\ai{P}{P}{A}
+
+\ai{\Gamma,P}{Q}{1,3,\condE}
+
+\ai{\lnot Q,P}{\lnot Q}{2}
+
+\ai{\Gamma,\lnot Q}{\lnot P}{4,5,\negI}
+
+\ai{\Gamma}{\lnot Q \limplies \lnot P}{6,\condI}
+
+\end{argument*}
+}
+
+ \item If you have evidence that \p{(X\lor Y)\limplies Z}, you have evidence 
+  that \p{X\limplies Z}. Construct a derivation from \p{\seq{\Gamma}{(X\lor Y)
+	\limplies Z}} to \p{\seq{\Gamma}{X\limplies Z}}.
+
+\answer{
+\begin{argument*}
+
+\ai{\Gamma}{(X \lor Y) \limplies Z}{premise}
+
+\ai{X}{X}{A}
+
+\ai{X}{X \lor Y}{2,\disjI}
+
+\ai{\Gamma,X}{Z}{1,3,\condE}
+
+\ai{\Gamma}{X \limplies Z}{4,\condI}
+
+\end{argument*}
+
+}
+\end{enumerate}
+
+
+
+

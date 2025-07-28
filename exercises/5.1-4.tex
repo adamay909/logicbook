@@ -1,0 +1,122 @@
+
+\subsection*{Exercises for 5.1--5.4}
+\begin{enumerate}
+ \item
+
+  Let \p{x,y} be variables and let the following keys explain the meanings of 
+  some predicates and constants:
+  \begin{lkey}
+  \item[Nx] \p{x}is a narcissist
+
+  \item[Lxy] \p{x} loves \p{y}
+
+  \item[Px] is popular
+
+  \item[d] Donald
+   
+  \item[f] Francis
+
+  \item[m] Magdalena
+
+  \end{lkey}
+
+ Translate the following sentences into \lL[Q] (it is often helpful to translate 
+ back into English to see if it comes out meaning the same as the original):
+
+  \begin{enumerate}
+
+   \item Donald is a narcissist.
+
+   \item If Donald is a narcissist, then Donald loves Donald.
+
+   \item Narcissists love themselves.
+
+   \item If someone is a narcissist, they are not popular.
+
+   \item Narcissists are not popular.
+
+   \item Everyone loves Magdalena.
+
+   \item Magdalena loves everyone.
+
+   \item There is someone Francis loves.
+
+   \item There is someone who loves Francis.
+
+   \item Everyone loves someone.
+
+   \item Someone is loved by everyone.
+
+   \item If someone is loved by everyone, then everyone loves someone.
+
+  \end{enumerate}
+\answer{
+ \begin{enumerate}
+  \item \p{Nd}
+  \item \p{Nd\limplies Ldd}
+  \item \p{\lforall x(Nx\limplies Lxx)}
+  \item \p{\lforall x(Nx\limplies\lnot Px)}
+  \item \p{\lforall x(Nx\limplies\lnot Px)}
+  \item \p{\lforall xLxm}
+  \item \p{\lforall xLmx}
+  \item \p{\lthereis xLfx}
+  \item \p{\lthereis xLxf}
+  \item \p{\lforall x\lthereis yLxy}
+  \item \p{\lthereis x\lforall yLyx}
+ \item \lbh{-p -f CXxUyLyxUxXyLxy}
+
+ \end{enumerate}
+}
+
+
+ \item Consider the following formula:
+
+  \lbh{-p -f XxKFxXyKFyKNGxyNXzKNGxkKNGyzFz}
+ 
+ 
+	\begin{enumerate}
+
+	 \item What is the scope of the left-most quantifier?
+
+	 \item What is the scope of the right-most quantifier?
+
+	 \item True of false: the formula contains free variables.
+
+	\end{enumerate}
+\answer{
+
+
+ \begin{enumerate}
+
+  \item The entire rest of the sentence.
+  \item \lbh{-p -f KNGxkKNGyzFz}
+ \item True. \p{k} is free (should have specified \p{k} is not a constant).
+ \end{enumerate}
+
+}
+
+\item Consider the following formula (\p{x,y,z} are variables):
+
+ \lbh{-p -f CXxFxUxCNFxXyKNGxzFy}
+
+
+	\begin{enumerate}
+	 \item Which variable in the formula is free?
+
+	 \item What is the scope of the left-most existential quantifier?
+
+	 \item What is the scope of the universal quantifier?
+
+	\end{enumerate}
+
+	\answer{
+	 \begin{enumerate}
+	\item \p{z}.
+	\item Just the \p{Fx} left of the first \p{\limplies}.
+	\item \lbh{-p -f CNFxXyKNGxzFy}
+   \end{enumerate}
+	}
+
+
+
+  \end{enumerate}

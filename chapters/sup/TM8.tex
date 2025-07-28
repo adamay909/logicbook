@@ -1,0 +1,134 @@
+
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\usetikzlibrary{fit}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+ 
+ \node(start) [terminal] {};
+ 
+ \node(n1)[decision, below=of start] {is 0?};
+
+ \node(n2)[process, left=of n1] {write 0}; 
+
+ \node(n3)[process, below=of n2] {move right};
+ 
+ \node(n4)[decision, below=3cm of n1] {is 0?};
+
+ \node(n5)[process, left =of n4] {write 0}; 
+
+ \node(n6)[process, below=of n5] {move right};
+
+ \node(n7)[decision, below=3cm of n4] {is 1?};
+
+ \node(n8)[process, left =of n7] {write 1}; 
+
+ \node(n9)[process, below=of n8] {move right};
+
+ \node(n10)[decision, below=3cm of n7] {is 0?};
+
+ \node(n11)[process, left =of n10] {write 0}; 
+
+ \node(n12)[process, below=of n11] {move right};
+
+ \node(yes) [terminal, below=of n12] {Yes};
+
+ \node(n13) [process, right=of n1] {write 1};
+
+ \node(n14) [process, below=of n13] {move right};
+
+ \node(n15) [process, right=of n4] {write 1};
+
+ \node(n16) [process, below=of n15] {move right};
+
+ \node(n17) [process, right=of n7] {write 0};
+
+ \node(n18) [process, below=of n17] {move right};
+
+ \node(n19) [process, right=of n10] {write 1};
+
+ \node(n20) [process, below=of n19] {move right};
+
+ \node(no) [terminal, below=of n20] {No};
+
+
+ \draw[arrow](start)--(n1);
+
+
+ \draw[arrow](n1)--node[anchor=south]{Yes}(n2);
+
+ \draw[arrow](n4)--node[anchor=south]{Yes}(n5);
+
+ \draw[arrow](n7)--node[anchor=south]{Yes}(n8);
+
+ \draw[arrow](n10)--node[anchor=south]{Yes}(n11);
+
+
+ \draw[arrow](n1)--node[anchor=south]{No}(n13);
+
+ \draw[arrow](n4)--node[anchor=south]{No}(n15);
+
+ \draw[arrow](n7)--node[anchor=south]{No}(n17);
+
+ \draw[arrow](n10)--node[anchor=south]{No}(n19);
+
+
+ \draw[arrow](n2)--(n3);
+
+ \draw[arrow](n3)-|(n4);
+
+ \draw[arrow](n5)--(n6);
+
+ \draw[arrow](n6)-|(n7);
+
+
+ \draw[arrow](n8)--(n9);
+
+ \draw[arrow](n9)-|(n10);
+
+ \draw[arrow](n11)--(n12);
+
+ \draw[arrow](n12)--(yes);
+
+
+ \draw[arrow](n13)--(n14)--++(2.5,0)|-(no);
+
+ \draw[arrow](n15)--(n16)--++(2.5,0)|-(no);
+
+ \draw[arrow](n17)--(n18)--++(2.5,0)|-(no);
+
+ \draw[arrow](n19)--(n20)--++(2.5,0)|-(no);
+
+
+ \node[draw,dashed,fit=(n1) (n2) (n3) (n13) (n14), inner sep=0.3cm] (group1) {};
+ 
+ \node[draw,dashed,fit=(n4) (n5) (n6) (n15) (n16), inner sep=0.3cm] (group2) {};
+
+ \node[draw,dashed,fit=(n7) (n8) (n9) (n17) (n18), inner sep=0.3cm] (group3) {};
+
+ \node[draw,dashed,fit=(n10) (n11) (n12) (n19) (n20), inner sep=0.3cm] (group4) 
+   {};
+
+ \node[draw,dashed, fit=(yes)] (group5) {};
+ 
+ \node[draw,dashed, fit=(no)] (group6) {};
+
+ \node[left] at (group1.west) {S0};
+ \node[left] at (group2.west) {S1};
+ \node[left] at (group3.west) {S2};
+ \node[left] at (group4.west) {S3};
+
+ \node[left] at (group5.west) {S4};
+ \node[left] at (group6.west) {S5};
+\end{tikzpicture}
+
+\end{document}
+
+
+

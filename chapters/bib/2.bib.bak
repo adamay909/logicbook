@@ -1,0 +1,18 @@
+
+@book{frege_grundlagen_1884,
+	address = {Breslau},
+	title = {Die {Grundlagen} der {Arithmetik}: eine logisch mathematische {Untersuchung} ueber den {Begriff} der {Zahl}},
+	publisher = {w. Koebner},
+	author = {Frege, Gottlob},
+	year = {1884},
+	file = {Die_Grundlagen_der_Arithmetik-2.pdf:/home/adamaymas/.Zotero/storage/E6AKM74G/Die_Grundlagen_der_Arithmetik-2.pdf:application/pdf;Frege.pdf:/home/adamaymas/.Zotero/storage/8DAW67ER/Frege.pdf:application/pdf}
+}
+
+@book{frege_grundgesetze_1893,
+	address = {Jena},
+	title = {Grundgesetze der {Arithmetik}},
+	volume = {1},
+	publisher = {Verlag Hermann Pohle},
+	author = {Frege, Gottlob},
+	year = {1893}
+}

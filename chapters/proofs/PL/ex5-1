@@ -1,0 +1,9 @@
+\Gamma;UxCWxMx;;premise
+\Gamma;CWeMe;1;ue
+\Delta;We;;premise
+\Gamma,\Delta;Me;2,3;ce
+\Theta;UxCMxBx;;premise
+\Theta;CMeBe;5;ue
+\Gamma,\Delta,\Theta; Be; 4,6;ce
+\Gamma,\Delta,\Theta;ExBx;7;ei
+

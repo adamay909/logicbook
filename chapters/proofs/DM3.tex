@@ -1,0 +1,28 @@
+\begin{argument*}
+
+\ai{\lnot P \lor \lnot Q}{\lnot P \lor \lnot Q}{A}
+
+\ai{\lnot P}{\lnot P}{A}
+
+\ai{P \land Q}{P \land Q}{A}
+
+\ai{P \land Q}{P}{3,\conjE}
+
+\ai{\lnot P, P \land Q}{\lnot P}{2}
+
+\ai{\lnot P}{\lnot (P \land Q)}{4,5,\negI}
+
+\ai{\lnot Q}{\lnot Q}{A}
+
+\ai{P \land Q}{Q}{3,\conjE}
+
+\ai{\lnot Q, P \land Q}{\lnot Q}{7}
+
+\ai{\lnot Q}{\lnot (P \land Q)}{8,9,\negI}
+
+\ai{\lnot P \lor \lnot Q}{\lnot (P \land Q)}{1,6,10,\disjE}
+
+\ai{}{(\lnot P \lor \lnot Q) \limplies \lnot (P \land Q)}{11,\condI}
+
+\end{argument*}
+

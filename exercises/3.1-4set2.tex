@@ -1,0 +1,342 @@
+\subsubsection*{1.}
+\def\aitem{\item[\stepcounter{argnum}\arabic{argnum}.]}
+
+Put the following arguments in standard form. You may find that the argument 
+forms we have named so far do not suffice to capture all the steps in the 
+argument. If that happens, flag it and make some suggestions for possible 
+argument patterns that could be used to fill the gap.
+
+\begin{enumerate}
+ \renewcommand{\labelenumi}{\alph{enumi}.}
+ \item If Sally has taken logic or has taken calculus, she has satisfied 
+  Pomona's area 5 requirements. She has taken calculus. So she has satisfied the 
+  area 5 requirements.
+\answer{
+
+ \begin{argument*}
+
+  \aitem If Sally has taken logic or has taken calculus, then she has satisfied 
+  Pomona's area 5 requirements. \texpl{premise}
+
+  \aitem She has taken calculus. \texpl{premise}
+
+  \aitem Sally has taken logic or has taken calculus. \texpl{from 2}
+
+  \aitem Sally has satisfied Pomona's area 5 requirements. \texpl{1,3,MP}
+
+ \end{argument*}
+
+ Note: It is tempting to skip line 3 and go straight to the conclusion. Not 
+ notice that premise does not match the antecedent of the conditional in premise 
+ 1.
+}
+
+ \item Only the butler or the gardener could have killed the old man. The 
+  gardener did not do it. So the butler killed the old man.
+\answer{
+
+  \begin{argument*}
+
+   \aitem The butler killed the old man or the gardener killed the old man.  
+   \texpl{premise}
+
+   \aitem The gardener did not kill the old man. \texpl{premise}
+
+   \aitem The butler killed the old man. \texpl{1,2, argument by elimination}
+
+  \end{argument*}
+
+The following general inference pattern seems fine:
+
+\begin{argument*}
+
+ \aitem A or B. \texpl{premise}
+
+ \aitem not A. \texpl{premise}
+
+ \aitem B. \texpl{1,2, argument by elimination}
+
+\end{argument*}
+
+After all, if a disjunction is true and one of the disjuncts is false, the other 
+disjunct must be true.
+
+You might wonder what happened to the `only' in the plain prose version of the 
+reasoning. The `only' signifies that the two options stated are exhaustive (no 
+third suspect). You might worry whether this exhaustiveness has been fully 
+captured. Here is an attempt at capturing it:
+
+\begin{argument*}
+
+ \aitem If someone killed the old man, then it was the butler or it was the 
+ gardener. \texpl{premise}
+
+ \aitem Someone killed the old man. \texpl{premise}
+
+ \aitem It was the butler or it was the garderner. \texpl{1,2,MP}
+
+ \aitem It was not the bulter. \texpl{premise}
+
+ \aitem It was the gardener. \texpl{3,4,argument by elimination}
+
+\end{argument*}
+
+The `If A,  then B' construction in premise 1 can also be read as `A only if B' 
+which enables us to capture the `only' in the plain prose version. But this 
+rendering may feel less natural than the one above.
+
+}
+
+
+ \item Only the butler or the gardener could have killed the old man. So if the 
+  butler didn't do it, the gardener must have done it.
+
+\answer{ 
+
+ Let's take this literally and take the conclusion to be the conditional \pp{if 
+ the butler didn't kill the old man, then the gardener killed the old man}.
+
+  \begin{argument*}
+
+   \aitem The butler killed the old man or the gardener killed the old man.  
+   \texpl{premise}
+
+   \aitem The gardener did not kill the old man. \texpl{assumption}
+
+   \aitem The butler killed the old man. \texpl{1,2, argument by elimination}
+
+   \aitem If the gardener did not kill the old man, then the butler killed the 
+   old man. \texpl{1,2,3, conditional weakening}
+
+  \end{argument*}
+
+If you stopped at 3 and accepted that the butler did it, you would accept 
+something based on a mere assumption that the gardener is innocent. That is 
+generally a bad idea. It makes sense, therefore, to weaken your position to just 
+accepting the conditional in 4.
+
+There is another fairly plausible way of reading the argument (one that I did 
+not intend but I have to agree is acceptable), and that is to take it as a way 
+of saying:
+
+  \begin{argument*}
+
+   \aitem The butler killed the old man or the gardener killed the old man.  
+   \texpl{premise}
+
+   \aitem The gardener did not kill the old man. \texpl{premise}
+
+   \aitem The butler killed the old man. \texpl{1,2, argument by elimination}
+
+
+  \end{argument*}
+
+  Notice that 2 is now labeled a premise. So the idea is that it is taken as 
+  somehow known (not just assumed) that the gardener didn't do it.
+
+ }
+
+\end{enumerate}
+
+\subsubsection*{2.}
+
+Put each of the following into a valid argument in standard form. Be creative 
+(i.e., add unstated premises, extra steps, etc. as necessary).
+
+\begin{enumerate}
+
+ \renewcommand{\labelenumi}{\alph{enumi}.}
+\item The new movie, which is directed by Christopher McQuarrie, runs for two 
+ hours and forty-three minutes, and its full title is ``Mission: 
+ Impossible---Dead Reckoning Part One,'' which takes about half an hour to say.  
+ If Part Two, which is due to be released next June, is of similar dimensions, 
+ we’ll be landed with a tale that is more than five hours in the telling.  
+ Concision junkies will have to look elsewhere.
+
+ \answer{
+
+  The first thing to do to identify the conclusion. It seems pretty clear that 
+  the point is that the movie is too long, so let's take that as the conclusion.  
+  The considerations offered in favor of that assessment of the movie are: part 
+  one runs for 2h43m and that with part two the whole story will more than five 
+  hours long. So here is a first stab:
+
+  \begin{argument*}
+
+   \aitem Part 1 is 2h43m long.\texpl{premise}
+
+   \aitem Part 2 is of similar length.\texpl{premise}
+
+   \aitem The whole is more than five hours long. \texpl{1,2, math}
+
+   \aitem If the whole is more than five hours long, then it is too long.  
+   \texpl{premise}
+
+   \aitem It is too long. \texpl{3,4,MP}
+
+  \end{argument*}
+
+  But we might wonder how the author gets to premise 2? What the author says is 
+  that \pp{\emph{if} part 2 is similar dimensions as part 1, then the whole is 
+  more than five hours long}. But why think part 2 will be of similar dimensions?  
+  Here the remark about the lengthy title might help. How about the following to 
+  get support premise 2 above:
+
+  \begin{argument*}
+
+   \aitem The title of part 1 is way too long. \texpl{premise}
+
+   \aitem If the title of the movie is too long, then the director is not 
+   interested in conciseness. \texpl{premise}
+
+   \aitem The director is not interested in conciseness. \texpl{1,2,MP}
+
+   \aitem If the director is not interested in conciseness, then part 2 will be 
+   of similar length as part 1. \texpl{premise}
+
+   \aitem Part 2 will be of similar length as part 1. \texpl{3,4,MP}
+
+  \end{argument*}
+
+  Putting the two arguments together, we get:
+
+  \begin{argument*}
+
+   \aitem Part 1 is 2h43m long.\texpl{premise}
+   
+   \aitem The title of part 1 is way too long. \texpl{premise}
+
+   \aitem If the title of the movie is too long, then the director is not 
+   interested in conciseness. \texpl{premise}
+
+   \aitem The director is not interested in conciseness. \texpl{2,3,MP}
+
+   \aitem If the director is not interested in conciseness, then part 2 will be 
+   of similar length as part 1. \texpl{premise}
+
+   \aitem Part 2 will be of similar length as part 1. \texpl{4,5,MP}
+
+   \aitem The whole is more than five hours long. \texpl{1,6, math}
+
+   \aitem If the whole is more than five hours long, then it is too long.  
+   \texpl{premise}
+
+   \aitem It is too long. \texpl{7,8,MP}
+
+  \end{argument*}
+
+ }
+
+
+\item \emph{Background: In 1839,  Lin Zexu, a high official of China, published 
+  an open letter to Queen Victoria of England calling for the cessation of the 
+  sales of opium in China by British merchants. (The letter went nowhere, China 
+  confiscated the opium stored by traders, and the British Empire responded by 
+ going to war with China in the name of defending the right to free trade---the 
+disgrace known as the Opium War.)}
+
+  Put the reasoning in the following snippet into standard form:
+
+  We have heard that in your own country opium is prohibited with the utmost
+strictness and severity; this is a strong proof that you know full well how 
+hurtful it is to mankind. Since then you do not permit it to injure your own 
+country, you ought not to have the injurious drug transferred to another 
+country.
+
+\answer{
+ 
+ The conclusion is \pp{you ought not to have the injurious drug transferred to 
+ another country}. The explanation for that is \pp{you do not permit opium to 
+ injure your own country}. Here is a reconstruction:
+
+ \begin{argument*}
+
+  \aitem Opium is prohibited with the utmost strictness and severity in your 
+  country.  \texpl{premise}
+
+  \aitem You prohibit opium with the utmost strictness and severity in your 
+  country only if you know how hurtful opium is to mankind. \texpl{premise}
+
+  \aitem You know how hurtful opium is to mankind. \texpl{1,2,MP}
+
+  \aitem If opium is prohibited strictly and severely and you know how hurtful 
+  opium is, then you do not permit opium to injure your own country.  
+  \texpl{premise}
+
+  \aitem You do not permit opium to injure your own country. \texpl{3,4,MP}
+
+  \aitem If you do not permit opium to injure own own country, then you ought 
+  not to permit it to injure another country. \texpl{premise}
+
+  \aitem You ought not to permit opium to injure another country. \texpl{5,6,
+  MP}
+
+  \aitem If you ought not to permit opium to injure another country, then you 
+  ought not to have opium transferred to another country. \texpl{premise}
+
+  \aitem You ought not to have opium transferred to another country. \texpl{7,8,
+  MP}
+
+ \end{argument*}
+
+}
+
+
+\item \emph{The idea that prohibiting the sales of opium is a serious 
+ infringement of liberty was a respectable idea back then. The following are the 
+thoughts of John Stuart Mill, one of the most important and respected British 
+philosophers of the 19th century, writing in 1859.}
+
+ Put Mill's reasoning in standard form:
+
+ These interferences [like the prohibition of the sales of opium] are 
+ objectionable, not as infringements on the liberty of the producer or seller, 
+ but on that of the buyer. ...  If poisons [like opium]  were never bought or 
+ used for any purpose except the commission of murder, it would be right to 
+ prohibit their manufacture and sale.  They may, however, be wanted not only for 
+ innocent but for useful purposes, and restrictions cannot be imposed in the one 
+ case without operating in the other.  ...  [W]hen there is not a certainty, but 
+ only a danger of mischief, no one but the person himself can judge of the 
+ sufficiency of the motive which may prompt him to incur the risk: in this case, 
+ therefore, he ought, I conceive, to be only warned of the danger; not forcibly 
+ prevented from exposing himself to it.
+
+\answer{
+
+The conclusion is that prohibition of the sales of opium infringes on the 
+liberty of the buyer. 
+
+\begin{argument*}
+
+ \aitem If effects of opium are not certain and it is impossible to regulate 
+ only the bad cases, then only the person himself is allowed to judge whether or 
+ not to incur the risk of taking opium.  \texpl{premise}
+
+ \aitem If only the person himself is allowed to judge whether or not to incur 
+ the risk of taking opium, then the prohibition of the sales of opium infringes 
+ on the liberty of the buyer. \texpl{premise}
+
+ \aitem Opium is used for evil, innocent, and useful purposes. \texpl{premise}
+
+ \aitem If opium is used for evil, innocent, and useful purposes, then effects 
+ of opium are uncertain. \texpl{premise}
+
+ \aitem The effects of opium are uncertain. \texpl{3,4,MP}
+
+ \aitem It is impossible to regulate only the bad cases of opium use.  
+ \texpl{premise}
+
+ \aitem The effects of opium are uncertain and it is impossible to regulate only 
+ the bad cases of opium use. \texpl{from 5,6}
+
+ \aitem Only the person himself is allowed to judge whether or not to incur the 
+ risk of taking opium. \texpl{1,7,MP}
+
+ \aitem The prohibition of sales of opium infringes on the liberty of the buyer.  
+ \texpl{2,6,MP}
+
+\end{argument*}
+}
+
+
+\end{enumerate}

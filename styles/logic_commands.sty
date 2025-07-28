@@ -1,0 +1,401 @@
+%!TEX root = main.tex
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{logic_commands}
+\RequirePackage{
+amsthm,
+arydshln,
+fancyhdr,
+hyperref,
+mdframed,
+subfig,
+ragged2e,
+qtree,
+graphicx,
+xfrac,
+circledsteps,
+forest,
+makecell,
+thmtools,
+}
+
+\newcommand{\oldlabel}{\label}
+
+%\renewcommand{\label}[1]{\oldlabel{#1}}
+
+\definecolor{lgray}{gray}{0.95}
+
+%\usepackage{arydshln}
+
+\newcommand{\loadexercise}[1]{\input{#1}}
+
+\renewcommand{\textcircled}[1]{\Circled{#1}}
+
+\newcommand{\textfrac}[2]{#1/#2}
+
+\newcommand{\p}[1]{${#1}$}%for type setting formal stuff
+
+\newcommand{\pp}[1]{$\langle$#1$\rangle$}%surround text with angled brackets
+
+\newcommand{\pq}[1]{`#1'}%surround text with single quotation marks
+
+\newcommand{\m}[1]{\emph{#1}}%for type setting as if usual math mode.
+\newcommand{\lset}[1]{$\{#1\}$}
+
+\newcommand{\llset}[1]{\{#1\}}
+
+\newcommand{\cali}[1]{\ensuremath{\mathcal #1}}
+
+
+\newcommand{\NN}{\ensuremath{\mathbb{N}}}
+%***********************************
+%  TEXT DECORAITONS
+%***********************************
+%emphasize using boldface:
+\newcommand{\bemph}[1]{\textbf{#1}}
+
+
+
+%**********************************
+%	SYMBOLS
+%**********************************
+%
+%therefore
+\def\ltherefore{\ensuremath{\ensuremath{\therefore}}}
+
+%negation
+\def\lnot{\ensuremath{\neg}} 
+
+%disjunction
+\def\lor{\ensuremath{\mathrel\vee}}
+
+%conjunction
+\def\land{\ensuremath{\mathrel\wedge}}
+
+%material implication
+\def\limplies{\ensuremath{\supset}}
+
+%material bi-conditional
+\def\liff{\ensuremath{\leftrightarrow}}
+
+%NAND
+\def\lnand{\ensuremath{\uparrow}}
+
+%NOR
+\def\lnor{\ensuremath{\downarrow}}
+
+%universal quantifier
+\def\lforall{\ensuremath{\forall}}
+
+%existential quantifier
+\def\lthereis{\ensuremath{\exists}}
+
+%modal operators
+\def\lnec{\ensuremath{\Box}}
+\def\lpos{\ensuremath{\Diamond}}
+
+
+%derivable
+\def\lproves{\ensuremath{\vdash}}
+\def\lprovesnot{\ensuremath{\nvdash}}
+
+%semantically provable
+\def\lentails{\ensuremath{\vDash}}
+\def\lentailsnot{\ensuremath{\nvDash}}
+
+%empty set
+\def\nullset{\ensuremath{\emptyset}}
+
+%union set
+\def\union{\ensuremath{\cup}}
+%the false
+\def\False{\ensuremath\bot}
+
+%composition sign for generic sentential connective
+\newcommand*{\comp}[1][]{\ensuremath{\otimes_{#1}}}
+
+%Language L
+\newcommand*\lL[1][]{\ensuremath{\mathcal{L}_{#1}}}
+
+%blank as in "fill in the blank"
+\newcommand*{\blank}{\underline{\hspace*{2.5em}}}
+
+%\renewcommand{\phi}{\varphi}
+
+%identity sign
+\setlength{\medmuskip}{1mu}
+\newcommand{\ident}[2]{#1\mathbin{=}#2}
+\newcommand{\nident}[2]{#1\mathbin{\neq}#2}
+
+%strict conditional
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
+\DeclareMathSymbol{\boxright}{\mathrel}{symbolsC}{128}
+
+%counterfactual
+\newcommand{\lcimplies}{\ensuremath{%
+\mathrel{\Box\kern-1.5pt\raise0pt\hbox{$\mathord{\rightarrow}$}}}}
+
+%definition
+\newcommand{\defn}{~\ensuremath{=_{def}}}
+
+
+\newcommand*{\conj}[1]{\ensuremath{\overline{#1}}}
+
+% Sequent
+\newcommand{\seq}[2]{#1 \lproves #2}
+
+\newcommand{\sqA}[4][0.25]{\makebox[#1\textwidth][l]
+ {\ensuremath{#2}} \makebox[1em]
+{\lproves}\ \ensuremath{#3}\expl{#4}}
+
+\newcommand{\sqAs}[4][0.25]{\makebox[#1\textwidth][l]
+ {\footnotesize{\ensuremath{#2}}} \makebox[1em]
+{\lproves}\ \ensuremath{#3}\expl{#4}}
+
+% Primitive Inference Rules 
+\newcommand{\negI}{\ensuremath{\lnot}I}
+\newcommand{\negE}{\ensuremath{\lnot}E}
+
+\newcommand{\conjI}{\ensuremath{\land}I}
+\newcommand{\conjE}{\ensuremath{\land}E}
+
+\newcommand{\disjI}{\ensuremath{\lor}I}
+\newcommand{\disjE}{\ensuremath{\lor}E}
+
+
+\newcommand{\condI}{\ensuremath{\limplies}I}
+\newcommand{\condE}{\ensuremath{\limplies}E}
+
+
+\newcommand{\uniE}{\ensuremath{\lforall}E}
+\newcommand{\uniI}{\ensuremath{\lforall}I}
+
+\newcommand{\exE}{\ensuremath{\lthereis}E}
+\newcommand{\exI}{\ensuremath{\lthereis}I}
+
+
+\newcommand{\iI}{\ensuremath{=}I}
+\newcommand{\iE}{\ensuremath{=}E}
+
+\newcommand{\necE}{\lnec E}
+\newcommand{\necI}{\lnec I}
+\newcommand{\posE}{\lpos E}
+\newcommand{\posI}{\lpos I}
+
+
+%**********************************
+%	ENVIRONMENTS
+%**********************************
+
+
+
+% slist is for listing sentences. Their numbers are
+% for every section.
+\newcounter{sentencenum}[section]
+\newenvironment{slist}%
+{\begin{enumerate}{\setcounter{enumi}{\value{sentencenum}}}}%
+{\setcounter{sentencenum}{\value{enumi}}\end{enumerate}}
+
+% like slist but takes an optional argument specifying number of first item.
+% Will not affect sentencenum counter.
+
+\newenvironment{slist*}[1][1]
+{\begin{enumerate}\setcounter{enumi}{#1}\addtocounter{enumi}{-1}}%
+{\end{enumerate}}
+
+
+% example is for typesetting examples.
+\theoremstyle{definition}
+\newtheorem{exmpl}{Example}[section]
+\newenvironment{Example}%
+{\begin{exmpl}\leftskip=2em\rightskip=2em}{\end{exmpl}
+\leftskip=0pt\rightskip=0pt}
+
+
+
+\declaretheorem[style=definition,numberwithin=section
+]{proposition}
+
+\declaretheorem[style=definition, sibling=proposition]{definition}
+
+\declaretheorem[name=Proposition,style=definition,qed=$\boxdot$,
+numberwithin=section
+]{propositionD}
+
+\declaretheorem[name=Definition,style=definition,qed=$\boxdot$, 
+sibling=proposition]
+{definitionD}
+
+\declaretheorem[style=definition,sibling=proposition]{theorem}
+
+\declaretheorem[name=Theorem, style=definition,qed=$\boxdot$,sibling=proposition]
+{theoremD}
+
+
+% For typesetting lists of theorems
+\newcounter{thmnum}
+\newcommand{\thrm}[2][]{\item \textbf{\stepcounter{thmnum}
+ #1}\\\p{#2}}
+\newenvironment{theorems}{\begin{description}}{\end{description}}
+
+
+\newcommand{\thrmNamed}[2][]{\item \textbf{#1}\\\p{#2}}
+\newcommand{\thrmN}[2][]{\item \textbf{\stepcounter{thmnum}
+ #1}\\{#2}}
+
+% \newenvironment{proof}{\emph{Proof.}}{}
+
+
+% for displaying keys.
+\newcommand{\lkeylabel}[1]{{\makebox[6ex][c]{ #1:}}}
+\newenvironment{lkey}{\begin{list}{}{\renewcommand{\makelabel}{\lkeylabel}}
+\setlength{\itemsep}{-0.25em}\sffamily}{\rmfamily\end{list}}
+
+\newenvironment{lkey*}{\begin{list}{}{\renewcommand{\makelabel}{\lkeylabel}}
+\setlength{\itemsep}{-0.25em}}{\end{list}}
+
+% for putting remarks inside a box.
+%\newcommand{\remarkbox}[1]{\begin{center}\framebox{\parbox{0.95\textwidth}{#1}}
+%\end{center}}
+\newcommand{\remarkbox}[1]{\begin{mdframed}#1\end{mdframed}}
+
+\newcommand{\exbox}[1]{\begin{mdframed}#1\end{mdframed}}
+
+% for displaying rules
+\newenvironment{infrule}{\begin{FlushLeft}\begin{description}}
+{\end{description}\end{FlushLeft}}
+
+% for typesetting definitions.
+%\theoremstyle{definition}
+%\newtheorem{dfn}{Definition}
+%\newenvironment{definition}{\begin{quote}\begin{dfn}}{\end{dfn}\end{quote}}
+
+%\theoremstyle{definition}
+%\newtheorem{lemma}{Lemma}[section]
+
+
+
+\newcommand{\noshow}[1]{}
+
+\newcommand{\mask}[1]{\_\_}
+
+%**********************************
+%	ARGUMENTS
+%**********************************
+\newcounter{enummain}
+\newcounter{argnum}[section]
+\newcounter{argstore}
+\newcounter{tmp}
+
+
+\newenvironment{argument}%
+{\begin{enumerate}}
+  {\end{enumerate}}
+
+  \newenvironment{argumentNamed}[1][]%
+{\textbf{#1.}\begin{enumerate}}
+  {\end{enumerate}}
+
+
+  %argument* starts the lines at no.1 but stores line numbers like argument
+\newenvironment{argument*}%
+{\begin{enumerate}\setcounter{argstore}{\value{argnum}}\setcounter{argnum}{0}}
+ {
+\addtocounter{argnum}{\value{argstore}}\end{enumerate}}
+
+\newenvironment{argumentNamed*}[1][]%
+{\textbf{#1.}\vspace{-1em}\begin{enumerate}\setcounter{argstore}{\value{argnum}}
+   \setcounter{argnum}
+ {0}}
+ {
+\addtocounter{argnum}{\value{argstore}}\end{enumerate}}
+%like argument but force counting at number given as optional argument. Does not 
+%affect running argument line numbers. 
+\newenvironment{argumentN}[1][1]%
+{\begin{enumerate}\setcounter{argstore}{\value{argnum}}\setcounter{argnum}{#1}
+ \addtocounter{argnum}{-1}}
+ {
+\addtocounter{argnum}{\value{argstore}}\end{enumerate}}
+
+
+\def\aitem{\item[\stepcounter{argnum}\arabic{argnum}.]}
+\def\aergo{\item[$\ltherefore$~\stepcounter{argnum}\arabic{argnum}.]}
+\def\ergo{\item[$\ltherefore$~\stepcounter{enumi}\theenumi.]}
+
+\newcommand{\texpl}[1]{\dotfill{#1}}
+\newcommand{\expl}[1]{\hspace{2em} \dotfill #1}
+\newcommand{\explx}[1]{\hspace{0.2em} \dotfill #1}
+
+\newcommand{\ai}[4][0.2]{\aitem \sqA[#1]{#2}{#3}{#4}} 
+
+
+\newcommand{\aisub}[5][0.2]{\aitem \makebox[#1\textwidth][l]
+ {\ensuremath{#3}} \makebox[2em]
+{$\lproves_{#2}$}\ \ensuremath{#4}\expl{#5}}
+
+\newcommand{\ais}[4][0.2]{\aitem \sqAs[#1]{#2}{#3}{#4}} 
+% for abbreviating formulae 
+\newcommand{\fA}{}
+\newcommand{\fB}{}
+\newcommand{\fC}{}
+\newcommand{\fD}{}
+\newcommand{\fE}{}
+
+
+
+
+
+%**********************************
+%	TRUTH TABLES
+%**********************************
+
+\newcommand{\showtt}[1]{\parbox{0.48\linewidth}{\input{sup/#1}}}
+
+\newcommand{\showttwide}[1]{\input{sup/#1}}
+\newcommand{\var}[1]{\emph{#1}}
+
+
+%**********************************
+%	EXERCISES
+%**********************************
+
+\newenvironment{exercises}%
+{\subsection*{Exercises}\begin{enumerate}}
+%\addcontentsline{toc}{subsection}{Exercises}}%
+{\end{enumerate}}
+
+\newcommand{\sect}[1]{\vskip 1em \item[] \hskip -1.5em \textbf{Section #1}}
+\newcommand{\opt}[1]{\vskip 1em \item[] \hskip -1.5em \textbf{Optional: #1}}
+
+\newcommand{\answer}[1]{}
+\newcommand{\answerk}[1]{}
+
+\newcommand{\cover}[1]{}
+
+\newcommand{\coverbox}[1]{}
+
+\newcommand{\error}[1]{#1}
+
+\newcommand{\mc}[1]{#1}
+
+\newcommand{\opts}[2]{#1}
+
+\newcommand{\anscircled}[1]{#1}
+
+%*********************************
+% Mostly for Handouts
+%*********************************
+
+\newcommand{\twocolumns}[2]{\begin{minipage}[t]{0.45\txw}#1\end{minipage}
+\hspace{0.075\txw}\begin{minipage}[t]{0.45\txw}#2\end{minipage}
+\vskip 0.75em}
+
+\newcommand{\dotline}{\leavevmode\xleaders\hbox{\tiny ~.~}\hfill\kern0pt
+
+}
+
+
+\newcommand{\txw}{\textwidth}
+\newcommand{\txh}{\textheight}
+
+\newcommand{\tsup}[1]{\textsuperscript{#1}}

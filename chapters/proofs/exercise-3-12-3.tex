@@ -1,0 +1,26 @@
+\begin{argument*}
+
+\ai{\Gamma}{P \land (Q \lor R)}{premise}
+
+\ai{\Gamma}{P}{1,\conjE}
+
+\ai{\Gamma}{Q \lor R}{1,\conjE}
+
+\ai{Q}{Q}{A}
+
+\ai{\Gamma,Q}{P \land Q}{2,4,\conjI}
+
+\ai{\Gamma,Q}{(P \land Q) \lor (P \land R)}{5,\disjI}
+
+\ai{R}{R}{A}
+
+\ai{\Gamma,R}{P \land R}{2,7,\conjI}
+
+\ai{\Gamma,R}{(P \land Q) \lor (P \land R)}{8,\disjI}
+
+\ai{\Gamma,\Gamma,\Gamma}{(P \land Q) \lor (P \land R)}{3,6,9,\disjE}
+
+\ai{\Gamma}{(P \land Q) \lor (P \land R)}{10}
+
+\end{argument*}
+

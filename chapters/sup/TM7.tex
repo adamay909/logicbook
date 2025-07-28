@@ -1,0 +1,144 @@
+
+
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+ 
+ \node(start) [terminal] {START};
+ 
+ \node(AS1) [decision, below=0.5cm of start] {On 0?};
+
+ \node(AS2) [process, left=of AS1] {write 0};
+
+ \node(AS3) [process, below=of AS2] {move right};
+
+ \node (AS4) [process, right=of AS1] {write 1};
+
+ \node (AS5) [process, below=of AS4] {move left};
+
+ \node (AS6) [decision, below=2cm of AS1] {On 0?};
+
+ \node (AS7) [process, right=of AS6] {write 1};
+
+ \node (AS7-1) [process, below=of AS7] {move left}; 
+
+
+
+ \node(AS9) [process, left=of AS6] {write 1};
+
+ \node(AS10) [process, below=of AS9] {move left};
+
+
+
+ \draw[arrow] (start)--(AS1);
+
+ \draw[arrow] (AS1)--node[anchor=south]{Yes}(AS2);
+
+ \draw[arrow] (AS2)--(AS3);
+
+ \draw[arrow] (AS3) -|(AS1);
+
+ \draw[arrow] (AS1)--node[anchor=south]{No}(AS4);
+
+ \draw[arrow] (AS4)--(AS5);
+
+ \draw[arrow] (AS5)--++(0,-0.75)-|(AS6);
+
+ \draw[arrow] (AS6)--node[anchor=south]{Yes}(AS7);
+
+ \draw[arrow] (AS7)--(AS7-1);
+
+ \draw[arrow] (AS6)--node[anchor=south]{No}(AS9);
+
+ \draw[arrow] (AS9)--(AS10);
+
+ \draw[arrow] (AS10)-|(AS6);
+
+% \draw[arrow] (AS1)--(AS4);
+
+% \draw[arrow] (AS4)--(AS5);
+
+
+
+ \node(S1) [decision, below=2cm of AS6] {On 0?};
+
+ \node(S2) [process, left=of S1] {write 0};
+
+ \node(S3) [process, below=of S2] {move right};
+
+ \node (S4) [process, right=of S1] {write 1};
+
+ \node (S5) [process, below=of S4] {move right};
+
+ \node (S6) [decision, below=2cm of S1] {On 0?};
+
+ \node (S7) [process, right=of S6] {write 1};
+
+ \node (S7-1) [process, below=of S7] {move right}; 
+
+ \node (S8) [terminal, below=0.5cm of S7-1] {STOP};
+
+ \node(S9) [process, left=of S6] {write 1};
+
+ \node(S10) [process, below=of S9] {move right};
+
+
+ \draw[arrow] (AS7-1)--++(0,-0.75)-|(S1);
+
+ \draw[arrow] (S1)--node[anchor=south]{Yes}(S2);
+
+ \draw[arrow] (S2)--(S3);
+
+ \draw[arrow] (S3) -|(S1);
+
+ \draw[arrow] (S1)--node[anchor=south]{No}(S4);
+
+ \draw[arrow] (S4)--(S5);
+
+ \draw[arrow] (S5)--++(0,-0.75)-|(S6);
+
+ \draw[arrow] (S6)--node[anchor=south]{Yes}(S7);
+
+ \draw[arrow] (S7)--(S7-1);
+
+ \draw[arrow] (S7-1)--(S8);
+
+ \draw[arrow] (S6)--node[anchor=south]{No}(S9);
+
+ \draw[arrow] (S9)--(S10);
+
+ \draw[arrow] (S10)-|(S6);
+
+% \draw[arrow] (S1)--(S4);
+
+% \draw[arrow] (S4)--(S5);
+
+
+ \node[draw,dashed,fit=(AS1) (AS2) (AS3) (AS4) (AS5)] (s0) {};
+
+ \node[draw,dashed,fit=(AS6) (AS7) (AS7-1) (AS9) (AS10)] (s1) {};
+
+ \node[draw,dashed,fit=(S1) (S2) (S3) (S4) (S5)] (s2) {};
+
+ \node[draw,dashed,fit=(S6) (S7) (S7-1) (S9) (S10)] (s3) {};
+
+\end{tikzpicture}
+
+\end{document}
+
+
+
+
+
+\end{tikzpicture}
+
+\end{document}
+
+
+

@@ -1,0 +1,104 @@
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+ 
+ \node(start) [terminal] {START};
+ 
+ \node(s1) [decision, below=of start] {Is \p{\lnot}?};
+
+ \node(s2) [process, below=of s1] {move right until not \p{\lnot}};
+
+ \node(s3) [decision, below=of s2] {is atomic sentence?};
+
+ \node(s4) [process, below=of s3] {move right until end of atomic sentence};
+
+ \node(s5) [decision, below=of s4] {at end of entire string?};
+
+ \node(s6) [process, below=of s5] {delete everything except first symbol}
+ ;
+
+\node(s6-1) [decision, below=of s6] {is \p{\lnot?}}; 
+
+ \node(s6-2) [terminal, right=of s6-1] {STOP};
+
+ \node(s6-3) [process, left=of s6-1] {erase everything and print `atomic 
+  sentence'}; 
+
+ \node(s6-4) [terminal, below=of s6-3]{STOP};
+
+ \node(s7) [decision, right=of s5] {is next symbol a logically connective?};
+
+ \node(s8) [process, below=of s7] {delete everything except the logical 
+  connective};
+
+ \node(s9) [terminal, below=of s8] {STOP};
+
+ \node(s10) [process, right=of s7] {erase everything and print `not wff'};
+
+ \node(s11) [terminal,below=of s10] {STOP};
+
+ \node(s12) [decision, right=of s3] {Is logical connective?};
+
+ \node(s13) [process, above=of s12] {erase everything and print `not wff'};
+
+ \node(s14) [terminal, above=of s13] {STOP};
+
+ \node(s15) [process, right=of s12] {erase everything and print `can't handle 
+  brackets'};
+
+  \node(s16) [terminal, right=of s15] {STOP};
+
+  \draw[arrow](s6-1)--(s6-2); 
+
+  \draw[arrow](s6-1)--(s6-3);
+
+   \draw[arrow](s6-3)--(s6-4);
+
+\draw[arrow](start)--(s1);
+
+\draw[arrow](s1)--node[anchor=west]{Yes}(s2);
+
+\draw[arrow](s2)--(s3);
+
+\draw[arrow](s3)--node[anchor=west]{Yes}(s4);
+
+\draw[arrow](s4)--(s5);
+
+\draw[arrow](s5)--node[anchor=west]{Yes}(s6);
+
+\draw[arrow](s6)--(s6-1);
+
+\draw[arrow](s5)--node[anchor=south]{No}(s7);
+
+\draw[arrow](s7)--node[anchor=south]{No}(s10);
+
+\draw[arrow](s7)--node[anchor=west]{Yes}(s8);
+
+\draw[arrow](s8)--(s9);
+
+\draw[arrow](s10)--(s11);
+
+\draw[arrow](s3)--node[anchor=south]{No}(s12);
+
+\draw[arrow](s12)--node[anchor=west]{Yes}(s13);
+
+\draw[arrow](s13)--(s14);
+
+\draw[arrow](s12)--node[anchor=south]{No}(s15);
+
+\draw[arrow](s15)--(s16);
+
+\draw[arrow](s1)--node[anchor=south]{No}++(-3,0)|-(s3);
+
+\end{tikzpicture}
+
+\end{document}
+
+
+

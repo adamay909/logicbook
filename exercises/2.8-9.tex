@@ -1,0 +1,74 @@
+\section*{Exercises for 2.8 and 2.9}
+\newcommand{\lbhelper}[1]{\input{|"lbhelper #1"}}
+\begin{enumerate}
+
+ \item  Take the procedure for enumerating class-1 sentences. The procedure
+lists sentences in groups of five (five sentences for each fraction). List
+the first 3 groups of sentences that the procedure lists (that’s 15 sentences in 
+total).
+\answer{
+
+	Let \p{S_1, S_2, S_3, ...} be the sentences of class-1. Then:
+
+ The first three fractions enumerated on Figure 2.1 are 1/1, 2/1, 1/2. We plug 
+ the numerator into \p{n} and the denominator into \p{m}.  So the first three 
+ groups of sentences are:
+
+ \p{S_1, \lnot S_1, S_1\land S_1, S_1\lor S_1, S_1\limplies S_1},
+ \p{S_2, \lnot S_2, S_2\land S_1, S_2\lor S_1, S_2\limplies S_1},
+ \p{S_1, \lnot S_1, S_1\land S_2, S_1\lor S_2, S_1\limplies S_2}
+}
+
+\item The procedure for enumerating class-1 sentences lists sentences in
+ groups of five. One of them is \lbhelper{-ab -f KP_nP_m}. Why is it ok not to 
+ list \lbhelper{-ab -f KP_mP_n}?
+
+\answer{
+
+ \lbhelper{-ab -f KP_nP_m} is listed when we encounter n/m, and we know 
+ \lbhelper{-ab -f KP_mP_n} will also be listed eventually because  for every 
+ fraction n/m, the fraction m/n will also be listed eventually.  
+
+Quite a few of you answered that it is because \p{A_m\land A_n} is logically 
+equivalent to \p{A_n\land A_m}. But that wouldn't explain why it is also ok not 
+to list \p{A_m\limplies A_n}. 
+
+}
+
+\item  ``Even a formal language with infinitely many atomic sentences could
+not express all the ways the world could be.'' Is this true or false? Explain.
+
+\answer{
+
+ Each interpretation represents a way the world could be. Given infinitely many 
+ atomic sentences, there are more interpretations than there are natural 
+ numbers.  But even with infinitely many atomic sentences, there are only as 
+ many sentences as there are natural numbers. So the formal language cannot 
+ express all the ways the world could be.
+
+Any language whose sentences are composed of countably many characters has only 
+as many sentences as there are natural numbers. In particular, if a language can 
+be presented on a computer screen, it only has as many sentences as there are 
+natural numbers---because a computer must represent a sentence by a natural 
+number. Now consider this:
+
+For any subset S of natural numbers, there is a fact whether or not the number 1 
+is in that subset. Could we express for each subset S of natural numbers the 
+claim that the number 1 is a member of S? The answer is No: there are more 
+subsets of natural numbers than there are natural numbers, but only as many 
+sentences as there are natural numbers. So there are uncountably many very 
+simple mathematical facts that no language---formal or otherwise---of ours can 
+even express. 
+
+And if they can't be expressed, they can't be proven either. If you are 
+interested in mathematics, this is a point worth letting sink in. Just to repeat 
+the point:  no matter how powerful our mathematical language, there are 
+uncountably many subsets of natural numbers of which we cannot even ask whether 
+1 is a member of that set. And once you see the point, you will notice that 
+there many more mathematical facts we cannot even express, let alone prove.
+
+}
+
+\end{enumerate}
+
+

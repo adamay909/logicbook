@@ -1,0 +1,2011 @@
+
+
+
+
+\section{Sentential Logic and Its Theorems}\label{sec:theorems}
+
+So far, the derivations we have seen had premises.  Let us move to derivations 
+that have no premises. You might wonder how there could be derivations without 
+premises. Don't we need some starting points and aren't they the premises? But 
+in our proof system it's easy to construct a derivation without premises.  
+Consider:
+
+\input{\prdir/identity}
+
+There are two points to note about this derivation. First, it has no 
+premises---just check the annotations. Secondly, the concluding sequent has an 
+empty datum. Let me discuss them in order.
+
+The derivation has no premises. But it does have an assumption.  A premise-less 
+derivation is a derivation that has no premises.  But that does not mean it 
+cannot have assumptions. The above is an example of that.  And notice that we do 
+have an inference rule for getting to our assumptions: the Assumption 
+Introduction rule.  So a premise-less derivation can be constructed using 
+nothing more than our rules of inference.  The typical premises of the 
+derivations in the previous sections require some work to get hold of---often 
+that work is empirical research as well as some philosophical reflection.  But 
+premise-less derivations require no appeals whatever to knowledge generated 
+outside of our proof system.  Such derivations are of particular interest to the 
+study of logic because it means that there are things we can figure out via 
+logic independently of any other sources of knowledge. We will call our proof 
+system combined with our characterization of a formal language \lL{} a 
+\emph{system of sentential logic}, or just \emph{sentential logic} for short.  
+In this chapter, we will be exploring important features of sentential logic.
+
+We will call a premise-less derivation a \emph{proof}, and when we can derive a 
+sequent through a proof, we say that we have proved the sequent. So a multi-line 
+proof proves each sequent that appears in the proof. Since a derivation can only 
+be of finite length, the same applies to proof. 
+
+Now to the second point of interest. The concluding sequent, line 4, has an 
+empty datum.  When we can prove a sequent that has an empty datum, we call the 
+succedent of the sequent a \emph{theorem} of sentential logic. And in such cases, 
+we will also say that we have proved the theorem. Notice that what's called the 
+theorem is the succedent of the relevant sequent. That is, a theorem is a 
+sentence of \lL{} and not a sequent.  What does such a theorem tell us? 
+
+A sequent \p{\seq{\Gamma}
+{s}} means that \p{\Gamma} conclusively supports \p{s}. So if we accept all the 
+claims in \p{\Gamma}, we must accept the claim that \p{s}. In the case of a 
+theorem \p{t}, we can prove \p{\seq{\Gamma}{t}} there \p{\Gamma} is empty. This 
+means means that we must accept \p{s} regardless of whatever else we accept.  
+That is, we must accept \p{s} regardless of what we believe and know about the 
+world. 
+
+Some theorems are more interesting than others.  The more interesting ones often 
+have commonly used names. The above theorem tells us that it's a theorem that a 
+sentence implies itself. It is known as \textbf{Identity (ID)}.
+
+
+
+Conditional Introduction is an easy way of inferring to a theorem. The reason it 
+works is that when you apply the inference rule, the number of items in the 
+datum decreases by one. Conditional Introduction is not the only inference rule 
+with this feature. Negation Introduction also has this feature. Recall:
+
+\begin{description}
+ \item[Negation Introduction (\negI)] From \p{\seq{\Gamma, s_1}
+  {s_2}} and \p{\seq{\Delta, s_1}{\lnot s_2}}, infer \p{\seq{\Gamma, \Delta}
+ {\lnot s_1}}.
+\end{description}
+
+We start with three items, \p{\Gamma}, \p{\Delta}, and \p{s_1} on the datum side 
+and end with only two: \p{\Gamma}, \p{\Delta}. This means that \p{\negI} can 
+also be used to prove a theorem. Here is an example:
+
+\input{\prdir/nonContradiction}
+
+Given the contradiction \p{p \land \lnot p}, its negation is a theorem of 
+sentential logic.  This is known as \textbf{Non-Contradiction (NC)}.
+
+Here is another important theorem closely related to Non-Contradiction. 
+Non-Contradiction says that we can prove that \p{p} is not both true and 
+not-true. We can also prove that \p{p} is either true or not-true---that is, it 
+cannot be that \p{p} is neither true nor false.  This is known as 
+\textbf{Excluded Middle (EM)}. Here is a proof:
+\newpage
+
+\input{\prdir/excludedMiddle2}
+
+
+Notice that \p{p} in the  proofs of the theorems above is a sentential variable.  
+So strictly speaking the proofs are templates of proofs. And a theorem is not a 
+particular sentence of \lL{} but a sentence template.  You can plug any actual 
+sentence of \lL{} into \p{p} and get an actual proof of a sentence. A theorem of 
+sentential logic, therefore, tells us that any sentence of a particular form can 
+be derived using the derivation rules of our proof system without needing any 
+extra knowledge. From now on, we will mainly be discussing such proof 
+templates---but we will call them proofs for brevity.
+
+In order to avoid confusions, we will make the following stipulation: you are 
+allowed to derive a sequent with an empty datum only if you can do so without 
+depending on a premise. This ensures that if we can derive \p{\lproves s}, \p{s} 
+is a theorem.
+
+\section{Working with Proof Templates}
+
+
+Given a proof template, you can replace a variable with any other variable and 
+that will make no difference so long as you make sure that you replace 
+consistently throughout.  For instance, take the first proof from the previous 
+section:
+
+\begin{argument}
+
+ \aitem \sqA{p}{p}{A}
+ \aitem \sqA{}{p\limplies p}{1,\condI}
+
+\end{argument}
+
+You can replace \p{p} with \p{s} throughout to get:
+
+\begin{argument}
+
+ \aitem \sqA{s}{s}{A}
+ \aitem \sqA{}{s\limplies s}{3,\condI}
+
+\end{argument}
+
+You can also plug complex sentences into \p{p}. E.g., you could plug \p{\lnot A} 
+into \p{p} and get:
+
+\begin{argument}
+
+ \aitem \sqA{\lnot A}{\lnot A}{A}
+ \aitem \sqA{}{\lnot A\limplies \lnot A}{5,\condI}
+
+\end{argument}
+
+You can plug the negation of any sentence into \p{p} and get a fine proof.  That 
+means you can replace \p{p} with \p{\lnot q} and get another fine proof template:
+
+\begin{argument}
+
+ \aitem \sqA{\lnot q}{\lnot q}{A}
+ \aitem \sqA{}{\lnot q\limplies \lnot q}{7,\condI}
+
+\end{argument}
+
+In fact, you can replace \p{p} with any complex sentence and that means that you 
+can replace \p{p} with any complex sentence template. E.g., the following is 
+fine:
+\begin{argument}
+
+ \aitem \sqA{q\land s}{q\land s}{A}
+ \aitem \sqA{}{(q\land s)\limplies (q\land s)}{9,\condI}
+
+\end{argument}
+
+Such systematic replacements of variables make no difference to the proof---just 
+think about how the inference rules work.  So you may rewrite theorems by 
+replacing sentence variables with other sentence variables or with sentence 
+templates.  This will make life easier in what follows.
+
+Be careful that you only make replacements and not engage in illicit 
+derivations. For instance, you can do:
+
+\begin{argument}
+ \aitem \sqA{\lnot\lnot r}{\lnot\lnot r}{A}
+ \aitem \sqA{}{\lnot\lnot r \limplies \lnot\lnot r}{11,\condI}
+\end{argument}
+
+But you may \emph{\textbf{not}} delete the double negations in line 12  unless 
+you can prove that that is ok (it's not that difficult to prove, but you 
+absolutely must prove it). 
+
+
+
+
+
+\section{More Theorems of Sentential Logic}\label{sec:theoremList}
+
+Here is a theorem known as \textbf{DeMorgan's Law (DM)} (there are a few other 
+theorems known by the same name):
+
+\input{\prdir/deMorgan1}
+
+
+Theorems can be proven from assumptions only and that means we could insert the 
+proof of a theorem into any other proof without disturbing it.  And that can be 
+useful. In order to save space, time, and energy, you do not have to restate the 
+proof of a theorem provided you have already proven it somewhere. We name 
+theorems that we have proven, and in the annotation we just state the name of 
+the theorem.  The proof of the following theorem, \textbf{Implication (IM)}
+is an example:
+
+%Prove \p{\seq{}{(p\limplies q)\limplies (\lnot p\lor q)}}
+
+\begin{argumentN}[12]
+%generated by gentzen
+
+\ai{p\limplies q}{p\limplies q}{A}
+
+\ai{\lnot (\lnot p\lor q)}{\lnot (\lnot p\lor q)}{A}
+
+\ai{}{\lnot (\lnot p\lor q)\limplies (\lnot \lnot p\land \lnot q)}{DM}
+
+\ai{\lnot (\lnot p\lor q)}{\lnot \lnot p\land \lnot q}{13,14,\condE}
+
+\ai{\lnot (\lnot p\lor q)}{\lnot \lnot p}{15,\conjE}
+
+\ai{\lnot (\lnot p\lor q)}{p}{16,\negE}
+
+\ai{p\limplies q, \lnot (\lnot p\lor q)}{q}{12,17,\condE}
+
+\ai{\lnot (\lnot p\lor q)}{\lnot q}{15,\conjE}
+
+\ai{p\limplies q}{\lnot \lnot (\lnot p\lor q)}{18,19,\negI}
+
+\ai{p\limplies q}{\lnot p\lor q}{20,\negE}
+
+\ai{}{(p\limplies q)\limplies (\lnot p\lor q)}{21,\condI}
+
+\end{argumentN}
+
+
+On line 14 we just state the theorem without giving its proof---we could, but it 
+would be a lot of work. The annotation tells us where to look for the proof.  
+Note that we replaced \p{p} in our proof of DeMorgan with \p{\lnot p}.
+
+
+Given Implication, we can give a shorter looking  proof of Excluded Middle which 
+may be easier to see through given the definition of \p{\limplies}:
+%Prove \p{\seq{}{\lnot p\lor p}}
+
+\begin{argumentN}[23]
+%generated by gentzen
+
+\ai{}{p\limplies p}{ID}
+
+\ai{}{(p\limplies p)\limplies (\lnot p\lor p)}{IM}
+
+\ai{}{\lnot p\lor p}{23,24,\condE}
+
+\end{argumentN}
+
+
+
+
+This proof looks short because instead of giving an explicit proof of 
+Implication, we merely state the theorem. Appealing to theorems proved elsewhere 
+is a real time and space saver.
+
+\subsection{Some useful theorems}
+
+Here are some theorems that are often useful. Most of the names are commonly 
+used ones. Notice that several related but distinct theorems have the same name 
+(e.g., DeMorgan).
+
+If you find yourself appealing to these theorems, use the name of the theorem in 
+your annotations: 
+
+\newpage
+
+
+\begin{theorems}
+
+ \thrm[Identity (ID)]{\plshn{Cpp}}
+
+\thrm[ Non-Contradiction (NC)]{\plshn{NKpNp}}
+
+\thrm[ Excluded Middle (EM)]{\plshn{ApNp}}
+
+\thrm[ DeMorgan  (DM)]{\plshn{CNApqKNpNq}}
+
+\thrm[ DeMorgan  (DM)]{\plshn{CKNpNqNApq}}
+
+\thrm[DeMorgan  (DM)]{\plshn{CNKpqANpNq}}
+
+\thrm[DeMorgan  (DM)]{\plshn{CANpNqNKpq}}
+
+\thrm[ Implication (IM)]{\plshn{CCpqANpq}}
+
+\thrm[ Elimination (EL)]{\plshn{CApqCNpq}}
+
+\thrm[ Contraposition (CP)]{\plshn{CCpqCNqNp}}
+
+\thrm[ Commutativity of Conjunction (CC)]{\plshn{CKpqKqp}}
+
+\thrm[ Commutativity of Disjunction (CD)]{\plshn{CApqAqp}}
+
+\thrm[ Associativity of Conjunction (AC)]{\plshn{CKKpqrKpKqr}}
+
+\thrm[ Associativity of Conjunction (AC)]{\plshn{CKpKqrKKpqr}}
+
+\thrm[ Associativity of Disjunction (AD)]{\plshn{CAApqrApAqr}}
+
+\thrm[ Associativity of Disjunction (AD)]{\plshn{CApAqrAApqr}}
+
+\thrm[ Double Negation Introduction (DN)]{\plshn{CpNNp}}
+
+\end{theorems}
+
+
+\section{Using Theorems in Derivations}
+
+Theorems can be used to make proofs of other theorems easier. But there is 
+nothing special about proofs of theorems in this regard. We can also use 
+theorems in more general derivations that we discussed in the previous chapter.  
+Appealing to theorems can make certain derivations much shorter and intuitive.  
+Consider, for instance, the following formalization of an argument that in the 
+plain English version uses Modus Tollens:
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\Gamma}{P\limplies Q}{premise}
+
+\ai{\Delta}{\lnot Q}{premise}
+
+\ai{}{(P\limplies Q)\limplies (\lnot Q\limplies \lnot P)}{CP}
+
+\ai{\Gamma}{\lnot Q\limplies \lnot P}{1,3,\condE}
+
+\ai{\Gamma, \Delta}{\lnot P}{2,4,\condE}
+
+\end{argumentN}
+
+
+This is a little shorter than the derivation we gave in Section          
+\ref{sec:negationRules} and it might feel like a more natural representation of 
+how we reason using Modus Tollens. 
+
+Our proof system is designed to use only a very small number of inference rules 
+and that often results in surprisingly long formal derivations of matters that 
+seem obvious. Appealing to theorems can make things a lot shorter and easier to 
+see through by hiding some of the complexity. Here is another example, deriving 
+from \p{\seq{\Gamma}
+{P\lor Q}} and \p{\seq{\Delta}{\lnot P}} to \p{\seq{\Gamma,\Delta}{\lnot Q}}:
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+\ai{\Gamma}{P\lor Q}{premise}
+
+\ai{\Delta}{\lnot P}{premise}
+
+\ai{}{(P\lor Q)\limplies (\lnot P\limplies Q)}{EL}
+
+\ai{\Gamma}{\lnot P\limplies Q}{1,3,\condE}
+
+\ai{\Gamma, \Delta}{Q}{2,4,\condE}
+
+\end{argumentN}
+
+
+This should be much easier to comprehend than the derivation we saw earlier in 
+one of our exercises. 
+
+
+
+
+\section{Valid Arguments}
+
+A very important idea in discussions of arguments is that of \emph{valid} 
+arguments that we mentioned earlier. An argument is said to be valid iff. it is 
+impossible for the conclusion to be false while all the premises are true. In 
+other words, in a valid argument, the truth of all the premises guarantees the 
+truth of the conclusion. Valid arguments are of great interest because given 
+reasons to accept the premises of a valid argument, we will thereby have reason 
+to accept its conclusion: you cannot rationally accept the premises while 
+rejecting the conclusion of a valid argument---they leave no such wiggle room. 
+
+Consider a very simple derivation:
+
+\begin{argument*}
+ 
+ \ai{\Gamma}{P\limplies Q}{premise}
+
+ \ai{\Delta}{P}{premise}
+
+ \ai{\Gamma,\Delta}{Q}{1,2,\condE}
+
+\end{argument*}
+
+Given our interpretation of a sequent, what this derivation tells us is that 
+given conclusive support for \plsh{CPQ} and \p{P}, there is also conclusive 
+support for \p{Q}. That is, the derivation tells us what would be true if an 
+argument from \plsh{CPQ} and \p{P} to \p{Q} were valid. But would such an 
+argument be valid? Of course, it would be.  We can see that by looking at the 
+truth table of the conditional.  Just look at the first row (both the 
+conditional and its antecedent are true) of:
+
+\begin{center}
+
+ \input{\ttdir/tt-cond}
+
+\end{center}
+
+
+Here is a question: given a successful derivation from \p{\seq{\Gamma_1}
+{P_1}} through \p{\seq{\Gamma_n}{P_n}} to \p{\seq{\Gamma_1,\ldots,\Gamma_n}{Q}},
+ is there a valid argument from \p{P_1}, \ldots, \p{P_n} to \p{Q}?  That is, 
+ does the truth of all of \p{P_1} through \p{P_n} guarantee the truth of \p{Q} 
+ given the existence of the derivation?
+
+Here is a related question. Suppose the truth all of \p{P_1} through \p{P_n} 
+guarantees the truth of \p{Q}. Is there a derivation from \p{\seq{\Gamma_1}
+{P_1}} through \p{\seq{\Gamma_n}{P_n}} to \p{\seq{\Gamma_1,\ldots,\Gamma_n}{Q}}?
+
+We want the answers to both of these questions to be Yes. Because in that case, 
+we can say that: a) any argument that can be formalized as a derivation in our 
+proof system is valid; and b) any valid argument can be captured by a derivation 
+in our proof system. 
+
+We will see in the next few sections that the answer to both these questions is 
+indeed Yes.
+
+Some preliminary exercises:
+
+\begin{enumerate}
+
+ \item Suppose there is a derivation from \p{\seq{\Gamma}{s}} to \p{\seq{\Gamma}
+  {t}}.  Explain why it follows that \p{\seq{}{s\limplies t}}. (Hint: you can 
+  plug anything you want into \p{\Gamma}.)
+
+ \item Suppose \plsh{Cst} is a tautology. Explain why in that case the truth of 
+  \p{s} guarantees the truth of \p{t}.
+
+  \item Suppose we can show that if \p{\seq{}{s\limplies t}}, then \plsh{Cst} is 
+   a tautology. Explain why this would show that if there is a derivation from 
+   \p{\seq{\Gamma}{s}} to \p{\seq{\Gamma}{t}}, then the truth of \p{s} 
+   guarantees the truth of \p{t}.
+
+  \item Suppose we can show that if \plsh{Cst} is a tautology, then \p{\seq{}
+   {s\limplies t}}. Explain why this would show that if \plsh{Cst} is a 
+   tautology, then there is a derivation from \p{\seq{\Gamma}{s}} to 
+   \p{\seq{\Gamma}{t}}.
+
+\end{enumerate}
+
+
+
+\section{Theorems and Tautologies}\label{sec:theoremsAndTautologies}
+
+Let us introduce some terminology and symbols to make our life easier in 
+answering the questions raised in the previous section.
+
+
+ When the truth of one sentence \p{p} guarantees the truth of another sentence 
+ \p{q}, we say that \p{p} \emph{entails} \p{q}.  We write 
+
+\begin{center}
+ \p{p\lentails q}
+\end{center}
+
+to express that \p{p} entails \p{q}. The entailment symbol, \p{\lentails} 
+(double turnstile), is \emph{not} part of \lL{}. It is a symbol we use in our 
+metalanguage to concisely express that the truth of one sentence guarantees the 
+truth of another. Truth tables tell us that the truths of several sentences 
+together guarantee the truth of another. For instance, the truth table for 
+disjunction tells that if \p{p\lor q} and \p{\lnot p} are both true, that 
+guarantees that \p{q} is true. In such a case, we use a comma separated list on 
+the left side of the entailment sign to indicate the truths of all those 
+sentences on the list guarantees the truth of the sentence on the right of the 
+entailment sign:
+
+\begin{center}
+ \p{p\lor q,\lnot p\lentails q}
+\end{center}
+
+The order in which we list the sentences on the left is obviously irrelevant.
+Notice that if \p{p\lentails q}, then \p{p}'s truth alone suffices to guarantee 
+the truth of \p{q} which means that it does not matter what else is, or isn't, 
+true.  Thus, if \p{p\lentails q}, then \p{p,\Gamma\lentails q} must also hold 
+for any list of sentences \p{\Gamma}. 
+
+Suppose \p{t} is a tautology. What is the list of sentences whose truths 
+guarantees the truth of \p{t}? Since \p{t} is a tautology, any list of sentences 
+is such that the truth of all the sentences on the list guarantees the truth of 
+\p{t}. To indicate that it does not matter what list goes on the left side of 
+the entailment symbol, we leave things blank there and write:
+
+\begin{center}
+ \p{\lentails t}
+\end{center}
+
+to mean that \p{t} is a tautology.
+
+You will have noticed some obvious similarities between the uses of \p{\lproves} 
+and \p{\lentails} symbols. But the two symbols mean different things.  
+\p{\lproves} concerns what we can reason our way to, and \p{\lentails} is about 
+what is true. For instance, inspecting the truth table of a sentence \p{t} might 
+tell you that it is a tautology, but so far you have no reason to think that you 
+will be able to construct a  derivation of \p{\seq{}{t}} (take a look again at 
+the tautologies in Section \ref{sec-taut-contra} and see if you can prove them 
+in our proof system).
+
+With this notation in place, let's consider generalized versions of the 
+preliminary exercises of the last section:
+
+
+\begin{enumerate}
+
+ \item Explain why there is a derivation from \p{\seq{\Gamma_1}{s_1}},  
+  \p{\seq{\Gamma_2}
+   {s_2}}, \ldots , \p{\seq{\Gamma_n}{s_n}} to \p{\seq{\Gamma_1, \Gamma_2,\ldots,
+   \Gamma_n}
+  {t}} iff. \p{\seq{}{[s_1\land (s_2 \ldots \land s_n)
+ ]\limplies t}}. (imagine all the brackets in place to make things well-formed.)
+
+ \item Explain why \p{\lentails (s_1\land s_2\ldots \land s_n)\limplies t} iff.  
+  \p{s_1, s_2,\ldots, s_n \lentails t}.
+
+  \item Suppose we can show that if \p{\seq{}{[s_1\land (s_2 \ldots \land s_n)
+ ]\limplies t}}, then \p{\lentails ( s_1\land s_2\ldots \land s_n)
+   \limplies t}.  Explain why this would show that: if there is a derivation 
+   from \p{\seq{\Gamma_1}
+  {s_1}},  \p{\seq{\Gamma_2}{s_2}}, \ldots , \p{\seq{\Gamma_n}{s_n}} to 
+  \p{\seq{\Gamma}{t}}, then \p{s_1, s_2,\ldots, s_n \lentails t}.
+
+  \item Suppose we can show that if \p{\lentails ( s_1\land s_2\ldots \land s_n)
+   \limplies t}, then \p{\seq{}{[s_1\land (s_2 \ldots \land s_n)
+ ]\limplies t}}.  Explain why this would show that: if \p{\lentails (s_1\land 
+  s_2\ldots \land s_n)
+   \limplies t}, then there is a derivation from \p{\seq{\Gamma_1}{s_1}},  
+   \p{\seq{\Gamma_2}{s_2}}, \ldots , \p{\seq{\Gamma_n}{s_n}} to \p{\seq{\Gamma_1, 
+	\Gamma_2,\ldots,\Gamma_n}
+  {t}}.
+
+
+\end{enumerate}
+
+If we can show our suppositions in  3. and 4. above, we can show that an 
+argument can be captured by a derivation if and only if it is valid. And we can 
+show those two things, if we can show the following two more general claims:
+
+\begin{description}
+
+ \item[Soundness.] If \p{\seq{}{t}}, then  \p{\lentails t}.
+
+ \item[Completeness.] If \p{\lentails t}, then \p{\seq{}{t}}.
+
+\end{description}
+
+We will prove both of these claims in what follows.
+
+\section{Soundness}\label{sec:soundnessSL}
+
+
+
+Let's start with soundness. When a proof system is such that all its theorems 
+are tautologies,  the proof system is called \emph{sound}. We want to show that 
+our proof system is sound.
+
+To make stating our argument easier, let's say say that a sequent \p{\seq{\Gamma}
+{s}} is \emph{correct} iff. \p{\Gamma\lentails s} (in particular, \p{\seq{}
+{s}} is correct iff. \p{\lentails s}).
+
+
+
+Now the argument showing the soundness of our proof system. Recall that a proof 
+is constructed by extending a series of sequents in accordance with the 
+inference rules.  We will show the following two points about such a series of 
+sequents:
+
+\begin{enumerate}\renewcommand{\labelenumi}{(\roman{enumi})}
+
+ \item If the series has only one sequent, that sequent is correct.
+
+ \item If all the sequents of a series of \emph{n} sequents are correct, 
+  then extending the series by one sequent in accordance with the inference 
+  rules results in a series of \emph{n+1} correct sequents.
+
+\end{enumerate}
+
+\emph{If} both of these points hold, then any series of length 1 consists of a 
+correct sequent (because of (i)). So, by (ii), any series of length 2 consists 
+of only correct sequents; ditto for any series of lengths 3, 4, etc. for any 
+natural number n. So any series of sequents constructed in accordance with the 
+inference rules consists of only correct sequents. In particular, if any sequent 
+appearing in such a series has an empty datum, its succedent is a tautology. So 
+any theorem is a tautology.
+
+Let's deal with the two points one by one. 
+
+\subsection{Series has only one sequent}
+
+(i) is trivial. If a series of sequents constructed in accordance with the 
+inference rules has length 1, that single sequent must have been inferred using 
+the Assumption Introduction rule because that is the only rule that does not 
+require any preceding sequents.  And the one sequent must take the form 
+\p{\seq{s}{s}}. Moreover, \p{s\lentails s}. So (i) is true.
+
+\subsection{Series has only correct sequents up to n-th line}
+
+What about (ii)? This is more work, but we have in fact done most of the grunt 
+work already. Most of the task is putting together the various pieces. 
+
+We will say that an inference rule is \emph{valid} just in case it is such that: 
+if all previous sequents are correct, then applying the rule results in 
+another correct sequent. 
+
+What we want to show is that all of our rules of inference are valid. If they 
+are, then if all the sequents in a series of \m{n} sequents are correct, so is a 
+sequent inferred from that series.
+
+We will work through the rules one by one.
+\begin{enumerate} \renewcommand{\labelenumi}{\arabic{enumi}.}
+ \setlength{\labelwidth}{1.5em}
+ \setlength{\leftmargin}{0em}
+
+\item \textbf{Assumption Introduction}
+
+The Assumption Introduction rule is obviously valid since it infers to \p{\seq{s}
+{s}} and that is correct. In particular, it is correct if all the 
+previous sequents are correct.
+
+\item \textbf{Conditional Introduction}
+
+Applying Conditional Introduction requires the presence of a sequent of the form 
+
+\p{\seq{\Gamma,s_1}{s_2}} 
+
+and allows inferring from this the sequent
+
+\p{\seq{\Gamma}{s_1\limplies s_2}}. 
+
+We are assuming that all sequents prior to applying this rule are correct.  
+That is, we assume that \p{\Gamma,
+ s_1\lentails s_2}. We need to show that given this assumption \p{\seq{\Gamma}
+ {s_1\limplies s_2}} is also correct; i.e., \p{\Gamma\lentails s_1\limplies 
+s_2}. 
+
+Now, suppose the truth of \p{\Gamma} and the truth of \p{s_1} together  
+guarantee the truth of \p{s_2} (`truth of \p{\Gamma}' is short for `truth of all 
+the sentences of \p{\Gamma}).  Further suppose that \p{\Gamma} on its own does 
+not guarantee the truth of \p{s_1\limplies s_2}.  That means that \p{\Gamma} 
+could be true, and \p{s_1} true, and \p{s_2} false.  But this contradicts the 
+first supposition that the truth of \p{\Gamma} and the truth \p{s_1} together 
+guarantee the truth of \p{s_2}. Thus, the truth of \p{\Gamma} guarantees the 
+truth of \p{s_1\limplies s_2}:
+\begin{center}
+If \p{\Gamma,s_1\lentails s_2}, then \p{\Gamma\lentails s_1\limplies s_2}.
+\end{center}
+Comparing with the Conditional Introduction rule, we can see that:
+
+\begin{center}
+ if \p{\seq{\Gamma,s_1}{s_2}} is correct then so is \p{\seq{\Gamma}
+{s_1\limplies s_2}}.  \end{center}
+Thus, Conditional Introduction is valid.
+
+\item \textbf{Conditional Elimination}
+
+ According to the truth table of the conditional, given a true conditional, if 
+ the antecedent of a conditional is true, its consequent is also true. So if the 
+ antecedent of a true conditional is guaranteed to be true, then its consequent 
+ is guaranteed to be true. Thus, if \p{\Gamma} guarantees the truth of 
+ \p{s_1\limplies s_2} and \p{\Delta} guarantees the truth of \p{s_1}, then 
+ \p{\Gamma,\Delta} must guarantee the truth of \p{s_2}: 
+
+ \begin{center}
+  If \p{\Gamma\lentails s_1\limplies s_2} and \p{\Delta\lentails s_1}, then 
+  \p{\Gamma,\Delta\lentails s_2}.  \end{center}
+
+ So Conditional Elimination is a valid rule of inference.
+
+There is a special case of the point we just made that we will be exploiting:
+
+\begin{center}
+If \p{\lentails s_1\limplies s_2} and \p{\Gamma\lentails s_1}, then 
+\p{\Gamma\lentails s_2}. 
+
+\end{center}
+Or, more usefully: 
+
+\begin{center}
+ If \p{\lentails s_1\limplies s_2}, then \pp{if \p{\Gamma\lentails s_1} then 
+ \p{\Gamma\lentails s_2}}. 
+
+\end{center}
+
+What this means is: if \p{\lentails s_1\limplies s_2}, then any rule that tells 
+us that we may infer from \p{\seq{\Gamma}{s_1}} to \p{\seq{\Gamma}{s_2}} is 
+valid.
+
+
+\item \textbf{Negation Elimination}
+
+We have already shown that \p{\lentails \lnot\lnot s\limplies s}. Thus, by what 
+we have just pointed out above, Negation Elimination is valid.
+
+\item \textbf{Disjunction Introduction}
+
+We also have shown that \p{\lentails s_1 \limplies (s_1\lor s_2)} as well as 
+\p{\lentails s_1\limplies(s_2\lor s_1)}. Thus Disjunction Introduction is valid.
+
+\item \textbf{Conjunction Elimination}
+
+Similarly, we have seen that \p{\lentails (s_1\land s_2) \limplies s_1} as well 
+as \p{\lentails (s_1 \land s_2) \limplies s_2}. So Conjunction Elimination is 
+valid.
+
+
+\item \textbf{Conjunction Introduction}
+
+This is a bit more complicated but not by much. We know that
+
+\begin{center}
+ 
+ \p{\lentails \plshn{Cs_1Cs_2Ks_1s_2}}.
+   
+
+\end{center}
+
+ So
+ 
+ \begin{center}
+  
+  If \p{\Gamma\lentails s_1}, then \p{\Gamma\lentails s_2\limplies (s_1\land 
+  s_2)}.
+
+  \end{center}
+
+
+   And this means that if additionally \p{\Delta\lentails s_2}, then \p{\Gamma,
+ \Delta\lentails s_1\land s_2}.  Put together, we have:
+ 
+ \begin{center}
+
+  If \p{\Gamma\lentails s_1} and \p{\Delta\lentails s_2}, then \p{\Gamma,
+  \Delta\lentails s_1\land s_2}. 
+
+ \end{center}
+
+  I.e., if \p{\seq{\Gamma}{s_1}
+ } and \p{\seq{\Delta}{s_2}} are correct, then \p{\seq{\Gamma,\Delta}
+{s_1\land s_2}} is correct. Thus, Conjunction Introduction is valid.
+
+
+\item \textbf{Disjunction Elimination}
+
+ Let's leave this as an exercise.
+ 
+
+\item \textbf{Negation Introduction}
+
+ Let's leave this as an exercise, too.
+
+
+\end{enumerate}
+
+\subsection{Drawing the conclusion}
+
+Since all the inference rules are valid, given  any series of \m{n} correct 
+sequents, inferring in accordance with our proof system will result in a series 
+of \m{n+1} correct sequents. Since we know that a series of 1 sequent is a 
+series with only correct sequents---remember, only Assumption Introduction can 
+get that single line in place---we now know that extending such a series to 2 
+sequents will leave us with a series of 2 correct sequents, and ditto if we 
+continue to infer a third sequent, fourth sequent, etc. It does not matter how 
+long the series of sequents gets, if each sequent was inferred using one or the 
+other of our rules of inference, then the series of sequents contains only 
+correct sequents. Therefore, any sentence proven to be a theorem is indeed a 
+tautology.  Our system of sentential logic is sound.
+
+
+
+
+\section{Exercise: Completeness}\label{sec:propCompleteness}
+\newcommand{\setM}{\ensuremath{\mathcal{M}}}
+
+This section walks you through an argument showing Completeness: any tautology 
+of \lL{} is also a theorem (if \p{\lentails t}, then \p{\seq{}{t}}). 
+
+The questions give an outline of the proof of Completeness (`proof' in the 
+colloquial sense---it's not a proof in the technical sense we introduced) in the 
+style of the proof of Completeness given by László \citet{Kalmar1935}. Your task 
+is to fill in  the details.  Just as in the fill-in-the-blanks exercises, it 
+makes sense to look at the whole thing first---it might be that some later parts 
+give you clues about how to do earlier parts. And if you don't know how to do a 
+question, you can proceed under the pretense that you managed to answer the 
+question.
+
+
+The easiest way to understand how our argument works is by thinking of what the 
+truth table of a sentence \p{s} tells us. A truth tables lists all interpretations and it 
+tells us for each interpretation whether or not \p{s} is true in that interpretation.  Let us 
+think of a interpretation not as a series of \emph{T}s and   \emph{F}s but as a set of 
+sentences: for each atomic sentence \p{a_i}, if the table says \emph{T}, \p{a_i} 
+is in the interpretation, and if the table says \emph{F}, \p{\lnot a_1} is in the interpretation; 
+and no other sentences are in the interpretation.  For instance, for \lL{} with two 
+atomic sentences \p{a_1} and \p{a_2}, the interpretations are:
+
+\begin{enumerate}
+
+ \item \p{a_1, a_2}\texpl{corresponds to \emph{TT}}
+
+ \item \p{\lnot a_1, a_2}\texpl{corresponds to \emph{FT}}
+
+ \item \p{a_1, \lnot a_2}\texpl{corresponds to \emph{TF}}
+
+ \item \p{\lnot a_1, \lnot a_2}\texpl{corresponds to \emph{FF}}
+
+\end{enumerate}
+
+In the following, we will be using this understanding of interpretations.
+
+
+\newpage
+
+
+\subsection*{The Proof}
+
+
+
+\begin{enumerate}
+ \newcommand{\Seq}[1]{\p{\seq{\setM}{#1}}}
+
+ \item Let's first take some sentence \p{t} and see what happens if 
+  \p{\seq{\setM}{t}} for any \setM.  We will show that in that case \p{\seq{}
+  {t}}. (Note:  \setM{} is a placeholder for a set of sentence. So it must not 
+  appear on the succedent side of a sequent.)
+
+ Suppose \p{t} is a sentence constructed using $n$ atomic sentences \p{a_1} 
+ through \p{a_n}, and further suppose that \p{\seq{\setM}{t}} for any interpretation 
+ \setM. That is, we are supposing that the following $2^n$ sequents can all be 
+ proven (we list them in the order we list interpretations in a truth table):
+
+
+ \begin{tabular}{l r r r r r c c}
+  %
+  1. & \p{a_1}, & \p{a_2}, &  \p{a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+ %
+  2. & \p{\lnot a_1}, & \p{a_2}, &  \p{a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+  %
+  3. & \p{a_1}, & \p{\lnot a_2}, &  \p{a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+  %
+  4. & \p{\lnot a_1}, & \p{\lnot a_2}, &  \p{a_3}, & \ldots, & \p{a_n} &\lproves 
+	 & \p{t}\\
+	 %
+  5. & \p{a_1}, & \p{a_2}, &  \p{\lnot a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+  %
+  6. & \p{\lnot a_1}, & \p{a_2}, &  \p{\lnot a_3}, & \ldots, & \p{a_n} &\lproves 
+	 & \p{t}\\
+	 %
+  7. & \p{a_1}, & \p{\lnot a_2}, &  \p{\lnot a_3}, & \ldots, & \p{a_n} &\lproves 
+	 & \p{t}\\
+	 %
+  8. & \p{\lnot a_1}, & \p{\lnot a_2}, &  \p{\lnot a_3}, & \ldots, & \p{a_n} 
+	 &\lproves & \p{t}\\
+	 %
+  \vdots &  &  &   &  & &\\
+  %
+  $2^n$. & \p{\lnot a_1}, & \p{\lnot a_2}, &  \p{\lnot a_3}, & \ldots, & 
+  \p{\lnot a_n} &\lproves & \p{t}\\
+  %
+ \end{tabular}
+
+ \begin{enumerate}
+
+  \item From the first pair of sequents in the list above, derive: 
+
+ \begin{tabular}{r r r r c c}
+  %
+  \p{a_2}, &  \p{a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+ \end{tabular}
+
+ You may appeal to exactly one theorem that we have named earlier, and you may 
+ appeal to this one theorem in the subsequent problems; but you may not appeal 
+ to any other theorem.  
+
+ 
+\opts{
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  \begin{argument*}
+
+   \ai[0.3]{a_1,a_2,a_3,\ldots,a_n}{t}{premise}
+   \ai[0.3]{\lnot a_1,a_2,a_3\ldots,a_n}{t}{premise}
+   \ai[0.3]{}{a_1\lor\lnot a_1}{EM}
+   \ai[0.3]{a_2,a_3,\ldots,a_n}{t}{1,2,3,\disjE}
+
+ \end{argument*}
+
+}
+}
+
+
+\item From the second pair of sequents, derive:
+
+ \begin{tabular}{r r r r c c}
+  %
+  \p{\lnot a_2}, &  \p{a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+ \end{tabular}
+
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  \begin{argument*}
+
+   \ai[0.3]{a_1,\lnot a_2,a_3,\ldots,a_n}{t}{premise}
+   \ai[0.3]{\lnot a_1,\lnot a_2,a_3\ldots,a_n}{t}{premise}
+   \ai[0.3]{}{a_1\lor\lnot a_1}{EM}
+   \ai[0.3]{\lnot a_2,a_3,\ldots,a_n}{t}{1,2,3,\disjE}
+ \end{argument*}
+
+ NB: I renumber the derivations to start from line numbered 1, but that's not 
+ necessary. The numbers are there so we can unambiguously refer to them in the 
+ annotations. If chose other line numbers, that's fine.
+ }
+}
+
+
+\item From the results of (a) and (b), derive:
+
+ \begin{tabular}{r r r c c}
+  %
+  \p{a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+ \end{tabular}
+
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+\answerk{
+
+ \begin{argument*}
+
+  \ai[0.3]{a_2,a_3,\ldots,a_n}{t}{premise}
+  \ai[0.3]{\lnot a_2,a_3,\ldots,a_n}{t}{premise}
+  \ai[0.3]{}{a_2\lor\lnot a_2}{EM}
+  \ai[0.3]{a_3,\ldots,a_n}{t}{1,2,3,\disjE}
+
+ \end{argument*}
+}
+}
+
+
+\item From the sequents number 5 through 8 in the above list, derive:
+
+ \begin{tabular}{r r r c c}
+  %
+  \p{\lnot a_3}, & \ldots, & \p{a_n} &\lproves & \p{t}\\
+ \end{tabular}
+
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  \begin{argument*}
+
+   \ai[0.3]{a_1,a_2,a_3,\ldots,a_n}{t}{premise}
+   \ai[0.3]{\lnot a_1,a_2,a_3,\ldots,a_n}{t}{premise}
+   \ai[0.3]{a_1,\lnot a_2,a_3,\ldots,a_n}{t}{premise}
+   \ai[0.3]{\lnot a_1,\lnot a_2,a_3,\ldots,a_n}{t}{premise}
+   \ai[0.3]{}{a_1\lor \lnot a_1}{EM}
+   \ai[0.3]{a_2,a_3,\ldots,a_n}{t}{1,2,5,\disjE}
+   \ai[0.3]{\lnot a_2,a_3,\ldots,a_n}{t}{3,4,5,\disjE}
+   \ai[0.3]{}{a_2\lor\lnot a_2}{EM}
+   \ai[0.3]{a_3,\ldots,a_n}{t}{6,7,8,\disjE}
+
+  \end{argument*}
+
+ }
+}
+
+
+\item Notice how the datum side of the sequents get shorter? Explain why you 
+ eventually will be able to derive the following two sequents:
+
+ \begin{tabular}{r c c}
+  %
+  \p{a_n} &\lproves & \p{t}\\
+  \p{\lnot a_n} &\lproves & \p{t}\\
+
+ \end{tabular}
+
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{\answerk{
+
+The initial list of sequents lists them pairwise from the top: each pair has 
+identical datums after the first item in the datum, and the first datum items 
+are negations of each other.  We can use EM to halve the number of sequents and 
+we will end with a list that again lists sequents in pairs where each pair has 
+identical datums after the first item in the datum and the first datum items are 
+negations of each other.  We can use EM again to again halve the number of 
+sequents.  If we repeat the procedure often enough, we will end with the two 
+sequents shown above.
+}
+}
+
+
+
+ \item Derive \p{\seq{}{t}} from the result of (e).
+
+\opts{
+
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+}
+{
+ \answerk{
+
+  \begin{argument*}
+
+   \ai{a_n}{t}{premise}
+   \ai{\lnot a_n}{t}{premise}
+   \ai{}{a_n\lor\lnot a_n}{EM}
+   \ai{}{t}{1,2,3,EM}
+
+  \end{argument*}
+ }
+}
+
+\end{enumerate}
+
+
+
+This results show that if \p{\seq{\setM}{t}} for every interpretation \setM, 
+then \p{\seq{}
+{t}} (i.e., \p{t} is a theorem). This is one important piece of the puzzle.
+
+
+\vskip 2em
+\item Let's move to another piece of the puzzle. We will show that for any 
+ sentence \p{s} and interpretation \p{\setM}, either we can prove that \p{\seq{\setM}
+ {s}} or we can prove that \p{\seq{\setM}{\lnot s}}. We will make use of the 
+ classification of sentences discussed in Chapter
+ \ref{sec:enumeratingSentences}.
+
+ \begin{enumerate}
+
+ 
+
+\item First, let \p{p} be a class-0 sentence.  Show that for any interpretation 
+ \setM{}, either we can \emph{prove} \Seq{p} or we can \emph{prove} \Seq{\lnot p}
+ . (Hint: notice that \setM{} must either contain \p{p} or contain \p{\lnot p}.)
+
+\opts{
+
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  case 1: \setM{} contains \p{p}:
+
+  \begin{argument*}
+   \ai{p}{p}{A}
+   \ai{\setM,p}{p}{1}
+   \ai{\setM}{p}{2}
+  \end{argument*}
+
+  case 2: \setM{} contains \p{\lnot p}
+
+  \begin{argument*}
+   \ai{\lnot p}{\lnot p}{A}
+   \ai{\setM,\lnot p}{\lnot p}{1}
+   \ai{\setM}{\lnot p}{2}
+  \end{argument*}
+
+  Note: the moves to the respective lines 3 are justified because we assume that 
+  \p{p} (or \p{\lnot p}) is contained in \setM{}.
+ }
+}
+
+  \item Secondly, suppose that for any sentence \p{p} of class-n either \Seq{p} 
+   or \Seq{\lnot p}.  All the subquestions of this problem are under this 
+   supposition.  Let us show that on this supposition, it is also true that for 
+   any sentence \p{s} of class-(n+1) either \Seq{s} or \Seq{\lnot s}.  
+
+
+We can show this by working through all the possible cases. 
+
+
+Construct each of the following indicated derivations---except x, xi, xii for 
+which you should fill in the blanks. Some derivations are trivial; others 
+require a bit more work; and not all derivations will make use of all the 
+indicated premises.  Most importantly, you can find clues about how to do most 
+of these from previous exercises/practice material/tests (or even the current 
+exercise):
+
+\begin{enumerate}
+
+ \item From \Seq{p} and \Seq{q}, derive \Seq{p\land q}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{\answerk{
+ \begin{argument*}
+  \ai{\setM}{p}{premise}
+  \ai{\setM}{q}{premise}
+  \ai{\setM}{p\land q}{1,2,\conjI}
+\end{argument*}}
+}
+
+\item From \Seq{p} and \Seq{q}, derive \Seq{p\lor q}.
+
+\opts{
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{\answerk{
+
+  \begin{argument*}
+   \ai{\setM}{p}{premise}
+   \ai{\setM}{q}{premise}
+   \ai{\setM}{p\lor q}{1,\disjI}
+  \end{argument*}
+ }
+}
+
+
+
+
+\item From \Seq{p} and \Seq{q}, derive \Seq{p\limplies q}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  \begin{argument*}
+   \ai{\setM}{p}{premise}
+  \ai{\setM}{q}{premise}
+  \ai{\setM,p}{q}{2}
+  \ai{\setM}{p\limplies q}{3,\condI}
+ \end{argument*}
+}
+}
+
+
+
+
+
+\item From \Seq{\lnot p} and \Seq{q}, derive \Seq{\lnot(p\land q)}.
+
+\opts{
+
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+\answerk{
+
+ \begin{argument*}
+
+  \ai{\setM}{\lnot p}{premise}
+  \ai{\setM}{q}{premise}
+  \ai{p\land q}{p\land q}{A}
+  \ai{p\land q}{p}{3,\conjE}
+  \ai{\setM,p\land q}{\lnot p}{1}
+  \ai{\setM}{\lnot(p\land q)}{4,5,\negI}
+ \end{argument*}
+}
+}
+\newpage
+\item From \Seq{\lnot p} and \Seq{q}, derive \Seq{p\lor q}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  \begin{argument*}
+   \ai{\setM}{\lnot p}{premise}
+   \ai{\setM}{q}{premise}
+   \ai{\setM}{p\lor q}{2,\disjI}
+  \end{argument*}
+ }
+}
+
+
+\item From \Seq{\lnot p} and \Seq{q}, derive \Seq{p\limplies q}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+\answerk{
+  \begin{argument*}
+   \ai{\setM}{\lnot p}{premise}
+  \ai{\setM}{q}{premise}
+  \ai{\setM,p}{q}{2}
+  \ai{\setM}{p\limplies q}{3,\condI}
+ \end{argument*}
+}
+}
+
+\item From \Seq{p} and \Seq{\lnot q}, derive \Seq{\lnot(p\land q)}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+\answerk{
+
+ \begin{argument*}
+
+  \ai{\setM}{p}{premise}
+  \ai{\setM}{\lnot q}{premise}
+  \ai{p\land q}{p\land q}{A}
+  \ai{p\land q}{q}{3,\conjE}
+  \ai{\setM,p\land q}{\lnot q}{2}
+  \ai{\setM}{\lnot(p\land q)}{4,5,\negI}
+ \end{argument*}
+}
+}
+
+
+\item From \Seq{p} and \Seq{\lnot q}, derive \Seq{p\lor q}.
+
+\opts{
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+}{
+
+ \answerk{
+
+  \begin{argument*}
+   \ai{\setM}{p}{premise}
+   \ai{\setM}{\lnot q}{premise}
+   \ai{\setM}{p\lor q}{1,\disjI}
+  \end{argument*}
+ }
+}
+
+ \item From \Seq{p} and \Seq{\lnot q}, derive \Seq{\lnot(p\limplies q)}.
+
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+\answerk{
+
+ \begin{argument*}
+  \ai{\setM}{p}{premise}
+  \ai{\setM}{\lnot q}{premise}
+  \ai{p\limplies q}{p\limplies q}{A}
+  \ai{\setM,p\limplies q}{q}{1,3,\condE}
+  \ai{\setM,p\limplies q}{\lnot q}{2}
+  \ai{\setM}{\lnot(p\limplies q)}{4,5,\negI}
+ \end{argument*}
+}
+}
+
+
+
+
+\setlength{\itemsep}{2em}
+
+\item Fill in missing items. This derives from  \Seq{\lnot p} and \Seq{\lnot q} 
+ to \Seq{\lnot(p\land q)}.
+
+
+\begin{argumentN}[1]
+%generated by gentzen
+ \setlength{\itemsep}{0.5em}
+\ai{\setM}{\mc{\lnot }p}{premise}
+
+\ai{\setM}{\mc{\lnot }q}{premise}
+
+\ai{p\mc{\land }q}{p\mc{\land }q}{A}
+
+\ai{\mask{p\mc{\land }q}}{\mask{p}}{3,\mask{\conjE}}
+
+\ai{\setM, \mask{p\mc{\land }q}}{\mask{\mc{\lnot }p}}{1}
+
+\ai{\setM}{\mc{\lnot }(p\land q)}{4,5,\negI}
+
+\end{argumentN}
+
+ \item Fill in missing items. This derives from \Seq{\lnot p} and \Seq{\lnot q} 
+  to \Seq{\lnot(p\lor q)}.
+
+
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+ \setlength{\itemsep}{0.5em}
+\ai{\setM}{\mc{\lnot }p}{premise}
+
+\ai{\setM}{\mc{\lnot }q}{premise}
+
+\ai{p\mc{\lor }q}{p\mc{\lor }q}{\mask{A}}
+
+\ai{p}{p}{\mask{A}}
+
+\ai{p, p\mc{\lor }q}{p}{\mask{4}}
+
+\ai{\setM, p\mc{\lor }q}{\mc{\lnot }p}{\mask{1}}
+
+\ai{\setM, p}{\mc{\lnot }(p\lor q)}{\mask{5,6,\negI}}
+
+\ai{q}{q}{\mask{A}}
+
+\ai{q, p\mc{\lor }q}{q}{\mask{8}}
+
+\ai{\setM, p\mc{\lor }q}{\mc{\lnot }q}{\mask{2}}
+
+\ai{\setM, q}{\mc{\lnot }(p\lor q)}{\mask{9,10,\negI}}
+
+\ai{\setM, p\mc{\lor }q}{\mc{\lnot }(p\lor q)}{\mask{3,7,11,\disjE}}
+
+\ai{\setM}{\mc{\lnot }(p\lor q)}{\mask{3,12,\negI}}
+
+\end{argumentN}
+
+ \item Fill in missing items. This derives from \Seq{\lnot p} and \Seq{\lnot q} 
+  to \Seq{p\limplies q}.
+
+
+\begin{argumentN}[1]
+%generated by gentzen
+
+ \setlength{\itemsep}{0.5em}
+\ai{\setM}{\mc{\lnot }p}{premise}
+
+\ai{\setM}{\mc{\lnot }q}{premise}
+
+\ai{p}{p}{A}
+
+\ai{\mask{\setM, \mc{\lnot }q}}{\mask{\mc{\lnot }p}}{1}
+
+\ai{\mask{p, \mc{\lnot }q}}{\mask{p}}{3}
+
+\ai{\setM, p}{\mask{\mc{\lnot }\lnot q}}{4,5,\negI}
+
+\ai{\setM, p}{\mask{q}}{6,\negE}
+
+\ai{\setM}{p\mc{\limplies }q}{7,\condI}
+
+\end{argumentN}
+
+\item From \Seq{p}, derive \Seq{\lnot\lnot p}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  \begin{argument*}
+
+\ai{\setM}{p}{premise}
+   \ai{\lnot p}{\lnot p}{A}
+   \ai{\setM,\lnot p}{p}{1}
+   \ai{\setM}{\lnot\lnot p}{2,3,\negI}
+
+  \end{argument*}
+  }
+ }
+
+\end{enumerate}
+\vskip 1.5em
+\item   Let's make sure you see the point of the above:
+
+  \begin{enumerate}
+	
+	\item Explain why if \p{s} is a conjunction of two class-n sentences, then 
+	 either \Seq{s} or \Seq{\lnot s}.  
+
+	 
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+\answerk{
+
+ Let \p{s} be \p{p\land q} where \p{p} and \p{q} are class-n sentences. We know 
+ from 2-c-i that \p{\setM\lproves s} if \Seq{p} and \Seq{q}, and we know that
+ \p{\setM\lproves \lnot s} otherwise from 2-c-iv, vii, and x. So if \Seq{r} or 
+ \Seq{\lnot r} for any class-n sentence \p{r}, then \Seq{s} or \Seq{\lnot s} if 
+ \p{s} is a conjunction of class-n sentences.
+
+}
+}
+
+
+\item Explain why if \p{s} is a disjunction of two class-n sentences, then 
+ either \Seq{s} or \Seq{\lnot s}.
+
+\opts{
+ \dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+ 
+  Let \p{s} be \p{p\lor q} where \p{p} and \p{q} are class-n sentences. We know 
+  from 2-c-xi that \p{\setM\lproves \lnot s} if \Seq{\lnot p} and \Seq{\lnot q}, 
+  and we know that \p{\setM\lproves s} otherwise from 2-c-ii, v, and viii.  So 
+  if \Seq{r} or \Seq{\lnot r} for any class-n sentence \p{r}, then \Seq{s} or 
+  \Seq{\lnot s} if \p{s} is a conjunction of class-n sentences.
+
+ }
+}
+
+
+\item Explain why if \p{s} is a conditional of two class-n sentences, then 
+ either \Seq{s} or \Seq{\lnot s}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  Let \p{s} be \p{p\limplies  q} where \p{p} and \p{q} are class-n sentences.  
+  We know from 2-c-ix that \p{\setM\lproves \lnot s} if \Seq{p} and \Seq{\lnot 
+  q}, and we know that \p{\setM\lproves s} otherwise from 2-c-iii, vi, and xii.  
+  So if \Seq{r} or \Seq{\lnot r} for any class-n sentence \p{r}, then \Seq{s} or 
+  \Seq{\lnot s} if \p{s} is a conjunction of class-n sentences.
+ }
+}
+
+
+ \item Explain why if \p{s} is a negation of a class-n sentence, then either 
+  \Seq{s} or \Seq{\lnot s}.
+
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}
+{
+ \answerk{
+
+  Let \p{s} be \p{\lnot p} where \p{p} is a class-n sentence. We know from 
+  2-c-xiii that if \Seq{p}, then \Seq{\lnot s}. If \Seq{\lnot p}, then \Seq{s}. 
+  So if \Seq{r} or \Seq{\lnot r} for any class-n sentence \p{r}, then \Seq{s} or 
+  \Seq{\lnot s} if \p{s} is a conjunction of class-n sentences.
+ }
+}
+
+\end{enumerate}   
+
+
+
+
+
+ \item Explain why it follows that: 
+	 
+	If for any sentence \p{p} of class-n either \Seq{p} or \Seq{\lnot p}, then 
+	any sentence \p{s} of class-(n+1) is such that either \Seq{s} or \Seq{\lnot 
+	s}.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+\answerk{
+
+ Any sentence \p{s} of class-(n+1) must be one of: a class-n sentence; a 
+ conjunction, disjunction, conditional between two class-n sentences; or a 
+ negation of a class-n sentence. The results of 2d show that \Seq{s} or 
+ \Seq{\lnot s} given that \Seq{p} or \Seq{\lnot p} for any sentence of class-n.
+
+}
+
+}
+
+
+
+ \end{enumerate}
+\item We now assemble our pieces of the puzzle. 
+
+ \begin{enumerate}
+
+  \item Explain why if \p{t} is a tautology, it is not the case that 
+   \p{\setM\lentails \lnot t} for any interpretation \setM.
+
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+
+ \answerk{
+
+ If \p{t} is a tautology, it is true in all interpretations. So \p{\lnot t} is false in 
+ all interpretations, which means \p{\setM\lentails \lnot t} is not the case for any 
+ interpretation \p{\setM}.
+
+}
+}
+
+\item Explain why if \p{\seq{\setM}{\lnot t}}, then \p{\setM\lentails\lnot t} 
+ (Hint: recall we already know an important feature of our proof system).
+ 
+\opts{
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+
+ \answerk{
+
+  Since our proof system is sound, we know that for any \p{p} if 
+  \p{\Gamma\lproves p}, then \p{\Gamma\lentails p}. So if \p{\seq{\setM}
+   {\lnot t}}, then \p{\setM\lentails \lnot t}.
+ }
+}
+
+
+ \cover{\newpage}
+  \item Explain why if \p{\lentails t}, then \p{\seq{\setM}{t}} for any 
+   interpretation \setM.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+\answerk{
+
+ Suppose \p{\lentails t}. From the results of 2b and 2e, it follows that \Seq{s} 
+ or \Seq{\lnot s} for any sentence \p{s} and interpretation \setM. Thus, either 
+ \Seq{t} or \Seq{\lnot t}.
+ If \Seq{\lnot t}, it follows from 3b that \p{\setM\lentails \lnot t}.  But we 
+ know from 3a that this cannot be given that \p{t} is a tautology.  Thus, if 
+ \p{\lentails t}, then \Seq{t} for any interpretation \setM.
+}
+}
+
+ \end{enumerate}
+
+
+\item Explain why it follows from what we have shown that our proof system is 
+ complete.
+
+\opts{
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+
+\dotline
+}{
+\answerk{
+
+ We know from 3c that if \p{\lentails t}, then \Seq{t} for any interpretation \setM.  
+ We know from Q1 that if \Seq{t} for any interpretation \setM, then \p{\seq{}{t}}.  
+ Thus, if \p{\lentails t}, then \p{\seq{}{t}}.
+
+}
+}
+
+
+
+\end{enumerate}
+
+
+Q.E.D. (\emph{quod erat demonstandum}. `This is what was to be shown' in Latin.) 
+Congratulations! You are done.
+
+
+\subsection*{Note}
+
+The above argument also gives you a recipe for proving any tautology by 
+mimicking the construction of truth tables.  For example, here is a proof of 
+\p{\seq{}
+   {(p\land q)
+  \limplies p}} suggested by the argument:
+\footnotesize
+
+\begin{argumentN}[1]
+ \setlength{\itemsep}{0em}
+\ai{p}{p}{A}
+
+\ai{q}{q}{A}
+
+\ai{\mc{\lnot }p}{\mc{\lnot }p}{A}
+
+\ai{\mc{\lnot }q}{\mc{\lnot }q}{A}
+
+\ai{p, q}{p}{1}
+
+\ai{p, q}{q}{2}
+
+\ai{\mc{\lnot }p, q}{\mc{\lnot }p}{3}
+
+\ai{\mc{\lnot }p, q}{q}{2}
+
+\ai{p, \mc{\lnot }q}{p}{1}
+
+\ai{p, \mc{\lnot }q}{\mc{\lnot }q}{4}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q}{\mc{\lnot }p}{3}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q}{\mc{\lnot }q}{4}
+
+\ai{p, q}{p\mc{\land }q}{5,6,\conjI}
+
+\ai{p\mc{\land }q}{p\mc{\land }q}{A}
+
+\ai{p\mc{\land }q}{p}{14,\conjE}
+
+\ai{\mc{\lnot }p, q, p\mc{\land }q}{\mc{\lnot }p}{7}
+
+\ai{\mc{\lnot }p, q}{\mc{\lnot }(p\land q)}{15,16,\negI}
+
+\ai{p\mc{\land }q}{q}{14,\conjE}
+
+\ai{p, \mc{\lnot }q, p\mc{\land }q}{\mc{\lnot }q}{10}
+
+\ai{p, \mc{\lnot }q}{\mc{\lnot }(p\land q)}{18,19,\negI}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q, p\mc{\land }q}{\mc{\lnot }p}{11}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q}{\mc{\lnot }(p\land q)}{15,21,\negI}
+
+\ai{p, q, p\mc{\land }q}{p}{5}
+
+\ai{p, q}{(p\land q)\mc{\limplies }p}{23,\condI}
+
+\ai{\mc{\lnot }p, q, \mc{\lnot }p}{\mc{\lnot }p}{7}
+
+\ai{p\mc{\land }q, \mc{\lnot }p}{p}{15}
+
+\ai{\mc{\lnot }p, q, p\mc{\land }q}{\mc{\lnot }\lnot p}{25,26,\negI}
+
+\ai{\mc{\lnot }p, q, p\mc{\land }q}{p}{27,\negE}
+
+\ai{\mc{\lnot }p, q}{(p\land q)\mc{\limplies }p}{28,\condI}
+
+\ai{p, \mc{\lnot }q, p\mc{\land }q}{p}{9}
+
+\ai{p, \mc{\lnot }q}{(p\land q)\mc{\limplies }p}{30,\condI}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q, \mc{\lnot }p}{\mc{\lnot }p}{11}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q, p\mc{\land }q}{\mc{\lnot }\lnot p}{26,32,\negI}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q, p\mc{\land }q}{p}{33,\negE}
+
+\ai{\mc{\lnot }p, \mc{\lnot }q}{(p\land q)\mc{\limplies }p}{34,\condI}
+
+\ai{}{p\mc{\lor }\lnot p}{EM}
+
+\ai{q}{(p\land q)\mc{\limplies }p}{24,29,36,\disjE}
+
+\ai{\mc{\lnot }q}{(p\land q)\mc{\limplies }p}{31,35,36,\disjE}
+
+\ai{}{q\mc{\lor }\lnot q}{EM}
+
+\ai{}{(p\land q)\mc{\limplies }p}{37,38,39,\disjE}
+
+\end{argumentN}
+
+
+\normalsize
+
+\setlength{\parindent}{0em}
+You see why no one teaches this recipe for generating proofs. It's spending 40 
+lines to prove something that can be proved in three lines.  But it shows a 
+point of principle.  It is not too difficult to write computer code to generate 
+such a proof for any theorem no matter how complex the theorem.  
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Significance of Soundness and Completeness}
+
+What is the point of proving soundness and completeness?  We started our 
+discussion of the proof system by considering ordinary language arguments and 
+how they might be formalized. Our formal system is designed to keep track of
+what supports what. Soundness of our system means that if we start with some 
+claims conclusively supported by the evidence (the datums of the premises are 
+the evidence, the succedents the claims), then inferences drawn in accordance 
+with our proof system will correctly identify what else is supported by that 
+evidence. Our proof system is immune to fallacious inferences. 
+
+Secondly, since our proof system is complete, it is possible to infer to 
+everything that is conclusively supported by the evidence. There is no need to 
+worry that reasoning in accordance with the proof system will make us miss out 
+on some things supported by the evidence. 
+
+Taken together, this means that our proof system is just right. We can reach all 
+conclusions we want to reach, while keeping us from drawing conclusions that are 
+illicit. 
+
+Our proof system is extracted from observations of what we regard as  good 
+reasoning.  What we have shown is that what we regard as good cases of slow and 
+careful reasoning really are good. While there are some important limitations of 
+our proof system that we have noted earlier---and we will see more very
+soon---completeness shows that what we can do, we can do well.  And that is a 
+good thing to know about ourselves. 
+
+The arguments for soundness and completeness are not arguments formulated within 
+our proof system. They are theorems \emph{about} our proof system and are not 
+themselves theorems of the proof system. They are known as \emph{meta-theorems}.  
+Meta-theorems are proven in the meta-language. That is why, for instance,  many 
+`if, then' statements used in the course of the argument did not use the 
+horseshoe symbol (\p{\limplies})---our meta-language is English, and the 
+horseshoe symbol is an expression of \lL{} but not of English. 
+
+
+\flushbottom
+\widowpenalty=150
+
+ 
+
+

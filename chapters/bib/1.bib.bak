@@ -1,0 +1,154 @@
+@article{Cantor1895,
+author = {Cantor, Georg},
+title = {Beiträge Zur {B}egründung Der Transfiniten {M}engenlehre},
+year = {1895},
+journal = {Mathematische Annalen},
+volume = {46},
+number = {4},
+pages = {481--512},
+doi = {10.1007/BF02124929},
+}
+
+@article{Gentzen1935a,
+author = {Gentzen, Gerhard},
+title = {Untersuchungen Über Das Logische {S}chließen. I},
+year = {1935},
+journal = {Mathematische Zeitschrift},
+volume = {39},
+number = {2},
+}
+
+@article{Gentzen1935b,
+author = {Gentzen, Gerhard},
+title = {Untersuchungen Über Das Logische {S}chließen. II},
+year = {1935},
+journal = {Mathematische Zeitschrift},
+volume = {39},
+number = {3},
+}
+
+@article{Gentzen1936,
+author = {Gentzen, Gerhard},
+title = {Die {W}iederspruchsfreiheit Der Reinen {Z}ahlentheorie},
+year = {1936},
+journal = {Mathematische Annalen},
+volume = {112},
+pages = {493--565},
+}
+
+@book{Lemmon1978,
+author = {Lemmon, E. J.},
+title = {Beginning Logic},
+year = {1978},
+address = {Indianapolis},
+publisher = {Hackett Pub. Co},
+}
+
+@book{MagnusND,
+author = {Magnus, P D},
+title = {Forallx: An Introduction to Formal Logic},
+year = {n.d.},
+}
+
+@book{OpenLogicProject2020,
+author = {Open Logic Project},
+title = {The Open Logic Text},
+year = {2020},
+}
+
+@book{Suppes1957,
+author = {Suppes, Patrick},
+title = {Introduction to Logic.},
+year = {1957},
+number = {312 p.},
+address = {Princeton, N.J.},
+publisher = {D. Van Nostrand Co.},
+}
+
+@misc{TellerNDa,
+author = {Teller, Paul},
+title = {A Modern Formal Logic Primer, Volume I},
+year = {n.d.},
+}
+
+@misc{TellerNDb,
+author = {Teller, Paul},
+title = {A Modern Formal Logic Primer, Volume II},
+year = {n.d.},
+}
+
+@article{Turing1937,
+author = {Turing, A. M.},
+title = {On Computable Numbers, With an Application to the Entscheidungsproblem},
+year = {1937},
+journal = {Proceedings of the London Mathematical Society},
+volume = {s2-42},
+number = {1},
+pages = {230--265},
+doi = {10.1112/plms/s2-42.1.230},
+}
+
+@article{UnknownNDa,
+title = {Die Logischen {G}rundlagen Der {M}athematik.},
+year = {n.d.},
+pages = {16},
+}
+
+@misc{UnknownNDb,
+title = {Teach Yourself Logic: A Study Guide (And Other Book Notes)},
+year = {n.d.},
+journal = {Logic Matters},
+}
+
+@article{vanBenthemND,
+author = {van Benthem, Johan and van Ditmarsch, Hans and van Eijck, Jan and Jaspars, Jan},
+title = {Logic in Action –New Edition, November 23, 2016–},
+year = {n.d.},
+pages = {456},
+}
+
+@article{Cantor1891,
+author = {Cantor, Georg},
+title = {Ueber Eine Elementare {F}rage Der {M}annigfaltigketislehre.},
+year = {1891},
+journal = {Jahresbericht der Deutschen Mathematiker-Vereinigung},
+pages = {72--78},
+}
+
+@article{Goedel1931,
+author = {Gödel, Kurt},
+title = {Über Formal Unentscheidbare {S}ätze Der {P}rincipia {M}athematica Und Verwandter {S}ysteme {I}},
+year = {1931},
+journal = {Monatshefte Für Mathematik Und Physik},
+volume = {38},
+pages = {173--198},
+doi = {10.1007/BF01700692},
+}
+
+@article{Kalmar1935,
+author = {Kalmár, László},
+title = {Über Die {A}xiomatisierbarkeit Des {A}ussagenkalküls},
+year = {1935},
+journal = {Acta Scientiarum Mathematicarum},
+volume = {7},
+pages = {222--243},
+}
+
+@book{Godel1929,
+author = {Gödel, Kurt},
+title = {Über {d}ie {V}ollstandigkeit {d}es {L}ogikkalküls},
+year = {1929},
+publisher = {Dissertation. Universität Wien},
+}
+
+@article{Henkin1949,
+author = {Henkin, Leon},
+title = {The Completeness of the First-Order Functional Calculus},
+year = {1949},
+journal = {The Journal of Symbolic Logic},
+volume = {14},
+number = {3},
+pages = {159--166},
+doi = {10.2307/2267044},
+}
+

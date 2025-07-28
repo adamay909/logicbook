@@ -1,0 +1,24 @@
+\begin{argument*}
+
+\ai{\Gamma}{\lnot P \lor Q}{premise}
+
+\ai{P}{P}{premise}
+
+\ai{\lnot P}{\lnot P}{A}
+
+\ai{P,\lnot Q}{P}{2}
+
+\ai{\lnot P,\lnot Q}{\lnot P}{3}
+
+\ai{P,\lnot P}{\lnot \lnot Q}{4,5,\negI}
+
+\ai{P,\lnot P}{Q}{6,\negE}
+
+\ai{Q}{Q}{A}
+
+\ai{\Gamma,P}{Q}{1,7,8,\disjE}
+
+\ai{\Gamma}{P \limplies Q}{9,\condI}
+
+\end{argument*}
+

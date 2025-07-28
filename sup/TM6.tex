@@ -1,0 +1,80 @@
+\documentclass[border=5pt]{standalone}
+
+\usepackage{logic_flowchart}
+
+\usetikzlibrary{fit}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+ \tikzset{node distance = 1cm and 1cm}
+ 
+ \node(start) [terminal] {START};
+ 
+ \node(S1) [decision, below=of start] {On 0?};
+
+ \node(S2) [process, below=of S1] {write 0};
+
+ \node(S3) [process, below=of S2] {move right};
+
+ \node (S4) [process, right=of S1] {Write 1};
+
+ \node (S5) [process, below=of S4] {move left};
+
+ \node (S6) [decision, right=of S5] {On 0?};
+
+ \node (S7) [process, below=of S6] {write 1};
+
+ \node (S7-1) [process,below=of S7] {move left};
+
+ \node (S8) [terminal, below=of S7-1] {STOP};
+
+ \node(S9) [process, above=of S6] {write 1};
+
+ \node(S10) [process, above=of S9] {move left};
+
+ \draw[arrow] (start)--(S1);
+
+ \draw[arrow] (S1)--node[anchor=west]{Yes}(S2);
+
+ \draw[arrow] (S2)--(S3);
+
+ \draw[arrow] (S3) --++(-3,0)|-(S1);
+
+ \draw[arrow] (S1)--node[anchor=south]{No}(S4);
+
+ \draw[arrow] (S4)--(S5);
+
+ \draw[arrow] (S5)--(S6);
+
+ \draw[arrow] (S6)--node[anchor=west]{Yes}(S7);
+
+ \draw[arrow] (S7)--(S7-1);
+ 
+ \draw[arrow] (S7-1)--(S8);
+
+ \draw[arrow] (S6)--node[anchor=west]{No}(S9);
+
+ \draw[arrow] (S9)--(S10);
+
+ \draw[arrow] (S10)--++(3,0)|-(S6);
+
+% \draw[arrow] (S1)--(S4);
+
+% \draw[arrow] (S4)--(S5);
+
+ \node[draw,dashed,fit=(S1) (S2) (S3) (S4) (S5), inner sep=0.3cm] (group1) {};
+ 
+ \node[draw,dashed, fit=(S6) (S7) (S7-1) (S9) (S10), inner sep=0.3cm] (group2) 
+  {};
+
+\node[below right] at (group1.south west) {S0};
+\node[below right] at (group2.south west) {S1};
+
+\end{tikzpicture}
+
+\end{document}
+
+
+

@@ -1,0 +1,15 @@
+Apq;Apq;;a
+p;p;;a
+p,Nq;p;2;
+p;CNqp;3;ci
+;CCNqpCNpNNq;4;Contraposition
+p;CNpNNq;4,5;ce
+Np;Np;;a
+p,Np;NNq;6,7;ce
+p,Np;q;8;ne
+p;CNpq;9;ci
+q;q;;a
+q,Np;q;11;
+q;CNpq;12;ci
+Apq;CNpq;1,10,13;de
+;CApqCNpq;14;ci

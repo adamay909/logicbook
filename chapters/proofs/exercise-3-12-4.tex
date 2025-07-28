@@ -1,0 +1,28 @@
+\begin{argument*}
+
+\ai{\Gamma}{(P \lor Q) \lor R}{premise}
+
+\ai{P \lor Q}{P \lor Q}{A}
+
+\ai{P}{P}{A}
+
+\ai{P}{P \lor (Q \lor R)}{3,\disjI}
+
+\ai{Q}{Q}{A}
+
+\ai{Q}{Q \lor R}{5,\disjI}
+
+\ai{Q}{P \lor (Q \lor R)}{6,\disjI}
+
+\ai{P \lor Q}{P \lor (Q \lor R)}{2,4,7,\disjE}
+
+\ai{R}{R}{A}
+
+\ai{R}{Q \lor R}{9,\disjI}
+
+\ai{R}{P \lor (Q \lor R)}{10,\disjI}
+
+\ai{\Gamma}{P \lor (Q \lor R)}{1,8,11,\disjE}
+
+\end{argument*}
+

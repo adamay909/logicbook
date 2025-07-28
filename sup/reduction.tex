@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\usepackage[margin=0.5em,paperheight=6in]{geometry}
+
+\usepackage{logic_commands}
+
+\begin{document}
+
+\newcommand{\sqM}
+[2]
+{\p{\seq{#1}{#2}}}
+
+\begin{enumerate}
+
+ \setlength{\itemsep}{1em}
+
+\item \sqM{}{\Big(\{Q\limplies [(R\land T)\lor (S\lor L)]\}\limplies \{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}\Big)\mc{\lor }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}
+
+\item \sqM{}{\mc{\lnot }\Big[\lnot \Big(\{Q\limplies [(R\land T)\lor (S\lor L)]\}\limplies \{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}\Big)\land \lnot \{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}\Big]}
+
+\item \sqM{\lnot \Big(\{Q\limplies [(R\land T)\lor (S\lor L)]\}\limplies \{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}\Big)\mc{\land }\lnot \{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{\lnot \Big(\{Q\limplies [(R\land T)\lor (S\lor L)]\}\limplies \{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}\Big)\mc{\land }\lnot \{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{\mc{\lnot }\Big(\{Q\limplies [(R\land T)\lor (S\lor L)]\}\limplies \{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}\Big), \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{\mc{\lnot }\Big(\{Q\limplies [(R\land T)\lor (S\lor L)]\}\limplies \{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}\Big), \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], \mc{\lnot }\{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}, \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], \mc{\lnot }\{[(T\land M)\limplies (R\limplies M)]\lor [(Q\land Q)\limplies (Q\land S)]\}, \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], \mc{\lnot }[(T\land M)\limplies (R\limplies M)], \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], \mc{\lnot }[(T\land M)\limplies (R\limplies M)], \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], T\mc{\land }M, \mc{\lnot }(R\limplies M), \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], T\mc{\land }M, \mc{\lnot }(R\limplies M), \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], T, M, \mc{\lnot }(R\limplies M), \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], T, M, \mc{\lnot }(R\limplies M), \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], T, M, R, \mc{\lnot }M, \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{Q}
+
+ \sqM{Q\mc{\limplies }[(R\land T)\lor (S\lor L)], T, M, R, \mc{\lnot }M, \mc{\lnot }[(Q\land Q)\limplies (Q\land S)], \mc{\lnot }\{[(Z\lor R)\lor (Y\land P)]\lor \lnot W\}}{\mc{\lnot }Q}
+
+\item \sqM{M}{M}
+
+ \sqM{\mc{\lnot }M}{\mc{\lnot }M}
+
+
+\end{enumerate}
+
+\end{document}
