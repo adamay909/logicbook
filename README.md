@@ -5,7 +5,7 @@ These are the LaTeX source files for my textbook *Introduction to Formal Logic*.
 ### Compiling
 - The main file is introFormalLogic.tex
 - You need to make the custom style files in the styles/ directory available to LaTeX. E.g., add them somewhere to texmf-local.
-- I use the fontspec package which means you need to use XeLaTeX or LuaLaTeX. I use XeLaTeX and it might that it's specified as a requirement somewhere. But I'm pretty sure you can switch to LuaLaTeX by editing a line or two.
+- I use the fontspec package which means you need to use XeLaTeX or LuaLaTeX. I use XeLaTeX and it might be that it's specified as a requirement somewhere. But I'm pretty sure you can switch to LuaLaTeX by editing a line or two.
 - The sources require running an external tool [lbhelper](https://github.com/adamay909/logicTools/tree/main/lbhelper) during compilation. Make sure you enable running external tools.
 
 ### About the use of lbhelper
